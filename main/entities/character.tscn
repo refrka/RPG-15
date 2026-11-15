@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bxhe8lv6h7cau"]
+
+[ext_resource type="Script" uid="uid://bnxoefktu4k7l" path="res://main/entities/character.gd" id="1_u7xqv"]
+[ext_resource type="Script" uid="uid://bkmh7jm822bx3" path="res://main/states/state_machine.gd" id="2_gosl2"]
+[ext_resource type="Script" uid="uid://cmnf584nwr2gv" path="res://main/states/body_idle_state.gd" id="3_0k2p7"]
+[ext_resource type="Script" uid="uid://boe5p3w2lcghw" path="res://main/states/combat_idle_state.gd" id="4_ruoji"]
+
+[node name="Character" type="CharacterBody2D" unique_id=920390172 node_paths=PackedStringArray("component_root", "state_machine")]
+script = ExtResource("1_u7xqv")
+component_root = NodePath("ComponentRoot")
+state_machine = NodePath("StateMachine")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=1546177270]
+y_sort_enabled = true
+
+[node name="BodySprite" type="Sprite2D" parent="CanvasGroup" unique_id=2072653577]
+
+[node name="BodyCollision" type="CollisionShape2D" parent="." unique_id=934894713]
+
+[node name="ComponentRoot" type="Node" parent="." unique_id=1771809177]
+
+[node name="StateMachine" type="Node" parent="." unique_id=1393344 node_paths=PackedStringArray("body_root", "combat_root", "initial_body_state", "initial_combat_state")]
+script = ExtResource("2_gosl2")
+body_root = NodePath("BodyRoot")
+combat_root = NodePath("CombatRoot")
+initial_body_state = NodePath("BodyRoot/BodyIdleState")
+initial_combat_state = NodePath("CombatRoot/CombatIdleState")
+metadata/_custom_type_script = "uid://bkmh7jm822bx3"
+
+[node name="BodyRoot" type="Node" parent="StateMachine" unique_id=2018266311]
+
+[node name="BodyIdleState" type="Node" parent="StateMachine/BodyRoot" unique_id=1403720713]
+script = ExtResource("3_0k2p7")
+
+[node name="CombatRoot" type="Node" parent="StateMachine" unique_id=119374014]
+
+[node name="CombatIdleState" type="Node" parent="StateMachine/CombatRoot" unique_id=1653228906]
+script = ExtResource("4_ruoji")
+
+[node name="CenterMarker" type="Marker2D" parent="." unique_id=1538757570]

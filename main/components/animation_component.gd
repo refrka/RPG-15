@@ -1,0 +1,4 @@
+class_name AnimationComponent extends Component
+
+
+

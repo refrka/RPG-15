@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bo1c75x6day7d"]
+
+[ext_resource type="Texture2D" uid="uid://cglaueypgd0b5" path="res://main/entities/player/player_sprite_sheet_texture.png" id="1_pq8q7"]
+
+[node name="Root" type="Node" unique_id=425788085]
+
+[node name="BGCanvas" type="CanvasLayer" parent="." unique_id=321048143]
+
+[node name="ColorRect" type="ColorRect" parent="BGCanvas" unique_id=1215279458]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.03529412, 0.047058824, 0.050980393, 1)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BGCanvas" unique_id=1965039274]
+position = Vector2(266, 172)
+texture = ExtResource("1_pq8q7")
+hframes = 8
+vframes = 4

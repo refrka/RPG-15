@@ -8,6 +8,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5jees"]
 
 [node name="CursorSlot" unique_id=163527939 instance=ExtResource("1_qx03j")]
+process_mode = 3
 mouse_filter = 2
 script = ExtResource("2_5jees")
 default_stylebox = SubResource("StyleBoxEmpty_qx03j")

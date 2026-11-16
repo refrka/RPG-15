@@ -11,3 +11,5 @@ enum WeaponType {
 
 
 @export var weapon_type: WeaponType
+
+@export var weapon_scene: PackedScene

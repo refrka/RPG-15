@@ -70,6 +70,10 @@ func disconnect_signals() -> void:
 
 func activate() -> void:
 
+	if active:
+
+		return
+
 	active = true
 
 	connect_signals()
@@ -78,6 +82,10 @@ func activate() -> void:
 
 
 func deactivate() -> void:
+
+	if not active:
+
+		return
 
 	active = false
 

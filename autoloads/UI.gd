@@ -47,4 +47,4 @@ func remove_overlay(overlay: Overlay) -> void:
 
 		if Game.is_paused() and pause_count <= 0:
 
-			Game.pause()
+			Game.unpause()

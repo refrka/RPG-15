@@ -18,7 +18,6 @@ signal item_updated
 
 
 
-
 func add_amount(amount: int) -> int:
 
 	var space = item.max_stack - count

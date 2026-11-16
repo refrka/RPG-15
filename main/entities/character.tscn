@@ -2,16 +2,18 @@
 
 [ext_resource type="Script" uid="uid://bnxoefktu4k7l" path="res://main/entities/character.gd" id="1_u7xqv"]
 [ext_resource type="Script" uid="uid://bkmh7jm822bx3" path="res://main/states/state_machine.gd" id="2_gosl2"]
+[ext_resource type="Script" uid="uid://bwmuuh1t4m42u" path="res://main/components/animation_component.gd" id="2_ruoji"]
 [ext_resource type="Script" uid="uid://cmnf584nwr2gv" path="res://main/states/body_idle_state.gd" id="3_0k2p7"]
 [ext_resource type="Script" uid="uid://boe5p3w2lcghw" path="res://main/states/combat_idle_state.gd" id="4_ruoji"]
 
-[node name="Character" type="CharacterBody2D" unique_id=920390172 node_paths=PackedStringArray("body_sprite", "body_collision", "component_root", "state_machine")]
+[node name="Character" type="CharacterBody2D" unique_id=920390172 node_paths=PackedStringArray("body_sprite", "body_collision", "combat_root", "component_root", "state_machine")]
 collision_layer = 3
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_u7xqv")
 body_sprite = NodePath("CanvasGroup/BodySprite")
 body_collision = NodePath("BodyCollision")
+combat_root = NodePath("CanvasGroup/CombatRoot")
 component_root = NodePath("ComponentRoot")
 state_machine = NodePath("StateMachine")
 
@@ -20,9 +22,15 @@ y_sort_enabled = true
 
 [node name="BodySprite" type="Sprite2D" parent="CanvasGroup" unique_id=2072653577]
 
+[node name="CombatRoot" type="Node2D" parent="CanvasGroup" unique_id=65545494]
+
 [node name="BodyCollision" type="CollisionShape2D" parent="." unique_id=934894713]
 
 [node name="ComponentRoot" type="Node" parent="." unique_id=1771809177]
+
+[node name="AnimationComponent" type="Node" parent="ComponentRoot" unique_id=798352642]
+script = ExtResource("2_ruoji")
+metadata/_custom_type_script = "uid://bwmuuh1t4m42u"
 
 [node name="StateMachine" type="Node" parent="." unique_id=1393344 node_paths=PackedStringArray("body_root", "combat_root", "initial_body_state", "initial_combat_state")]
 script = ExtResource("2_gosl2")
@@ -43,3 +51,7 @@ script = ExtResource("3_0k2p7")
 script = ExtResource("4_ruoji")
 
 [node name="CenterMarker" type="Marker2D" parent="." unique_id=1538757570]
+
+[node name="DirRay" type="RayCast2D" parent="." unique_id=1334925714]
+position = Vector2(0, -7)
+target_position = Vector2(0, 20)

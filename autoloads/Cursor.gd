@@ -26,14 +26,55 @@ func handle_slot_input(item_slot: ItemSlot, event: InputEvent) -> void:
 
 				cursor_slot.copy_slot(item_slot)
 
+			[true, false]:
+
+				if item_slot.can_accept_contents(cursor_slot):
+
+					item_slot.set_stack(cursor_slot.item_stack)
+
+					cursor_slot.held_slot.clear_slot()
+
+					cursor_slot.drop_slot()
+
+			[false, false]:
+
+				if item_slot == cursor_slot.held_slot:
+
+					cursor_slot.drop_slot()
+
+				else:
+
+					if cursor_slot.held_slot.can_accept_contents(item_slot) and item_slot.can_accept_contents(cursor_slot.held_slot):
+
+						cursor_slot.held_slot.swap(item_slot)
+
+						cursor_slot.copy_slot(item_slot)
+
+
 
 
 
 func select_slot(slot: ItemSlot) -> void:
 
-	pass
+	if not multi_select_enabled:
+
+		for _slot in selected_slots:
+
+			_slot.set_selected_state(false)
+
+	slot.set_selected_state(true)
+
+	selected_slots.append(slot)
 
 
+
+func deselect_slot(slot: ItemSlot) -> void:
+
+	if selected_slots.has(slot):
+
+		selected_slots.erase(slot)
+
+		slot.set_selected_state(false)
 
 
 

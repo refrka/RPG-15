@@ -6,6 +6,8 @@ class_name Entity extends PhysicsBody2D
 
 @export var body_collision: CollisionShape2D
 
+@export var combat_root: Node2D
+
 @export var component_root: Node
 
 @export var state_machine: StateMachine

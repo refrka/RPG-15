@@ -20,9 +20,13 @@ func copy_slot(slot: ItemSlot) -> void:
 
 	set_stack(held_slot.item_stack)
 
+	Cursor.select_slot(slot)
+
 
 
 func drop_slot() -> void:
+
+	Cursor.deselect_slot(held_slot)
 
 	held_slot = null
 

@@ -90,7 +90,7 @@ func pause() -> void:
 
 
 
-func resume() -> void:
+func unpause() -> void:
 
 	get_tree().paused = false
 

@@ -1,8 +1,12 @@
 [gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://c58tpeps5btc6"]
 
 [ext_resource type="Script" uid="uid://dkppyi86u3mti" path="res://main/items/weapon.gd" id="1_15bhp"]
+[ext_resource type="Texture2D" uid="uid://c27q25farhqj5" path="res://textures/items/sword_icon_texture.png" id="1_jlv2x"]
+[ext_resource type="PackedScene" uid="uid://dym1vojbd4jjb" path="res://main/items/equipment/weapons/sword.tscn" id="2_n5uey"]
 
 [resource]
 script = ExtResource("1_15bhp")
+weapon_scene = ExtResource("2_n5uey")
 item_id = &"sword"
+icon_texture = ExtResource("1_jlv2x")
 max_stack = 1

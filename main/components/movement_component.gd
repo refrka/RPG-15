@@ -4,6 +4,9 @@ class_name MovementComponent extends Component
 signal face_dir_updated(dir: Vector2)
 
 
+@export var dir_ray: RayCast2D
+
+
 var move_dir: Vector2
 
 var face_dir: Vector2
@@ -37,7 +40,32 @@ func set_face_dir(dir: Vector2) -> void:
 
 		face_dir = dir
 
+		dir_ray.rotation = dir.angle()
+
 		face_dir_updated.emit(dir)
+
+
+
+
+func get_face_dir_string() -> String:
+
+	if face_dir == Vector2.RIGHT:
+
+		return "right"
+
+	if face_dir == Vector2.LEFT:
+
+		return "left"
+
+	if face_dir == Vector2.UP:
+
+		return "up"
+
+	if face_dir == Vector2.DOWN:
+
+		return "down"
+
+	return ""
 
 
 
@@ -59,7 +87,7 @@ func get_velocity(delta: float) -> Vector2:
 
 func get_move_speed() -> float:
 
-	return 5000.0
+	return 4000.0
 
 
 
@@ -67,11 +95,13 @@ func get_move_speed() -> float:
 
 func _physics_process(delta: float) -> void:
 
+	if not active:
+
+		return
+
 	var current_velocity = entity.velocity
 
 	var new_velocity = get_velocity(delta)
-
-	set_face_dir(new_velocity.normalized())
 
 	entity.velocity = current_velocity.move_toward(new_velocity, 30.0)
 

@@ -1,0 +1,146 @@
+[gd_scene format=3 uid="uid://dym1vojbd4jjb"]
+
+[ext_resource type="PackedScene" uid="uid://dgqx5amis6irs" path="res://main/combat/weapon_scene.tscn" id="1_qev53"]
+[ext_resource type="Texture2D" uid="uid://c187d805bogko" path="res://textures/items/sword_sprite_texture.png" id="2_aeeg4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qev53"]
+size = Vector2(9, 2)
+
+[sub_resource type="Animation" id="Animation_qev53"]
+resource_name = "attack_right"
+length = 0.13333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.9198621771937625, -1.2217304763960306]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, -1)]
+}
+
+[sub_resource type="Animation" id="Animation_aeeg4"]
+resource_name = "attack_right"
+length = 0.13333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.3490658503988659, -0.3490658503988659]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, -1)]
+}
+
+[sub_resource type="Animation" id="Animation_n8iok"]
+resource_name = "attack_right"
+length = 0.13333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.3490658503988659, 0.3490658503988659]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jpvu3"]
+resource_name = "attack_right"
+length = 0.13333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.9198621771937625, -1.2217304763960306]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1nf5d"]
+_data = {
+&"attack_down": SubResource("Animation_qev53"),
+&"attack_left": SubResource("Animation_aeeg4"),
+&"attack_right": SubResource("Animation_n8iok"),
+&"attack_up": SubResource("Animation_jpvu3")
+}
+
+[node name="Sword" unique_id=1950214909 instance=ExtResource("1_qev53")]
+scale = Vector2(1, 1)
+
+[node name="Sprite2D" parent="." index="0" unique_id=699357638]
+position = Vector2(7, 0)
+texture = ExtResource("2_aeeg4")
+
+[node name="Hitbox" parent="." index="1" unique_id=1611579010]
+position = Vector2(7, 0)
+
+[node name="CollisionShape2D" parent="Hitbox" index="0" unique_id=526524626]
+position = Vector2(2.5, 0)
+shape = SubResource("RectangleShape2D_qev53")
+
+[node name="AnimationPlayer" parent="." index="2" unique_id=770247959]
+libraries/sword = SubResource("AnimationLibrary_1nf5d")
+
+[editable path="Hitbox"]

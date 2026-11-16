@@ -8,6 +8,8 @@ signal stack_updated
 
 @export var hovered_empty_stylebox: StyleBox
 
+@export var selected_stylebox: StyleBox
+
 @export var panel: PanelContainer
 
 @export var texture_rect: TextureRect
@@ -39,15 +41,23 @@ func _ready() -> void:
 
 	if item_stack != null:
 
-		set_stack(item_stack)
+		set_stack(item_stack.duplicate(true))
+
+		if item_stack.item is Equipment:
+
+			item_stack.item_data = ItemData.new()
 
 	update_visuals()
+
+
+
 
 
 
 func clear_slot() -> void:
 
 	set_stack(null)
+
 
 
 
@@ -69,6 +79,11 @@ func is_empty() -> bool:
 
 
 
+func can_accept_contents(slot: ItemSlot) -> bool:
+
+	return true
+
+
 
 
 func update_visuals() -> void:
@@ -80,6 +95,10 @@ func update_visuals() -> void:
 		if is_empty():
 
 			stylebox = hovered_empty_stylebox
+
+	if selected:
+
+		stylebox = selected_stylebox
 
 	panel.add_theme_stylebox_override("panel", stylebox)
 
@@ -108,6 +127,13 @@ func swap(target_slot: ItemSlot) -> void:
 
 
 
+func set_selected_state(state: bool) -> void:
+
+	selected = state
+
+	update_visuals()
+
+
 
 func set_hovered_state(state: bool) -> void:
 
@@ -132,6 +158,6 @@ func _on_mouse_exited() -> void:
 
 func _on_gui_input(event: InputEvent) -> void:
 
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and event.is_pressed():
 
 		Cursor.handle_slot_input(self, event)

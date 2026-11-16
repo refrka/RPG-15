@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bpfqy3f3tse4t"]
+
+[ext_resource type="Script" uid="uid://cjtekgm8d7108" path="res://main/sensor/hurtbox.gd" id="1_2g84x"]
+
+[node name="Hurtbox" type="Area2D" unique_id=1587296689]
+collision_layer = 512
+collision_mask = 256
+script = ExtResource("1_2g84x")
+metadata/_custom_type_script = "uid://cjtekgm8d7108"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=135124436]
+debug_color = Color(0.00010030448, 0.33072382, 0.9520852, 0)

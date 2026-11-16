@@ -55,6 +55,22 @@ func initialize(_entity: Entity) -> void:
 
 
 
+func reset() -> void:
+
+	entity = null
+
+	body_states.values().map(func(s): s.reset())
+
+	body_states.clear()
+
+	combat_states.values().map(func(s): s.reset())
+
+	combat_states.clear()
+
+	current_body_state = null
+
+	current_combat_state = null
+
 
 
 

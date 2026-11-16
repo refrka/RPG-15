@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://w2vrij3o1p87"]
+
+[ext_resource type="Script" uid="uid://2565sv2tfrc7" path="res://ui/profile_overlay.gd" id="1_ihex5"]
+[ext_resource type="PackedScene" uid="uid://dfl48hjw5fn52" path="res://ui/item_slot.tscn" id="2_4idp5"]
+[ext_resource type="Resource" uid="uid://fq4ssaq2ck3x" path="res://main/items/consumables/apple.tres" id="3_8yg2g"]
+[ext_resource type="Script" uid="uid://cwi55co0pga55" path="res://main/items/item_stack.gd" id="4_5loy3"]
+[ext_resource type="Resource" uid="uid://cu3yrs5y5mirp" path="res://main/items/consumables/bread.tres" id="5_3t5dm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28aoi"]
+bg_color = Color(0.1221207, 0.14522305, 0.15285042, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25674063, 0.29679266, 0.31015244, 1)
+
+[sub_resource type="Resource" id="Resource_28aoi"]
+script = ExtResource("4_5loy3")
+item = ExtResource("3_8yg2g")
+count = 10
+metadata/_custom_type_script = "uid://cwi55co0pga55"
+
+[sub_resource type="Resource" id="Resource_jnlp7"]
+script = ExtResource("4_5loy3")
+item = ExtResource("5_3t5dm")
+count = 13
+metadata/_custom_type_script = "uid://cwi55co0pga55"
+
+[node name="ProfileOverlay" type="MarginContainer" unique_id=1283527882 groups=["overlay"]]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_ihex5")
+metadata/_custom_type_script = "uid://dw1aw6urlvg27"
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1722764651]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_28aoi")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=838182737]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1299024219]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1454029875]
+layout_mode = 2
+columns = 3
+
+[node name="ItemSlot" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=163527939 instance=ExtResource("2_4idp5")]
+layout_mode = 2
+item_stack = SubResource("Resource_28aoi")
+
+[node name="ItemSlot2" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=795038393 instance=ExtResource("2_4idp5")]
+layout_mode = 2
+item_stack = SubResource("Resource_jnlp7")

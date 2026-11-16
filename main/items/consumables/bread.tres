@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Consumable" format=3 uid="uid://cu3yrs5y5mirp"]
+
+[ext_resource type="Script" uid="uid://cw6a1oafm3u0g" path="res://main/items/consumable.gd" id="1_s4iod"]
+[ext_resource type="Texture2D" uid="uid://v2yqt374420m" path="res://textures/items/bread_icon_texture.png" id="1_s5jlk"]
+
+[resource]
+script = ExtResource("1_s4iod")
+icon_texture = ExtResource("1_s5jlk")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Consumable" format=3 uid="uid://bv547bjtfya6w"]
+
+[ext_resource type="Script" uid="uid://cw6a1oafm3u0g" path="res://main/items/consumable.gd" id="1_bfaqu"]
+[ext_resource type="Texture2D" uid="uid://2ftqy5kdyow0" path="res://textures/items/health_potion_small_icon_texture.png" id="1_m6eym"]
+
+[resource]
+script = ExtResource("1_bfaqu")
+item_id = &"health_potion_small"
+icon_texture = ExtResource("1_m6eym")
+max_stack = 10

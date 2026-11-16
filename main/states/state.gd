@@ -21,6 +21,14 @@ func initialize(_entity: Entity) -> void:
 
 
 
+func reset() -> void:
+
+	entity = null
+
+
+
+
+
 
 func activate() -> void:
 

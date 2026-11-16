@@ -43,6 +43,21 @@ func initialize() -> bool:
 
 
 
+func reset() -> void:
+
+	if active:
+
+		deactivate()
+
+	initialized = false
+
+	components.values().map(func(c): c.reset())
+
+	components.clear()
+
+	state_machine.reset()
+
+
 
 
 

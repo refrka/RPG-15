@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Consumable" format=3 uid="uid://fq4ssaq2ck3x"]
+
+[ext_resource type="Script" uid="uid://cw6a1oafm3u0g" path="res://main/items/consumable.gd" id="1_b4o4a"]
+[ext_resource type="Texture2D" uid="uid://cs86a5ilw1gmw" path="res://textures/items/apple_icon_texture.png" id="1_cwt31"]
+
+[resource]
+script = ExtResource("1_b4o4a")
+item_id = &"apple"
+icon_texture = ExtResource("1_cwt31")

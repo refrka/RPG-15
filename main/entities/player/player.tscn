@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b5h20ga7gh3ky"]
+
+[ext_resource type="PackedScene" uid="uid://bxhe8lv6h7cau" path="res://main/entities/character.tscn" id="1_8x8hf"]
+[ext_resource type="Script" uid="uid://i22ro207a1vo" path="res://main/entities/player/player.gd" id="2_ihp3c"]
+[ext_resource type="Texture2D" uid="uid://cglaueypgd0b5" path="res://main/entities/player/player_sprite_sheet_texture.png" id="3_ihp3c"]
+[ext_resource type="Script" uid="uid://dui1ijtj6i8no" path="res://main/components/player_movement_component.gd" id="4_0kxhf"]
+
+[node name="Player" unique_id=920390172 instance=ExtResource("1_8x8hf")]
+collision_layer = 11
+script = ExtResource("2_ihp3c")
+
+[node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(1546177270) index="0" unique_id=2072653577]
+position = Vector2(0, -7)
+texture = ExtResource("3_ihp3c")
+offset = Vector2(0, -9)
+hframes = 8
+vframes = 4
+
+[node name="PlayerMovementComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="0" unique_id=1696674147]
+script = ExtResource("4_0kxhf")
+
+[node name="CenterMarker" parent="." index="4" unique_id=1538757570]
+position = Vector2(0, -7)

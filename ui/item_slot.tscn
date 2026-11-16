@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dfl48hjw5fn52"]
+
+[ext_resource type="Script" uid="uid://bb32qa4pof7r" path="res://ui/item_slot.gd" id="1_m0q4r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aajxx"]
+bg_color = Color(0.1221207, 0.14522305, 0.15285042, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.16832915, 0.20190993, 0.20610741, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0q4r"]
+bg_color = Color(0.13713741, 0.1642676, 0.17104965, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.19564644, 0.23057005, 0.23930186, 1)
+
+[node name="ItemSlot" type="MarginContainer" unique_id=163527939 node_paths=PackedStringArray("panel", "texture_rect", "count_label")]
+custom_minimum_size = Vector2(18, 18)
+mouse_filter = 0
+script = ExtResource("1_m0q4r")
+default_stylebox = SubResource("StyleBoxFlat_aajxx")
+hovered_empty_stylebox = SubResource("StyleBoxFlat_m0q4r")
+panel = NodePath("PanelContainer")
+texture_rect = NodePath("PanelContainer/TextureRect")
+count_label = NodePath("PanelContainer/CountLabel")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1815180678]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_aajxx")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer" unique_id=1095555993]
+layout_mode = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="CountLabel" type="Label" parent="PanelContainer" unique_id=772141228]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8

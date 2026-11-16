@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cgvvhswm6fe30"]
+
+[ext_resource type="PackedScene" uid="uid://bxhe8lv6h7cau" path="res://main/entities/character.tscn" id="1_2cvbs"]
+[ext_resource type="Texture2D" uid="uid://eqxiq60w63ko" path="res://main/entities/characters/npcs/thief_sprite_texture.png" id="2_b22mq"]
+
+[node name="Thief" unique_id=920390172 instance=ExtResource("1_2cvbs")]
+
+[node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(1546177270) index="0" unique_id=2072653577]
+position = Vector2(0, -5)
+texture = ExtResource("2_b22mq")
+offset = Vector2(0, -3)
+
+[node name="CenterMarker" parent="." index="4" unique_id=1538757570]
+position = Vector2(0, -5)

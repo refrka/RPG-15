@@ -34,3 +34,14 @@ func activate() -> void:
 func deactivate() -> void:
 
 	active = false
+
+
+
+func _on_damage_package_received(damage_package: DamagePackage) -> void:
+
+	pass
+
+
+func _on_death() -> void:
+
+	pass

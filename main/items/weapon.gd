@@ -12,6 +12,8 @@ enum WeaponType {
 
 @export var weapon_type: WeaponType
 
+@export var attack_entry: AttackEntry
+
 @export var weapon_scene: PackedScene
 
 @export var default_ammunition: Ammunition

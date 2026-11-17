@@ -30,14 +30,14 @@ func reset() -> void:
 
 
 
-func activate() -> void:
+func enter() -> void:
 
 	active = true
 
 
 
 
-func deactivate() -> void:
+func exit() -> void:
 
 	active = false
 

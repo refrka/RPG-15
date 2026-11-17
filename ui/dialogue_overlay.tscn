@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cesr4eybdnurm"]
+
+[ext_resource type="Script" uid="uid://d07hlm6rx6hat" path="res://ui/dialogue_overlay.gd" id="1_6w78s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l8v81"]
+bg_color = Color(0.1221207, 0.14522305, 0.15285042, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25674063, 0.29679266, 0.31015244, 1)
+
+[node name="DialogueOverlay" type="MarginContainer" unique_id=779482418 node_paths=PackedStringArray("texture_rect", "text_label") groups=["overlay"]]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+script = ExtResource("1_6w78s")
+texture_rect = NodePath("PanelContainer/MarginContainer/HBoxContainer/TextureRect")
+text_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer/RichTextLabel")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=610389764]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_l8v81")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=888375654]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer" unique_id=406686747]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=1491562411]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=1338190817]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer" unique_id=132368667]
+layout_mode = 2
+text = "Dialogue text"
+fit_content = true
+horizontal_alignment = 1

@@ -112,6 +112,8 @@ func get_projectile_scene() -> ProjectileScene:
 		
 		projectile_scene = current_weapon_stack.item_data.ammunition_stack.item.projectile_scene.instantiate()
 
+	projectile_scene.damage_package = DamagePackage.create(current_weapon.attack_entry, entity)
+
 	return projectile_scene
 
 
@@ -133,9 +135,15 @@ func _on_weapon_projectile_requested() -> void:
 
 	if projectile_scene:
 
+		projectile_scene.owning_entity = entity
+
 		Scenes.current_location.projectile_root.add_child(projectile_scene)
 
-		projectile_scene.global_position = entity.center_marker.global_position
+		projectile_scene.global_position = entity.global_position + movement_component.face_dir
+
+		if projectile_scene.origin_at_center:
+
+			projectile_scene.global_position += entity.center_marker.position
 
 		match projectile_scene.projectile_type:
 
@@ -145,9 +153,9 @@ func _on_weapon_projectile_requested() -> void:
 
 			ProjectileScene.ProjectileType.ARC:
 
-				var target_position = movement_component.face_dir * 50.0
+				var target_position = movement_component.face_dir * 30.0
 
-				projectile_scene.set_arc(target_position, 40.0, 1.0)
+				projectile_scene.set_arc(target_position, 30.0, 1.0)
 
 
 

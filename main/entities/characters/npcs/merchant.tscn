@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://duvi1y4dt78e4"]
+
+[ext_resource type="PackedScene" uid="uid://bxhe8lv6h7cau" path="res://main/entities/character.tscn" id="1_floog"]
+[ext_resource type="Script" uid="uid://d1l0dy163gnc5" path="res://main/items/inventory.gd" id="2_1coy8"]
+[ext_resource type="Script" uid="uid://bilm5ege1cif1" path="res://main/entities/entity_stats.gd" id="2_stbip"]
+[ext_resource type="Script" uid="uid://cwi55co0pga55" path="res://main/items/item_stack.gd" id="3_v47wg"]
+[ext_resource type="Texture2D" uid="uid://uyr51w3s5ed6" path="res://textures/characters/merchant_sprite_texture.png" id="4_v47wg"]
+[ext_resource type="Script" uid="uid://bgdddqoa78u1i" path="res://main/components/health_component.gd" id="5_msveb"]
+[ext_resource type="Script" uid="uid://opu1es3c8l74" path="res://main/dialogue/dialogue_library.gd" id="5_rrlfr"]
+[ext_resource type="Texture2D" uid="uid://biqfawyncmraf" path="res://textures/characters/merchant_speaker_texture.png" id="6_ugwj6"]
+
+[sub_resource type="Resource" id="Resource_msveb"]
+script = ExtResource("2_stbip")
+base_health = 2
+metadata/_custom_type_script = "uid://bilm5ege1cif1"
+
+[sub_resource type="Resource" id="Resource_f0nyr"]
+script = ExtResource("2_1coy8")
+metadata/_custom_type_script = "uid://d1l0dy163gnc5"
+
+[sub_resource type="Resource" id="Resource_l8v81"]
+script = ExtResource("5_rrlfr")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v47wg"]
+size = Vector2(10, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_msveb"]
+size = Vector2(10, 14)
+
+[node name="Merchant" unique_id=920390172 instance=ExtResource("1_floog")]
+entity_id = "merchant"
+speaker_texture = ExtResource("6_ugwj6")
+stats = SubResource("Resource_msveb")
+inventory = SubResource("Resource_f0nyr")
+dialogue_library = SubResource("Resource_l8v81")
+
+[node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(1546177270) index="0" unique_id=2072653577]
+texture = ExtResource("4_v47wg")
+
+[node name="BodyCollision" parent="." index="1" unique_id=934894713]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_v47wg")
+
+[node name="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1587296689) index="0" unique_id=135124436]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_msveb")
+
+[node name="HealthComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="1" unique_id=1147873646]
+script = ExtResource("5_msveb")
+metadata/_custom_type_script = "uid://bgdddqoa78u1i"
+
+[node name="CenterMarker" parent="." index="5" unique_id=1538757570]
+position = Vector2(0, -6)
+
+[node name="DirRay" parent="." index="6" unique_id=1334925714]
+position = Vector2(0, -6)
+
+[editable path="Hurtbox"]

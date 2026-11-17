@@ -1,12 +1,158 @@
 [gd_scene format=3 uid="uid://bxhe8lv6h7cau"]
 
 [ext_resource type="Script" uid="uid://bnxoefktu4k7l" path="res://main/entities/character.gd" id="1_u7xqv"]
+[ext_resource type="PackedScene" uid="uid://bpfqy3f3tse4t" path="res://main/sensor/hurtbox.tscn" id="2_6ows6"]
 [ext_resource type="Script" uid="uid://bkmh7jm822bx3" path="res://main/states/state_machine.gd" id="2_gosl2"]
 [ext_resource type="Script" uid="uid://bwmuuh1t4m42u" path="res://main/components/animation_component.gd" id="2_ruoji"]
 [ext_resource type="Script" uid="uid://cmnf584nwr2gv" path="res://main/states/body_idle_state.gd" id="3_0k2p7"]
 [ext_resource type="Script" uid="uid://boe5p3w2lcghw" path="res://main/states/combat_idle_state.gd" id="4_ruoji"]
 
-[node name="Character" type="CharacterBody2D" unique_id=920390172 node_paths=PackedStringArray("body_sprite", "body_collision", "combat_root", "center_marker", "component_root", "state_machine")]
+[sub_resource type="Animation" id="Animation_6ows6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/BodySprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/BodySprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -8)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasGroup/BodySprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasGroup/BodySprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_b4l5d"]
+resource_name = "die"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/BodySprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -1.5707963267948966]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/BodySprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasGroup/BodySprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.16666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -8), Vector2(0, -5)]
+}
+
+[sub_resource type="Animation" id="Animation_3m3yh"]
+resource_name = "expire"
+length = 0.80279726
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/BodySprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0014062716, 0.14929686, 0.2992969, 0.39929688, 0.49929687, 0.54929686, 0.59929687, 0.62252337),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6826327),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_nqau1"]
+resource_name = "flinch"
+length = 0.13333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/BodySprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.05, 0.075),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(4.415934, 0, 0, 1), Color(3.2944162, 3.2944162, 3.2944162, 1), Color(4.415934, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3m3yh"]
+_data = {
+&"RESET": SubResource("Animation_6ows6"),
+&"die": SubResource("Animation_b4l5d"),
+&"expire": SubResource("Animation_3m3yh"),
+&"flinch": SubResource("Animation_nqau1")
+}
+
+[node name="Character" type="CharacterBody2D" unique_id=920390172 node_paths=PackedStringArray("body_sprite", "body_collision", "combat_root", "hurtbox", "center_marker", "component_root", "state_machine", "body_anim_player")]
 collision_layer = 3
 collision_mask = 0
 motion_mode = 1
@@ -14,18 +160,24 @@ script = ExtResource("1_u7xqv")
 body_sprite = NodePath("CanvasGroup/BodySprite")
 body_collision = NodePath("BodyCollision")
 combat_root = NodePath("CanvasGroup/CombatRoot")
+hurtbox = NodePath("Hurtbox")
 center_marker = NodePath("CenterMarker")
 component_root = NodePath("ComponentRoot")
 state_machine = NodePath("StateMachine")
+body_anim_player = NodePath("BodyAnimPlayer")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=1546177270]
 y_sort_enabled = true
 
 [node name="BodySprite" type="Sprite2D" parent="CanvasGroup" unique_id=2072653577]
+position = Vector2(0, -8)
 
 [node name="CombatRoot" type="Node2D" parent="CanvasGroup" unique_id=65545494]
 
 [node name="BodyCollision" type="CollisionShape2D" parent="." unique_id=934894713]
+debug_color = Color(0.7, 0.43166667, 0, 0)
+
+[node name="Hurtbox" parent="." unique_id=1587296689 instance=ExtResource("2_6ows6")]
 
 [node name="ComponentRoot" type="Node" parent="." unique_id=1771809177]
 
@@ -56,3 +208,8 @@ script = ExtResource("4_ruoji")
 [node name="DirRay" type="RayCast2D" parent="." unique_id=1334925714]
 position = Vector2(0, -7)
 target_position = Vector2(0, 20)
+
+[node name="BodyAnimPlayer" type="AnimationPlayer" parent="." unique_id=1242108839]
+libraries/ = SubResource("AnimationLibrary_3m3yh")
+
+[editable path="Hurtbox"]

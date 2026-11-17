@@ -1,9 +1,14 @@
 [gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://dyg2duv8uioh6"]
 
+[ext_resource type="Script" uid="uid://vqmdx5cwp2ie" path="res://main/combat/attack_entry.gd" id="1_46mnd"]
 [ext_resource type="Script" uid="uid://dkppyi86u3mti" path="res://main/items/weapon.gd" id="1_v6i5c"]
-[ext_resource type="PackedScene" uid="uid://c6ss0mx2kd77f" path="res://main/combat/projectiles/fireball.tscn" id="1_wia2h"]
+[ext_resource type="PackedScene" uid="uid://bqnycc4u3hgqk" path="res://main/combat/projectiles/arrow.tscn" id="1_wia2h"]
 [ext_resource type="Script" uid="uid://bhjjrqmy0u6h1" path="res://main/items/ammunition.gd" id="2_46mnd"]
 [ext_resource type="PackedScene" uid="uid://bbncb4ljcbnjf" path="res://main/items/equipment/weapons/bow.tscn" id="2_o3o67"]
+
+[sub_resource type="Resource" id="Resource_6ows6"]
+script = ExtResource("1_46mnd")
+metadata/_custom_type_script = "uid://vqmdx5cwp2ie"
 
 [sub_resource type="Resource" id="Resource_qedsv"]
 script = ExtResource("2_46mnd")
@@ -13,6 +18,7 @@ item_id = &"fireball"
 [resource]
 script = ExtResource("1_v6i5c")
 weapon_type = 1
+attack_entry = SubResource("Resource_6ows6")
 weapon_scene = ExtResource("2_o3o67")
 default_ammunition = SubResource("Resource_qedsv")
 attack_cooldown = 0.3

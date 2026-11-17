@@ -81,11 +81,11 @@ func activate() -> void:
 
 	if current_body_state:
 
-		current_body_state.activate()
+		current_body_state.enter()
 
 	if current_combat_state:
 
-		current_combat_state.activate()
+		current_combat_state.enter()
 
 
 
@@ -95,12 +95,51 @@ func deactivate() -> void:
 
 	if current_body_state:
 
-		current_body_state.deactivate()
+		current_body_state.exit()
 
 	if current_combat_state:
 
-		current_combat_state.deactivate()
+		current_combat_state.exit()
 
+
+
+
+
+func request_state(script: Script) -> void:
+
+	if body_states.has(script):
+
+		change_state(body_states[script])
+
+	if combat_states.has(script):
+
+		change_state(combat_states[script])
+
+
+
+
+
+func change_state(state: State) -> void:
+	
+	if state is BodyState:
+
+		if current_body_state:
+
+			current_body_state.exit()
+
+		current_body_state = state
+
+		current_body_state.enter()
+
+	elif state is CombatState:
+
+		if current_combat_state:
+
+			current_combat_state.exit()
+
+		current_combat_state = state
+		
+		current_combat_state.enter()
 
 
 

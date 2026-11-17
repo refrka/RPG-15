@@ -33,6 +33,8 @@ func initialize() -> bool:
 
 	initialized = true
 
+	entity_root.get_children().map(func(e): e.initialize())
+
 	return true
 
 
@@ -44,11 +46,15 @@ func activate() -> void:
 
 	set_location_state(LocationState.ACTIVE)
 
+	entity_root.get_children().map(func(e): e.activate())
+
 
 
 func deactivate() -> void:
 
 	set_location_state(LocationState.INACTIVE)
+
+	entity_root.get_children().map(func(e): e.activate())
 
 
 

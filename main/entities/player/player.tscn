@@ -8,6 +8,9 @@
 [ext_resource type="Script" uid="uid://cwi55co0pga55" path="res://main/items/item_stack.gd" id="4_enjxq"]
 [ext_resource type="Resource" uid="uid://dyg2duv8uioh6" path="res://main/items/equipment/weapons/bow.tres" id="5_elonm"]
 [ext_resource type="Script" uid="uid://cx0laqv80fdxi" path="res://main/components/combat_component.gd" id="6_kdw2b"]
+[ext_resource type="Script" uid="uid://baoovdts8slvq" path="res://main/states/body_moving_state.gd" id="9_enjxq"]
+[ext_resource type="Script" uid="uid://ccdd8pxqp8bym" path="res://main/components/interaction_component.gd" id="10_243e6"]
+[ext_resource type="Script" uid="uid://dqww7qb3cvxoo" path="res://main/sensor/sensor.gd" id="10_elonm"]
 
 [sub_resource type="Resource" id="Resource_kdw2b"]
 script = ExtResource("4_enjxq")
@@ -20,21 +23,111 @@ script = ExtResource("3_la1ju")
 weapon_stack = SubResource("Resource_kdw2b")
 metadata/_custom_type_script = "uid://d1l0dy163gnc5"
 
-[node name="Player" unique_id=920390172 instance=ExtResource("1_8x8hf")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_elonm"]
+radius = 7.0
+height = 24.0
+
+[sub_resource type="Animation" id="Animation_elonm"]
+resource_name = "idle_down"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/BodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_243e6"]
+resource_name = "idle_down"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/BodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_enjxq"]
+resource_name = "move_left"
+length = 0.26
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/BodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_qe6dv"]
+resource_name = "move_left"
+length = 0.26
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/BodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_elonm"]
+_data = {
+&"idle_down": SubResource("Animation_elonm"),
+&"idle_up": SubResource("Animation_243e6"),
+&"move_down": SubResource("Animation_enjxq"),
+&"move_up": SubResource("Animation_qe6dv")
+}
+
+[node name="Player" unique_id=920390172 node_paths=PackedStringArray("interaction_sensor") instance=ExtResource("1_8x8hf")]
 collision_layer = 11
 script = ExtResource("2_ihp3c")
+entity_id = "player"
+interaction_sensor = NodePath("InteractionSensor")
 inventory = SubResource("Resource_fc701")
 
 [node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(1546177270) index="0" unique_id=2072653577]
-position = Vector2(0, -7)
 texture = ExtResource("3_ihp3c")
-offset = Vector2(0, -9)
+offset = Vector2(0, -8)
 hframes = 8
 vframes = 4
 
 [node name="CombatRoot" parent="CanvasGroup" parent_id_path=PackedInt32Array(1546177270) index="1" unique_id=65545494]
 y_sort_enabled = true
 position = Vector2(0, -7)
+
+[node name="InteractionSensor" type="Area2D" parent="." index="3" unique_id=317631068]
+position = Vector2(0, -7)
+collision_layer = 0
+script = ExtResource("10_elonm")
+metadata/_custom_type_script = "uid://dqww7qb3cvxoo"
+
+[node name="InteractionArea" type="CollisionShape2D" parent="InteractionSensor" index="0" unique_id=1833372749]
+position = Vector2(7, 0)
+shape = SubResource("CapsuleShape2D_elonm")
+debug_color = Color(0.7, 0.7, 0.7, 0)
 
 [node name="PlayerMovementComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="0" unique_id=1696674147 node_paths=PackedStringArray("dir_ray")]
 script = ExtResource("4_0kxhf")
@@ -47,8 +140,20 @@ y_sprite_frames = Vector2i(0, 5)
 script = ExtResource("6_kdw2b")
 metadata/_custom_type_script = "uid://cx0laqv80fdxi"
 
-[node name="CenterMarker" parent="." index="4" unique_id=1538757570]
+[node name="InteractionComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="3" unique_id=607242513]
+script = ExtResource("10_243e6")
+metadata/_custom_type_script = "uid://ccdd8pxqp8bym"
+
+[node name="BodyMovingState" type="Node" parent="StateMachine/BodyRoot" parent_id_path=PackedInt32Array(2018266311) index="1" unique_id=1212966244]
+script = ExtResource("9_enjxq")
+
+[node name="CenterMarker" parent="." index="6" unique_id=1538757570]
 position = Vector2(0, -7)
 
-[node name="DirRay" parent="." index="5" unique_id=1334925714]
+[node name="DirRay" parent="." index="7" unique_id=1334925714]
 target_position = Vector2(20, 0)
+
+[node name="BodyAnimPlayer" parent="." index="8" unique_id=1242108839]
+libraries/player = SubResource("AnimationLibrary_elonm")
+
+[editable path="Hurtbox"]

@@ -7,6 +7,7 @@
 size = Vector2(1, 1)
 
 [node name="Arrow" unique_id=1236751785 instance=ExtResource("1_qhg55")]
+origin_at_center = true
 
 [node name="Sprite2D" parent="." index="0" unique_id=1220180525]
 position = Vector2(0, -0.5)

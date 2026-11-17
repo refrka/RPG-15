@@ -140,7 +140,7 @@ func _on_area_entered(area: Area2D) -> void:
 
 		return
 
-	if area is Sensor and not sensors.has(area) and not area.entity == entity:
+	if area is Sensor and not sensors.has(area) and area.entity != entity:
 
 		sensors.append(area)
 

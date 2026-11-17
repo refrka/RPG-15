@@ -3,6 +3,10 @@ class_name MovementComponent extends Component
 
 signal face_dir_updated(dir: Vector2)
 
+signal move_started
+
+signal move_ended
+
 
 @export var dir_ray: RayCast2D
 
@@ -10,6 +14,8 @@ signal face_dir_updated(dir: Vector2)
 var move_dir: Vector2
 
 var face_dir:= Vector2.RIGHT
+
+var move_velocity: Vector2
 
 var move_speed:= 0.0
 
@@ -80,11 +86,9 @@ func get_velocity(delta: float) -> Vector2:
 
 	move_speed = get_move_speed()
 
-	var move_velocity = move_dir * move_speed
+	move_velocity = move_dir * move_speed * delta
 
-	var velocity = move_velocity * delta
-
-	return velocity
+	return move_velocity
 
 
 
@@ -107,6 +111,16 @@ func _physics_process(delta: float) -> void:
 
 	var new_velocity = get_velocity(delta)
 
-	entity.velocity = current_velocity.move_toward(new_velocity, 30.0)
+	new_velocity = current_velocity.move_toward(new_velocity, 30.0)
+
+	if new_velocity != Vector2.ZERO and entity.velocity == Vector2.ZERO:
+
+		move_started.emit()
+
+	if new_velocity == Vector2.ZERO and current_velocity != Vector2.ZERO:
+
+		move_ended.emit()
+
+	entity.velocity = new_velocity
 
 	entity.move_and_slide()

@@ -3,12 +3,27 @@
 [ext_resource type="PackedScene" uid="uid://bxhe8lv6h7cau" path="res://main/entities/character.tscn" id="1_8x8hf"]
 [ext_resource type="Script" uid="uid://i22ro207a1vo" path="res://main/entities/player/player.gd" id="2_ihp3c"]
 [ext_resource type="Texture2D" uid="uid://cglaueypgd0b5" path="res://main/entities/player/player_sprite_sheet_texture.png" id="3_ihp3c"]
+[ext_resource type="Script" uid="uid://d1l0dy163gnc5" path="res://main/items/inventory.gd" id="3_la1ju"]
 [ext_resource type="Script" uid="uid://dui1ijtj6i8no" path="res://main/components/player_movement_component.gd" id="4_0kxhf"]
+[ext_resource type="Script" uid="uid://cwi55co0pga55" path="res://main/items/item_stack.gd" id="4_enjxq"]
+[ext_resource type="Resource" uid="uid://dyg2duv8uioh6" path="res://main/items/equipment/weapons/bow.tres" id="5_elonm"]
 [ext_resource type="Script" uid="uid://cx0laqv80fdxi" path="res://main/components/combat_component.gd" id="6_kdw2b"]
+
+[sub_resource type="Resource" id="Resource_kdw2b"]
+script = ExtResource("4_enjxq")
+item = ExtResource("5_elonm")
+count = 1
+metadata/_custom_type_script = "uid://cwi55co0pga55"
+
+[sub_resource type="Resource" id="Resource_fc701"]
+script = ExtResource("3_la1ju")
+weapon_stack = SubResource("Resource_kdw2b")
+metadata/_custom_type_script = "uid://d1l0dy163gnc5"
 
 [node name="Player" unique_id=920390172 instance=ExtResource("1_8x8hf")]
 collision_layer = 11
 script = ExtResource("2_ihp3c")
+inventory = SubResource("Resource_fc701")
 
 [node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(1546177270) index="0" unique_id=2072653577]
 position = Vector2(0, -7)

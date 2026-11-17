@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://c6ss0mx2kd77f"]
+
+[ext_resource type="PackedScene" uid="uid://bul72yit1vyw" path="res://main/combat/projectile_scene.tscn" id="1_cj5l2"]
+[ext_resource type="Texture2D" uid="uid://dqvswcbu3y4jp" path="res://textures/projectiles/fireball_texture_sprite.png" id="2_sur5g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cj5l2"]
+radius = 5.0
+
+[sub_resource type="Animation" id="Animation_cj5l2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sur5g"]
+_data = {
+&"RESET": SubResource("Animation_cj5l2")
+}
+
+[sub_resource type="Animation" id="Animation_ltslt"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 6.283185307179586, 12.566370614359172]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_av81y"]
+_data = {
+&"default": SubResource("Animation_ltslt")
+}
+
+[node name="Fireball" unique_id=1236751785 instance=ExtResource("1_cj5l2")]
+projectile_type = 1
+
+[node name="Sprite2D" parent="." index="0" unique_id=1220180525]
+position = Vector2(0, -8)
+texture = ExtResource("2_sur5g")
+offset = Vector2(0.5, -0.5)
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1122584934]
+position = Vector2(0, -8)
+
+[node name="Hitbox" parent="." index="2" unique_id=1611579010]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" parent="Hitbox" index="0" unique_id=526524626]
+shape = SubResource("CircleShape2D_cj5l2")
+
+[node name="AnimationPlayer" parent="." index="3" unique_id=666765051]
+libraries/ = SubResource("AnimationLibrary_sur5g")
+libraries/fireball = SubResource("AnimationLibrary_av81y")
+autoplay = &"fireball/default"
+
+[editable path="Hitbox"]

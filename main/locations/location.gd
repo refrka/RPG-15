@@ -14,6 +14,8 @@ enum LocationState {
 
 @export var entity_root: Node2D
 
+@export var projectile_root: Node2D
+
 var location_state: LocationState
 
 var initialized:= false

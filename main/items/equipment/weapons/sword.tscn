@@ -127,7 +127,8 @@ _data = {
 }
 
 [node name="Sword" unique_id=1950214909 instance=ExtResource("1_qev53")]
-scale = Vector2(1, 1)
+rotation = -1.9198622
+scale = Vector2(-1, -1)
 
 [node name="Sprite2D" parent="." index="0" unique_id=699357638]
 position = Vector2(7, 0)

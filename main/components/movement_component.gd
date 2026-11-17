@@ -9,7 +9,7 @@ signal face_dir_updated(dir: Vector2)
 
 var move_dir: Vector2
 
-var face_dir: Vector2
+var face_dir:= Vector2.RIGHT
 
 var move_speed:= 0.0
 
@@ -71,6 +71,10 @@ func get_face_dir_string() -> String:
 
 
 func get_velocity(delta: float) -> Vector2:
+
+	if move_locked:
+
+		return Vector2.ZERO
 
 	move_dir = get_move_dir()
 

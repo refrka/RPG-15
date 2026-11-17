@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://dpkxaqx8pn8qx"]
 
 [ext_resource type="Script" uid="uid://b0sw0v5y17w7s" path="res://main/locations/location.gd" id="1_rethr"]
+[ext_resource type="PackedScene" uid="uid://b5h20ga7gh3ky" path="res://main/entities/player/player.tscn" id="2_kceww"]
+[ext_resource type="PackedScene" uid="uid://c6ss0mx2kd77f" path="res://main/combat/projectiles/fireball.tscn" id="3_ftcat"]
 
-[node name="Location" type="Node2D" unique_id=670555715 node_paths=PackedStringArray("entity_root")]
+[node name="Location" type="Node2D" unique_id=670555715 node_paths=PackedStringArray("entity_root", "projectile_root")]
 script = ExtResource("1_rethr")
 entity_root = NodePath("NavigationRegion2D/YSortRoot/Entities")
+projectile_root = NodePath("NavigationRegion2D/YSortRoot/Projectiles")
 metadata/_custom_type_script = "uid://b0sw0v5y17w7s"
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=557022044]
@@ -17,3 +20,10 @@ y_sort_enabled = true
 
 [node name="Entities" type="Node2D" parent="NavigationRegion2D/YSortRoot" unique_id=1602233272]
 y_sort_enabled = true
+
+[node name="Player" parent="NavigationRegion2D/YSortRoot/Entities" unique_id=920390172 instance=ExtResource("2_kceww")]
+
+[node name="Projectiles" type="Node2D" parent="NavigationRegion2D/YSortRoot" unique_id=1399905173]
+y_sort_enabled = true
+
+[node name="Fireball" parent="NavigationRegion2D/YSortRoot/Projectiles" unique_id=1236751785 instance=ExtResource("3_ftcat")]

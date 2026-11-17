@@ -7,10 +7,22 @@ var current_weapon_stack: ItemStack
 var current_weapon_scene: WeaponScene
 
 
+var current_weapon: Weapon:
+
+	get:
+
+		if not current_weapon_stack:
+
+			return null
+
+		return current_weapon_stack.item
+
 
 var movement_component: MovementComponent
 
 var animation_component: AnimationComponent
+
+var cooldown_timer: SceneTreeTimer
 
 
 
@@ -23,6 +35,10 @@ func initialize(_entity: Entity) -> void:
 	movement_component = entity.get_component(MovementComponent)
 
 	animation_component = entity.get_component(AnimationComponent)
+
+	if entity.inventory and entity.inventory.weapon_stack:
+
+		load_weapon(entity.inventory.weapon_stack)
 
 
 
@@ -37,6 +53,10 @@ func load_weapon(weapon_stack: ItemStack) -> void:
 
 	current_weapon_scene = weapon_stack.item.weapon_scene.instantiate()
 
+	current_weapon_scene.attack_finished.connect(_on_weapon_attack_finished)
+
+	current_weapon_scene.projectile_requested.connect(_on_weapon_projectile_requested)
+
 	entity.combat_root.add_child(current_weapon_scene)
 
 	current_weapon_scene.hide()
@@ -49,7 +69,14 @@ func get_animation_name() -> String:
 
 
 
+
 func attack() -> void:
+
+	if cooldown_timer != null and cooldown_timer.time_left > 0.0:
+
+		return
+
+	movement_component.move_locked = true
 
 	current_weapon_scene.show()
 
@@ -60,8 +87,74 @@ func attack() -> void:
 
 
 
+func start_attack_cooldown(duration: float) -> void:
+
+	cooldown_timer = get_tree().create_timer(duration)
+
+	cooldown_timer.timeout.connect(_on_cooldown_timer_timeout)
 
 
+
+
+func get_projectile_scene() -> ProjectileScene:
+
+	var projectile_scene: ProjectileScene = null
+
+	if not current_weapon:
+
+		return projectile_scene
+
+	if current_weapon.default_ammunition:
+		
+		projectile_scene = current_weapon.default_ammunition.projectile_scene.instantiate()
+		
+	elif current_weapon_stack.item_data.ammunition_stack:
+		
+		projectile_scene = current_weapon_stack.item_data.ammunition_stack.item.projectile_scene.instantiate()
+
+	return projectile_scene
+
+
+
+
+func _on_weapon_attack_finished() -> void:
+
+	if current_weapon.attack_cooldown > 0.0:
+
+		start_attack_cooldown(current_weapon.attack_cooldown)
+
+	movement_component.move_locked = false
+
+
+
+func _on_weapon_projectile_requested() -> void:
+
+	var projectile_scene = get_projectile_scene()
+
+	if projectile_scene:
+
+		Scenes.current_location.projectile_root.add_child(projectile_scene)
+
+		projectile_scene.global_position = entity.center_marker.global_position
+
+		match projectile_scene.projectile_type:
+
+			ProjectileScene.ProjectileType.LINEAR:
+
+				projectile_scene.set_trajectory(movement_component.face_dir)
+
+			ProjectileScene.ProjectileType.ARC:
+
+				var target_position = movement_component.face_dir * 50.0
+
+				projectile_scene.set_arc(target_position, 40.0, 1.0)
+
+
+
+
+func _on_cooldown_timer_timeout() -> void:
+
+	cooldown_timer = null
 
 
 

@@ -2,12 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://dd2x7hm18y1gm" path="res://main/sensor/hitbox.tscn" id="1_1xwyj"]
 [ext_resource type="Script" uid="uid://bdo3qor04ikel" path="res://main/combat/projectile_scene.gd" id="1_tuvjr"]
+[ext_resource type="Script" uid="uid://dnoafrw7cdnlo" path="res://main/expiration_timer.gd" id="3_0hx1g"]
 
-[node name="ProjectileScene" type="CharacterBody2D" unique_id=1236751785 node_paths=PackedStringArray("sprite", "hitbox", "anim_player")]
+[node name="ProjectileScene" type="CharacterBody2D" unique_id=1236751785 node_paths=PackedStringArray("sprite", "hitbox", "anim_player", "on_screen_notifier", "timer")]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_tuvjr")
 sprite = NodePath("Sprite2D")
 hitbox = NodePath("Hitbox")
 anim_player = NodePath("AnimationPlayer")
+on_screen_notifier = NodePath("VisibleOnScreenNotifier2D")
+timer = NodePath("ExpirationTimer")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1220180525]
 
@@ -17,5 +22,11 @@ anim_player = NodePath("AnimationPlayer")
 collision_mask = 1536
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=666765051]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=337604420]
+
+[node name="ExpirationTimer" type="Timer" parent="." unique_id=49445218]
+wait_time = 3.0
+script = ExtResource("3_0hx1g")
 
 [editable path="Hitbox"]

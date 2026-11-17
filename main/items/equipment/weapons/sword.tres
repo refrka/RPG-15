@@ -2,11 +2,20 @@
 
 [ext_resource type="Script" uid="uid://dkppyi86u3mti" path="res://main/items/weapon.gd" id="1_15bhp"]
 [ext_resource type="Texture2D" uid="uid://c27q25farhqj5" path="res://textures/items/sword_icon_texture.png" id="1_jlv2x"]
+[ext_resource type="PackedScene" uid="uid://c6ss0mx2kd77f" path="res://main/combat/projectiles/fireball.tscn" id="1_qedsv"]
+[ext_resource type="Script" uid="uid://bhjjrqmy0u6h1" path="res://main/items/ammunition.gd" id="2_21sel"]
 [ext_resource type="PackedScene" uid="uid://dym1vojbd4jjb" path="res://main/items/equipment/weapons/sword.tscn" id="2_n5uey"]
+
+[sub_resource type="Resource" id="Resource_qev53"]
+script = ExtResource("2_21sel")
+projectile_scene = ExtResource("1_qedsv")
+item_id = &"fireball"
 
 [resource]
 script = ExtResource("1_15bhp")
+weapon_type = 1
 weapon_scene = ExtResource("2_n5uey")
+default_ammunition = SubResource("Resource_qev53")
 item_id = &"sword"
 icon_texture = ExtResource("1_jlv2x")
 max_stack = 1

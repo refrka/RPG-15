@@ -19,7 +19,7 @@ var current_options: Array
 
 var selected_options: Array
 
-
+var dialogue_data:= {}
 
 
 
@@ -87,6 +87,8 @@ func close_dialogue() -> void:
 
 func set_options(options: Array[DialogueOption]) -> void:
 
+	dialogue_overlay.clear_options()
+
 	for option in current_options:
 
 		if option.persist and not selected_options.has(option):
@@ -112,6 +114,10 @@ func set_dialogue_source(source: Entity) -> void:
 
 
 func set_dialogue_node(dialogue_node: DialogueNode) -> void:
+	
+	if current_node and current_node.exit_command_set:
+
+		current_node.exit_command_set.execute_all()
 
 	current_node = dialogue_node
 
@@ -119,15 +125,16 @@ func set_dialogue_node(dialogue_node: DialogueNode) -> void:
 
 	set_options(current_node.options)
 
+	if current_node.enter_command_set:
+
+		current_node.enter_command_set.execute_all()
+
 
 
 
 func set_dialogue_text(dialogue_text: DialogueText) -> void:
 
 	dialogue_overlay.set_dialogue_text(dialogue_text)
-
-
-
 
 
 
@@ -168,7 +175,11 @@ func get_root_options(entity: Entity = null) -> Array[DialogueOption]:
 
 				root_options.append(option)
 
-	# Fetch appropriate root options from quests
+	var quest_options = Quests.get_root_options(entity)
+
+	for option in quest_options:
+
+		root_options.append(option)
 
 	return root_options
 
@@ -210,4 +221,6 @@ func _on_last_line_shown() -> void:
 
 func _on_dialogue_option_selected(option: DialogueOption) -> void:
 
-	pass
+	selected_options.append(option)
+
+	set_dialogue_node(option.node)

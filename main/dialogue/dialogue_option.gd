@@ -10,3 +10,17 @@ class_name DialogueOption extends Resource
 @export var node: DialogueNode
 
 @export var forced_greeting: DialogueGreeting
+
+
+
+
+
+func passes_conditions() -> bool:
+
+	for condition in gate_conditions:
+
+		if not condition.evaluate():
+
+			return false
+
+	return true

@@ -19,6 +19,9 @@ signal option_selected(option: DialogueOption)
 
 @export var close_button: Button
 
+@export var anim_player: AnimationPlayer
+
+
 
 var dialogue_text: DialogueText
 
@@ -49,6 +52,8 @@ func set_dialogue_text(_dialogue_text: DialogueText) -> void:
 
 func show_line(index: int) -> void:
 
+	anim_player.stop()
+
 	if dialogue_text.lines.size() - 1 >= index:
 
 		line_index = index
@@ -58,6 +63,10 @@ func show_line(index: int) -> void:
 		if index == dialogue_text.lines.size() - 1:
 
 			last_line_shown.emit()
+
+		else:
+
+			anim_player.play("blink")
 
 
 

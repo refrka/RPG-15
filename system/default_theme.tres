@@ -1,6 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://bl82iafgvbst2"]
 
-[ext_resource type="FontFile" uid="uid://bedcc0ac2qhmy" path="res://system/m5x7.ttf" id="1_iuegx"]
+[ext_resource type="FontFile" uid="uid://cj5sqms8n42u0" path="res://system/MesloLGS-Regular.ttf" id="1_iuegx"]
 
 [resource]
 default_font = ExtResource("1_iuegx")

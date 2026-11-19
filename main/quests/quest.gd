@@ -18,6 +18,7 @@ enum QuestState {
 
 }
 
+@export var quest_id: StringName
 
 @export var quest_title: String
 

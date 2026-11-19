@@ -10,6 +10,8 @@ signal completed
 
 @export var dialogue_node: DialogueNode
 
+@export var dialogue_option: DialogueOption
+
 @export var dialogue_target_ref: EntityRef
 
 

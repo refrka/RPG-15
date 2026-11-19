@@ -4,6 +4,7 @@ extends Node
 
 var active_quests: Array[QuestData]
 
+var quest_registry: Dictionary[StringName, Quest]
 
 
 
@@ -11,6 +12,22 @@ func _ready() -> void:
 
 	process_mode = PROCESS_MODE_ALWAYS
 
+	load_quest_registry()
+
+
+
+
+func load_quest_registry() -> void:
+
+	var dir = "res://main/quests/resources/"
+
+	for dir_name in ResourceLoader.list_directory(dir):
+
+		if dir_name.ends_with(".tres"):
+
+			var quest = load(dir + dir_name) as Quest
+
+			quest_registry[quest.quest_id] = quest
 
 
 
@@ -20,7 +37,22 @@ func get_root_options(source_entity: Entity) -> Array:
 
 	var root_options = []
 
+	for quest_data in active_quests:
+
+		var current_objectives = quest_data.get_current_objectives()
+
+		for objective in current_objectives:
+
+			if objective.dialogue_target_ref.matches(source_entity) and objective.dialogue_option:
+
+				if not objective.dialogue_option.passes_conditions():
+
+					continue
+
+				root_options.append(objective.dialogue_option)
+
 	return root_options
+
 
 
 
@@ -46,18 +78,6 @@ func get_quest_data(quest: Quest) -> QuestData:
 
 	return null
 
-
-
-
-func get_quest_dialogue_nodes(entity: Entity) -> Array:
-
-	var dialogue_nodes = []
-
-	for quest_data in active_quests:
-
-		pass
-
-	return dialogue_nodes
 
 
 
@@ -88,6 +108,8 @@ func set_quest_stage(quest: Quest, index: int) -> void:
 		quest_data = QuestData.create(quest)
 
 		quest_data.state_changed.connect(_on_quest_state_changed)
+
+		active_quests.append(quest_data)
 
 	quest_data.set_stage_index(index)
 

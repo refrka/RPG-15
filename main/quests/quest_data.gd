@@ -60,6 +60,21 @@ func get_stage(index:= -1) -> QuestStage:
 
 
 
+func get_current_objectives() -> Array:
+
+	var current_objectives = []
+
+	var stage = get_stage()
+
+	for objective in stage.objectives:
+
+		if not completed_objectives.has(objective):
+
+			current_objectives.append(objective)
+
+	return current_objectives
+
+
 
 
 static func create(_quest: Quest) -> QuestData:

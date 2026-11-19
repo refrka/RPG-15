@@ -3,7 +3,9 @@ class_name Entity extends PhysicsBody2D
 
 
 
-@export var entity_id: String
+@export var entity_id: StringName
+
+@export var authored_id: StringName
 
 @export var speaker_texture: Texture2D
 
@@ -27,7 +29,7 @@ class_name Entity extends PhysicsBody2D
 
 @export var body_anim_player: AnimationPlayer
 
-@export var inventory: Inventory
+@export var inventory:= Inventory.new()
 
 @export var dialogue_library: DialogueLibrary
 
@@ -49,6 +51,8 @@ func initialize() -> bool:
 	if initialized:
 
 		return false
+
+	inventory = inventory.duplicate(true)
 
 	initialized = true
 
@@ -165,6 +169,32 @@ func get_component(script: Script) -> Component:
 			return component
 
 	return null
+
+
+
+func get_interactable_component() -> InteractableComponent:
+
+	for component in components.values():
+
+		if component is InteractableComponent:
+
+			return component
+
+	return null
+
+
+
+
+
+func is_alive() -> bool:
+
+	var health_component = get_component(HealthComponent)
+
+	if not health_component:
+
+		return false
+
+	return health_component.is_alive()
 
 
 

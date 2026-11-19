@@ -2,8 +2,6 @@ class_name AnimationComponent extends Component
 
 signal death_animation_finished
 
-@export var combat_anim_player: AnimationPlayer
-
 @export var y_sprite_frames:= Vector2i(0,1)
 
 
@@ -47,6 +45,10 @@ func play_body_animation(anim_name: String) -> void:
 
 func _on_damage_package_received(_damage_package: DamagePackage) -> void:
 
+	if not entity.is_alive():
+
+		return
+
 	var anim_name = "%s/flinch" % entity.entity_id if entity.body_anim_player.has_animation("%s/flinch" % entity.entity_id) else "flinch"
 
 	entity.body_anim_player.play(anim_name)
@@ -62,11 +64,13 @@ func _on_death() -> void:
 
 	var anim_name = "%s/die" % entity.entity_id if entity.body_anim_player.has_animation("%s/die" % entity.entity_id) else "die"
 
-	print(anim_name)
-
 	if anim_name != "":
 
 		entity.body_anim_player.play(anim_name)
+
+	else:
+
+		death_animation_finished.emit()
 
 
 

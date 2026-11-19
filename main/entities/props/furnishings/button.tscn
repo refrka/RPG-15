@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://c8emgg2k861k8"]
+
+[ext_resource type="PackedScene" uid="uid://ir8hcomoadvf" path="res://main/entities/prop.tscn" id="1_vq07n"]
+[ext_resource type="Texture2D" uid="uid://dci0wyuxgbp5d" path="res://textures/props/button_sprite_texture.png" id="2_e5ol4"]
+[ext_resource type="Script" uid="uid://dkup4jec3tqds" path="res://main/components/activate_component.gd" id="3_1mnl4"]
+[ext_resource type="Script" uid="uid://dkta1jljyvgwr" path="res://main/commands/command.gd" id="4_wgnu6"]
+[ext_resource type="Script" uid="uid://pl241836natb" path="res://main/conditions/condition.gd" id="5_bqypv"]
+[ext_resource type="Script" uid="uid://c5grjaygcv5nq" path="res://main/commands/print_command.gd" id="5_otc75"]
+[ext_resource type="Script" uid="uid://bxv7h66hnp8wv" path="res://main/commands/command_set.gd" id="6_otc75"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l8v81"]
+size = Vector2(8, 3)
+
+[sub_resource type="Resource" id="Resource_wgnu6"]
+script = ExtResource("5_otc75")
+text = "pressed!"
+
+[sub_resource type="Resource" id="Resource_xlonn"]
+script = ExtResource("6_otc75")
+commands = Array[ExtResource("4_wgnu6")]([SubResource("Resource_wgnu6")])
+metadata/_custom_type_script = "uid://bxv7h66hnp8wv"
+
+[sub_resource type="Animation" id="Animation_wgnu6"]
+length = 0.11
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/BodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bqypv"]
+_data = {
+&"activate": SubResource("Animation_wgnu6")
+}
+
+[node name="Button" unique_id=1222908469 instance=ExtResource("1_vq07n")]
+collision_layer = 69
+entity_id = &"button"
+
+[node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(549313783) index="0" unique_id=1612993214]
+texture = ExtResource("2_e5ol4")
+hframes = 2
+
+[node name="BodyCollision" parent="." index="1" unique_id=892046188]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_l8v81")
+
+[node name="ActivateComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1493594875) index="1" unique_id=845464760]
+script = ExtResource("3_1mnl4")
+activate_command_set = SubResource("Resource_xlonn")
+
+[node name="BodyAnimPlayer" parent="." index="6" unique_id=527948352]
+libraries/button = SubResource("AnimationLibrary_bqypv")
+
+[editable path="Hurtbox"]

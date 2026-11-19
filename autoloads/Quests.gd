@@ -49,6 +49,34 @@ func get_quest_data(quest: Quest) -> QuestData:
 
 
 
+func get_quest_dialogue_nodes(entity: Entity) -> Array:
+
+	var dialogue_nodes = []
+
+	for quest_data in active_quests:
+
+		pass
+
+	return dialogue_nodes
+
+
+
+
+func get_quest_objectives(quest_data: QuestData) -> Array:
+
+	var objectives = []
+
+	var stage = quest_data.get_stage()
+
+	for _objective in stage.objectives:
+
+		if not quest_data.completed_objectives.has(_objective):
+
+			objectives.append(_objective)
+
+	return objectives
+
+
 
 
 func set_quest_stage(quest: Quest, index: int) -> void:

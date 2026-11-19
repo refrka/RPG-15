@@ -10,7 +10,43 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.25674063, 0.29679266, 0.31015244, 1)
 
-[node name="DialogueOverlay" type="MarginContainer" unique_id=779482418 node_paths=PackedStringArray("texture_rect", "text_label") groups=["overlay"]]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6w78s"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.13993472, 0.16699684, 0.17714348, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.17975459, 0.21232891, 0.22163719, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jq6f"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.13993472, 0.16699684, 0.17714348, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.14117648, 0.16862746, 0.1764706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tm4tl"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.18338072, 0.21642798, 0.22587162, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2578227, 0.29848108, 0.31373546, 1)
+
+[node name="DialogueOverlay" type="MarginContainer" unique_id=779482418 node_paths=PackedStringArray("texture_rect", "text_label", "input_bg_vbox", "option_vbox", "close_button") groups=["dialogue_overlay", "overlay"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,35 +59,70 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 script = ExtResource("1_6w78s")
 texture_rect = NodePath("PanelContainer/MarginContainer/HBoxContainer/TextureRect")
-text_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer/RichTextLabel")
+text_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/InputBGVBox/MarginContainer3/RichTextLabel")
+input_bg_vbox = NodePath("PanelContainer/MarginContainer/HBoxContainer/InputBGVBox")
+option_vbox = NodePath("PanelContainer/MarginContainer/HBoxContainer/InputBGVBox/MarginContainer2/VBoxContainer/OptionVBox")
+close_button = NodePath("PanelContainer/MarginContainer/HBoxContainer/InputBGVBox/MarginContainer2/VBoxContainer/CloseButton")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=610389764]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 8
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_l8v81")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=888375654]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer" unique_id=406686747]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=1491562411]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=1338190817]
+[node name="InputBGVBox" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=676496156]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 0
+theme_override_constants/separation = 0
+
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer/InputBGVBox" unique_id=1338190817]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer" unique_id=132368667]
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer/InputBGVBox/MarginContainer3" unique_id=132368667]
 layout_mode = 2
+mouse_filter = 2
 text = "Dialogue text"
 fit_content = true
-horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer/InputBGVBox" unique_id=697441215]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/InputBGVBox/MarginContainer2" unique_id=1268497362]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="OptionVBox" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/InputBGVBox/MarginContainer2/VBoxContainer" unique_id=1383020702]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CloseButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/InputBGVBox/MarginContainer2/VBoxContainer" unique_id=494464645]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_6w78s")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5jq6f")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tm4tl")
+text = "Close [x]"

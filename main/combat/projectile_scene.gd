@@ -142,3 +142,9 @@ func _physics_process(delta: float) -> void:
 		velocity = trajectory * 5000.0 * delta
 
 		move_and_slide()
+
+		if get_last_slide_collision() != null:
+
+			trajectory = Vector2.ZERO
+
+			timer.start()

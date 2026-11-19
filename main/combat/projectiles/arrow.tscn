@@ -3,6 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://bul72yit1vyw" path="res://main/combat/projectile_scene.tscn" id="1_qhg55"]
 [ext_resource type="Texture2D" uid="uid://2bk4lmh3sloa" path="res://textures/projectiles/arrow.png" id="2_xlonn"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hx1g"]
+size = Vector2(1, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xlonn"]
 size = Vector2(1, 1)
 
@@ -12,6 +15,10 @@ origin_at_center = true
 [node name="Sprite2D" parent="." index="0" unique_id=1220180525]
 position = Vector2(0, -0.5)
 texture = ExtResource("2_xlonn")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1122584934]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_0hx1g")
 
 [node name="Hitbox" parent="." index="2" unique_id=1611579010]
 position = Vector2(0, -0.5)

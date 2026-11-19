@@ -5,9 +5,8 @@
 [ext_resource type="Script" uid="uid://dnoafrw7cdnlo" path="res://main/expiration_timer.gd" id="3_0hx1g"]
 
 [node name="ProjectileScene" type="CharacterBody2D" unique_id=1236751785 node_paths=PackedStringArray("sprite", "hitbox", "anim_player", "on_screen_notifier", "timer")]
-y_sort_enabled = true
-collision_layer = 0
-collision_mask = 0
+collision_layer = 16
+collision_mask = 4
 script = ExtResource("1_tuvjr")
 sprite = NodePath("Sprite2D")
 hitbox = NodePath("Hitbox")

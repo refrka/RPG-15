@@ -8,6 +8,9 @@ signal completed
 
 @export var optional:= false
 
+@export var dialogue_node: DialogueNode
+
+@export var dialogue_target_ref: EntityRef
 
 
 

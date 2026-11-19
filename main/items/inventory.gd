@@ -31,6 +31,19 @@ func clear() -> void:
 
 
 
+func is_empty() -> bool:
+
+	for stack in stacks:
+
+		if stack and not stack.is_empty():
+
+			return false
+
+	return true
+
+
+
+
 func set_stack_index(index: int, stack: ItemStack) -> void:
 
 	if index <= size:

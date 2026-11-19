@@ -4,6 +4,8 @@ extends Node
 
 var overlays: Dictionary[Script, Overlay]
 
+var active_overlays: Array
+
 var pause_count:= 0
 
 
@@ -25,7 +27,11 @@ func _ready() -> void:
 
 func add_overlay(overlay: Overlay) -> void:
 
-	overlay.show()
+	if active_overlays.has(overlay):
+
+		return
+
+	active_overlays.append(overlay)
 
 	if overlay.pause:
 
@@ -35,11 +41,19 @@ func add_overlay(overlay: Overlay) -> void:
 
 			Game.pause()
 
+	overlay.open()
+
 	
 
 func remove_overlay(overlay: Overlay) -> void:
 
-	overlay.hide()
+	if not active_overlays.has(overlay):
+
+		return
+
+	active_overlays.erase(overlay)
+
+	overlay.close()
 
 	if overlay.pause:
 
@@ -48,3 +62,21 @@ func remove_overlay(overlay: Overlay) -> void:
 		if Game.is_paused() and pause_count <= 0:
 
 			Game.unpause()
+
+
+
+
+
+
+
+
+
+
+
+func _unhandled_input(event: InputEvent) -> void:
+
+	if event.is_action_pressed("back") and Inputs.is_action_allowed("back"):
+
+		if not active_overlays.is_empty():
+
+			remove_overlay(active_overlays.back())

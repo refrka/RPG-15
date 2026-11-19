@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://baoovdts8slvq" path="res://main/states/body_moving_state.gd" id="9_enjxq"]
 [ext_resource type="Script" uid="uid://ccdd8pxqp8bym" path="res://main/components/interaction_component.gd" id="10_243e6"]
 [ext_resource type="Script" uid="uid://dqww7qb3cvxoo" path="res://main/sensor/sensor.gd" id="10_elonm"]
+[ext_resource type="Script" uid="uid://rv1tyr5x36h4" path="res://main/states/body_interacting_state.gd" id="12_qe6dv"]
 
 [sub_resource type="Resource" id="Resource_kdw2b"]
 script = ExtResource("4_enjxq")
@@ -22,6 +23,9 @@ metadata/_custom_type_script = "uid://cwi55co0pga55"
 script = ExtResource("3_la1ju")
 weapon_stack = SubResource("Resource_kdw2b")
 metadata/_custom_type_script = "uid://d1l0dy163gnc5"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o4e80"]
+size = Vector2(10, 4)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_elonm"]
 radius = 7.0
@@ -104,7 +108,6 @@ _data = {
 [node name="Player" unique_id=920390172 node_paths=PackedStringArray("interaction_sensor") instance=ExtResource("1_8x8hf")]
 collision_layer = 11
 script = ExtResource("2_ihp3c")
-entity_id = "player"
 interaction_sensor = NodePath("InteractionSensor")
 inventory = SubResource("Resource_fc701")
 
@@ -117,6 +120,10 @@ vframes = 4
 [node name="CombatRoot" parent="CanvasGroup" parent_id_path=PackedInt32Array(1546177270) index="1" unique_id=65545494]
 y_sort_enabled = true
 position = Vector2(0, -7)
+
+[node name="BodyCollision" parent="." index="1" unique_id=934894713]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_o4e80")
 
 [node name="InteractionSensor" type="Area2D" parent="." index="3" unique_id=317631068]
 position = Vector2(0, -7)
@@ -147,10 +154,15 @@ metadata/_custom_type_script = "uid://ccdd8pxqp8bym"
 [node name="BodyMovingState" type="Node" parent="StateMachine/BodyRoot" parent_id_path=PackedInt32Array(2018266311) index="1" unique_id=1212966244]
 script = ExtResource("9_enjxq")
 
+[node name="BodyInteractingState" type="Node" parent="StateMachine/BodyRoot" parent_id_path=PackedInt32Array(2018266311) index="2" unique_id=1127505818]
+script = ExtResource("12_qe6dv")
+metadata/_custom_type_script = "uid://rv1tyr5x36h4"
+
 [node name="CenterMarker" parent="." index="6" unique_id=1538757570]
 position = Vector2(0, -7)
 
 [node name="DirRay" parent="." index="7" unique_id=1334925714]
+position = Vector2(0, -7)
 target_position = Vector2(20, 0)
 
 [node name="BodyAnimPlayer" parent="." index="8" unique_id=1242108839]

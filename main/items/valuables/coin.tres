@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://2vovknpo4hli"]
+
+[ext_resource type="Script" uid="uid://jlm5jqxs7txp" path="res://main/items/item.gd" id="1_bg6qm"]
+[ext_resource type="Texture2D" uid="uid://6p73f5y74lam" path="res://textures/items/coin_icon_texture.png" id="1_ftn4p"]
+
+[resource]
+script = ExtResource("1_bg6qm")
+item_id = &"coin"
+max_stack = 200
+icon_texture = ExtResource("1_ftn4p")
+sprite_offset = Vector2(0, -2)
+metadata/_custom_type_script = "uid://jlm5jqxs7txp"

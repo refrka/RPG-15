@@ -95,6 +95,7 @@ back={
 2d_physics/layer_3="Prop"
 2d_physics/layer_4="Player"
 2d_physics/layer_5="Projectile"
+2d_physics/layer_6="Pickup"
 2d_physics/layer_7="SolidProp"
 2d_physics/layer_9="Hitbox"
 2d_physics/layer_10="Hurtbox"

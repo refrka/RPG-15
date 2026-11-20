@@ -56,9 +56,18 @@ script = ExtResource("2_evbot")
 objectives = Array[ExtResource("3_evbot")]([SubResource("Resource_evbot")])
 metadata/_custom_type_script = "uid://cueli6i2x3jcm"
 
+[sub_resource type="Resource" id="Resource_4vm1k"]
+script = ExtResource("3_evbot")
+metadata/_custom_type_script = "uid://bctckvtbxq52j"
+
+[sub_resource type="Resource" id="Resource_4171m"]
+script = ExtResource("2_evbot")
+objectives = Array[ExtResource("3_evbot")]([SubResource("Resource_4vm1k")])
+metadata/_custom_type_script = "uid://cueli6i2x3jcm"
+
 [resource]
 script = ExtResource("1_5oyv4")
 quest_id = &"test_quest"
 quest_title = "Test quest"
-stages = Array[ExtResource("2_evbot")]([SubResource("Resource_lp6si")])
+stages = Array[ExtResource("2_evbot")]([SubResource("Resource_lp6si"), SubResource("Resource_4171m")])
 metadata/_custom_type_script = "uid://bn3ydcd7pg5wa"

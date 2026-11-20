@@ -116,6 +116,7 @@ func update_visuals() -> void:
 
 
 
+
 func swap(target_slot: ItemSlot) -> void:
 
 	var temp_stack = target_slot.item_stack

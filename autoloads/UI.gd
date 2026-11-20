@@ -67,7 +67,13 @@ func remove_overlay(overlay: Overlay) -> void:
 
 
 
+func get_overlay(script: Script) -> Overlay:
 
+	if overlays.has(script):
+
+		return overlays[script]
+	
+	return null
 
 
 

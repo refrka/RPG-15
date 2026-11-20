@@ -1,6 +1,10 @@
 class_name Player extends Character
 
 
+@export var pickup_sensor: PickupSensor
+
+
+
 
 
 

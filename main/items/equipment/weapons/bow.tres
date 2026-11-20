@@ -5,9 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://bqnycc4u3hgqk" path="res://main/combat/projectiles/arrow.tscn" id="1_wia2h"]
 [ext_resource type="Script" uid="uid://bhjjrqmy0u6h1" path="res://main/items/ammunition.gd" id="2_46mnd"]
 [ext_resource type="PackedScene" uid="uid://bbncb4ljcbnjf" path="res://main/items/equipment/weapons/bow.tscn" id="2_o3o67"]
+[ext_resource type="Texture2D" uid="uid://c1kmtnf850oro" path="res://textures/items/bow_icon_texture.png" id="4_vmymc"]
 
 [sub_resource type="Resource" id="Resource_6ows6"]
 script = ExtResource("1_46mnd")
+knockback_force = 25.0
 metadata/_custom_type_script = "uid://vqmdx5cwp2ie"
 
 [sub_resource type="Resource" id="Resource_qedsv"]
@@ -24,3 +26,4 @@ default_ammunition = SubResource("Resource_qedsv")
 attack_cooldown = 0.3
 item_id = &"bow"
 max_stack = 1
+icon_texture = ExtResource("4_vmymc")

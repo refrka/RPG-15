@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://duu5epb1ou00m"]
+
+[ext_resource type="Script" uid="uid://dild4gui0ob2" path="res://main/items/pickup.gd" id="1_ep31m"]
+[ext_resource type="PackedScene" uid="uid://dmd2ra11svjpc" path="res://main/entities/shadow_sprite.tscn" id="2_5f27t"]
+[ext_resource type="Texture2D" uid="uid://drovkff2k304f" path="res://textures/pickup_shadow.png" id="2_ep31m"]
+[ext_resource type="Texture2D" uid="uid://6p73f5y74lam" path="res://textures/items/coin_icon_texture.png" id="4_5f27t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5f27t"]
+
+[sub_resource type="Animation" id="Animation_5f27t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-3.0]
+}
+
+[sub_resource type="Animation" id="Animation_8361i"]
+resource_name = "drop"
+length = 0.43
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08000002, 0.13333334, 0.18666668, 0.29333338, 0.4266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-3.0, -14.0, -15.0, -16.0, -14.0, -1.0]
+}
+
+[sub_resource type="Animation" id="Animation_0yu50"]
+resource_name = "float"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-2.0, -6.0, -2.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8361i"]
+_data = {
+&"RESET": SubResource("Animation_5f27t"),
+&"drop": SubResource("Animation_8361i"),
+&"float": SubResource("Animation_0yu50")
+}
+
+[node name="Pickup" type="CharacterBody2D" unique_id=1314014851 node_paths=PackedStringArray("sprite", "anim_player")]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_ep31m")
+sprite = NodePath("Sprite2D")
+anim_player = NodePath("AnimationPlayer")
+
+[node name="ShadowSprite" parent="." unique_id=1787777379 instance=ExtResource("2_5f27t")]
+texture = ExtResource("2_ep31m")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=923878116]
+position = Vector2(0, -3)
+texture = ExtResource("4_5f27t")
+offset = Vector2(0, -3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1184566159]
+modulate = Color(1, 1, 1, 0.23529412)
+shape = SubResource("CircleShape2D_5f27t")
+debug_color = Color(0.7, 0.7, 0.7, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=237182402]
+libraries/ = SubResource("AnimationLibrary_8361i")

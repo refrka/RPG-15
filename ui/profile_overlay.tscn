@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://2565sv2tfrc7" path="res://ui/profile_overlay.gd" id="1_ihex5"]
 [ext_resource type="PackedScene" uid="uid://dfl48hjw5fn52" path="res://ui/item_slot.tscn" id="2_4idp5"]
+[ext_resource type="Script" uid="uid://cxw6uu73bv8y" path="res://ui/inventory_grid.gd" id="2_tyu4j"]
 [ext_resource type="Resource" uid="uid://fq4ssaq2ck3x" path="res://main/items/consumables/apple.tres" id="3_8yg2g"]
 [ext_resource type="Script" uid="uid://cwi55co0pga55" path="res://main/items/item_stack.gd" id="4_5loy3"]
 [ext_resource type="Resource" uid="uid://cu3yrs5y5mirp" path="res://main/items/consumables/bread.tres" id="5_3t5dm"]
@@ -34,7 +35,7 @@ item = ExtResource("7_3t5dm")
 count = 1
 metadata/_custom_type_script = "uid://cwi55co0pga55"
 
-[node name="ProfileOverlay" type="MarginContainer" unique_id=1283527882 groups=["overlay"]]
+[node name="ProfileOverlay" type="MarginContainer" unique_id=1283527882 node_paths=PackedStringArray("inventory_grid", "weapon_slot") groups=["overlay"]]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,11 +44,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_ihex5")
+inventory_grid = NodePath("PanelContainer/MarginContainer/VBoxContainer/InventoryGrid")
+weapon_slot = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentSlot")
 pause = true
 metadata/_custom_type_script = "uid://dw1aw6urlvg27"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1722764651]
-custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -62,28 +64,48 @@ theme_override_constants/margin_bottom = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1299024219]
 layout_mode = 2
+theme_override_constants/separation = 16
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1454029875]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=978791420]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=128958089]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1144413179]
+layout_mode = 2
+text = "Weapon"
+
+[node name="EquipmentSlot" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=163527939 instance=ExtResource("6_5loy3")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="InventoryGrid" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1731855994]
 layout_mode = 2
 columns = 3
+script = ExtResource("2_tyu4j")
 
-[node name="ItemSlot" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=163527939 instance=ExtResource("2_4idp5")]
+[node name="ItemSlot" parent="PanelContainer/MarginContainer/VBoxContainer/InventoryGrid" unique_id=260476297 instance=ExtResource("2_4idp5")]
 layout_mode = 2
 item_stack = SubResource("Resource_28aoi")
 
-[node name="ItemSlot2" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=795038393 instance=ExtResource("2_4idp5")]
+[node name="ItemSlot2" parent="PanelContainer/MarginContainer/VBoxContainer/InventoryGrid" unique_id=795038393 instance=ExtResource("2_4idp5")]
 layout_mode = 2
 item_stack = SubResource("Resource_jnlp7")
 
-[node name="ItemSlot3" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=1803070594 instance=ExtResource("2_4idp5")]
+[node name="ItemSlot3" parent="PanelContainer/MarginContainer/VBoxContainer/InventoryGrid" unique_id=1803070594 instance=ExtResource("2_4idp5")]
 layout_mode = 2
 
-[node name="ItemSlot4" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=844183927 instance=ExtResource("2_4idp5")]
+[node name="ItemSlot4" parent="PanelContainer/MarginContainer/VBoxContainer/InventoryGrid" unique_id=844183927 instance=ExtResource("2_4idp5")]
 layout_mode = 2
 
-[node name="EquipmentSlot" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=515841138 instance=ExtResource("6_5loy3")]
+[node name="EquipmentSlot" parent="PanelContainer/MarginContainer/VBoxContainer/InventoryGrid" unique_id=515841138 instance=ExtResource("6_5loy3")]
+custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 item_stack = SubResource("Resource_3t5dm")
 
-[node name="EquipmentSlot2" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=819561582 instance=ExtResource("6_5loy3")]
+[node name="EquipmentSlot2" parent="PanelContainer/MarginContainer/VBoxContainer/InventoryGrid" unique_id=819561582 instance=ExtResource("6_5loy3")]
+custom_minimum_size = Vector2(18, 18)
 layout_mode = 2

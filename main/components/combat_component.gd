@@ -40,6 +40,8 @@ func initialize(_entity: Entity) -> void:
 
 		load_weapon(entity.inventory.weapon_stack)
 
+		entity.inventory.weapon_updated.connect(_on_weapon_updated)
+
 
 
 
@@ -51,11 +53,17 @@ func load_weapon(weapon_stack: ItemStack) -> void:
 
 		current_weapon_scene.queue_free()
 
+	if not current_weapon_stack:
+
+		return
+
 	current_weapon_scene = weapon_stack.item.weapon_scene.instantiate()
 
 	current_weapon_scene.attack_finished.connect(_on_weapon_attack_finished)
 
 	current_weapon_scene.projectile_requested.connect(_on_weapon_projectile_requested)
+
+	current_weapon_scene.hitbox.hit_detected.connect(_on_weapon_hit_detected)
 
 	entity.combat_root.add_child(current_weapon_scene)
 
@@ -72,13 +80,17 @@ func get_animation_name() -> String:
 
 func attack() -> void:
 
+	if not is_instance_valid(current_weapon_scene):
+
+		return
+
 	if cooldown_timer != null and cooldown_timer.time_left > 0.0:
 
 		return
 
 	movement_component.move_locked = true
 
-	current_weapon_scene.show()
+	current_weapon_scene.activate()
 
 	var animation_name = get_animation_name()
 
@@ -112,7 +124,7 @@ func get_projectile_scene() -> ProjectileScene:
 		
 		projectile_scene = current_weapon_stack.item_data.ammunition_stack.item.projectile_scene.instantiate()
 
-	projectile_scene.damage_package = DamagePackage.create(current_weapon.attack_entry, entity)
+	projectile_scene.damage_package = DamagePackage.create(current_weapon.attack_entry, movement_component.face_dir, entity)
 
 	return projectile_scene
 
@@ -126,6 +138,8 @@ func _on_weapon_attack_finished() -> void:
 		start_attack_cooldown(current_weapon.attack_cooldown)
 
 	movement_component.move_locked = false
+
+	current_weapon_scene.deactivate()
 
 
 
@@ -163,6 +177,19 @@ func _on_weapon_projectile_requested() -> void:
 func _on_cooldown_timer_timeout() -> void:
 
 	cooldown_timer = null
+
+
+
+func _on_weapon_updated() -> void:
+
+	load_weapon(entity.inventory.weapon_stack)
+
+
+
+func _on_weapon_hit_detected(hurtbox: Hurtbox) -> void:
+
+	hurtbox.receive_damage_package(DamagePackage.create(current_weapon.attack_entry, movement_component.face_dir, entity))
+
 
 
 

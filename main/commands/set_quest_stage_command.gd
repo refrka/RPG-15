@@ -21,6 +21,14 @@ func execute(_data:= {}) -> Result:
 
 		index = _data.index
 
+	if _data.has("quest_id"):
+
+		quest_id = _data.quest_id
+
+	if not quest:
+
+		quest = Quests.get_quest(quest_id)
+
 	Quests.set_quest_stage(quest, index)
 
 	result = Result.SUCCESS

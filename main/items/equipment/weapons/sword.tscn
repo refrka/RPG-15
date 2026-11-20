@@ -8,7 +8,7 @@ size = Vector2(9, 2)
 
 [sub_resource type="Animation" id="Animation_qev53"]
 resource_name = "attack_right"
-length = 0.13333334
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -36,7 +36,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_aeeg4"]
 resource_name = "attack_right"
-length = 0.13333334
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -64,7 +64,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_n8iok"]
 resource_name = "attack_right"
-length = 0.13333334
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -92,7 +92,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_jpvu3"]
 resource_name = "attack_right"
-length = 0.13333334
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -127,8 +127,7 @@ _data = {
 }
 
 [node name="Sword" unique_id=1950214909 instance=ExtResource("1_qev53")]
-rotation = -1.9198622
-scale = Vector2(-1, -1)
+rotation = -1.2217305
 
 [node name="Sprite2D" parent="." index="0" unique_id=699357638]
 position = Vector2(7, 0)

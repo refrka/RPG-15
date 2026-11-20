@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dmd2ra11svjpc"]
+
+[ext_resource type="Script" uid="uid://2xtavv76xhsg" path="res://main/entities/shadow_sprite.gd" id="1_om6yl"]
+[ext_resource type="Texture2D" uid="uid://bw3axsli7bhe4" path="res://textures/entity_shadow.png" id="1_xnayt"]
+
+[node name="ShadowSprite" type="Sprite2D" unique_id=1787777379]
+modulate = Color(0, 0, 0, 0.3529412)
+texture = ExtResource("1_xnayt")
+script = ExtResource("1_om6yl")

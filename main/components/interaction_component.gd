@@ -43,6 +43,10 @@ func try_interaction() -> void:
 
 		interactable_component = interactable.get_interactable_component()
 
+	if not interactable_component.can_interact():
+
+		return
+
 	if not interactable and not interactable_component:
 
 		return

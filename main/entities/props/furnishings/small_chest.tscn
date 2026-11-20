@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dj6b2a6e6i55d"]
+
+[ext_resource type="PackedScene" uid="uid://ir8hcomoadvf" path="res://main/entities/prop.tscn" id="1_0au4o"]
+[ext_resource type="Texture2D" uid="uid://bn8rjihvtvwlb" path="res://textures/props/small_chest_sprite_texture.png" id="2_ck51w"]
+[ext_resource type="Script" uid="uid://d1l0dy163gnc5" path="res://main/items/inventory.gd" id="2_lguia"]
+[ext_resource type="Script" uid="uid://bjsigac1fgp3o" path="res://main/components/container_component.gd" id="3_7fl1e"]
+[ext_resource type="Script" uid="uid://cwi55co0pga55" path="res://main/items/item_stack.gd" id="3_q75d6"]
+[ext_resource type="Resource" uid="uid://c58tpeps5btc6" path="res://main/items/equipment/weapons/sword.tres" id="4_q75d6"]
+
+[sub_resource type="Resource" id="Resource_lguia"]
+script = ExtResource("3_q75d6")
+item = ExtResource("4_q75d6")
+count = 1
+metadata/_custom_type_script = "uid://cwi55co0pga55"
+
+[sub_resource type="Resource" id="Resource_mvgl5"]
+script = ExtResource("2_lguia")
+stacks = Array[ExtResource("3_q75d6")]([SubResource("Resource_lguia")])
+size = 3
+metadata/_custom_type_script = "uid://d1l0dy163gnc5"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ck51w"]
+size = Vector2(12, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fl1e"]
+size = Vector2(12, 10)
+
+[node name="SmallChest" unique_id=1222908469 instance=ExtResource("1_0au4o")]
+collision_layer = 69
+inventory = SubResource("Resource_mvgl5")
+
+[node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(549313783) index="0" unique_id=1612993214]
+texture = ExtResource("2_ck51w")
+hframes = 2
+
+[node name="BodyCollision" parent="." index="1" unique_id=892046188]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_ck51w")
+
+[node name="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1587296689) index="0" unique_id=135124436]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_7fl1e")
+
+[node name="ContainerComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1493594875) index="1" unique_id=1111636385]
+script = ExtResource("3_7fl1e")
+metadata/_custom_type_script = "uid://bjsigac1fgp3o"
+
+[node name="CenterMarker" parent="." index="5" unique_id=1397579162]
+position = Vector2(0, -5)
+
+[editable path="Hurtbox"]

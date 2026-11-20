@@ -88,6 +88,10 @@ func get_velocity(delta: float) -> Vector2:
 
 	move_velocity = move_dir * move_speed * delta
 
+	var modifier_velocity = modifier_tracker.get_vector()
+
+	move_velocity += modifier_velocity
+
 	return move_velocity
 
 
@@ -97,6 +101,23 @@ func get_move_speed() -> float:
 
 	return 4000.0
 
+
+
+
+
+func _on_damage_package_received(damage_package: DamagePackage) -> void:
+
+	if damage_package.attack_entry.knockback_force > 0.0:
+
+		var value = damage_package.source_dir * damage_package.attack_entry.knockback_force
+
+		if entity.stats.knockback_resistance > 0.0:
+
+			value *= (1.0 - entity.stats.knockback_resistance)
+
+		var modifier = Modifier.new_decay(value, 10.0, Modifier.Operator.ADD)
+
+		modifier_tracker.add_modifier(modifier)
 
 
 
@@ -124,3 +145,5 @@ func _physics_process(delta: float) -> void:
 	entity.velocity = new_velocity
 
 	entity.move_and_slide()
+
+	modifier_tracker.tick(delta)

@@ -31,6 +31,8 @@ class_name Entity extends PhysicsBody2D
 
 @export var inventory:= Inventory.new()
 
+@export var death_loot_table: LootTable
+
 @export var dialogue_library: DialogueLibrary
 
 
@@ -201,6 +203,18 @@ func is_alive() -> bool:
 
 
 func die() -> void:
+	
+	if death_loot_table:
+
+		var loot = death_loot_table.get_loot(randf())
+
+		for stack in loot:
+
+			var pickup = Pickup.create(stack)
+
+			Scenes.current_location.add_pickup(pickup, global_position)
+
+	hurtbox.deactivate()
 
 	components.values().map(func(c): c._on_death())
 

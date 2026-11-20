@@ -12,6 +12,7 @@ var damage_package_log: Array
 
 
 
+
 func receive_damage_package(damage_package: DamagePackage) -> void:
 
 	if hurt_timer > 0.0:

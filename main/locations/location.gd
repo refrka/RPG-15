@@ -16,6 +16,8 @@ enum LocationState {
 
 @export var projectile_root: Node2D
 
+@export var pickup_root: Node2D
+
 var location_state: LocationState
 
 var initialized:= false
@@ -50,6 +52,7 @@ func activate() -> void:
 
 
 
+
 func deactivate() -> void:
 
 	set_location_state(LocationState.INACTIVE)
@@ -78,6 +81,19 @@ func add_entity(entity: Entity, target_position: Vector2) -> void:
 		entity.activate()
 
 
+
+
+func add_pickup(pickup: Pickup, origin: Vector2) -> void:
+
+	pickup_root.add_child.call_deferred(pickup)
+
+	pickup.global_position = origin
+
+	var dir = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
+
+	var tween = get_tree().create_tween()
+
+	tween.tween_property(pickup, "global_position", origin + (dir * 16.0), 0.5)
 
 
 

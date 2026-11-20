@@ -6,12 +6,21 @@
 [ext_resource type="Script" uid="uid://d1l0dy163gnc5" path="res://main/items/inventory.gd" id="3_la1ju"]
 [ext_resource type="Script" uid="uid://dui1ijtj6i8no" path="res://main/components/player_movement_component.gd" id="4_0kxhf"]
 [ext_resource type="Script" uid="uid://cwi55co0pga55" path="res://main/items/item_stack.gd" id="4_enjxq"]
+[ext_resource type="Resource" uid="uid://fq4ssaq2ck3x" path="res://main/items/consumables/apple.tres" id="5_3tj71"]
 [ext_resource type="Resource" uid="uid://dyg2duv8uioh6" path="res://main/items/equipment/weapons/bow.tres" id="5_elonm"]
 [ext_resource type="Script" uid="uid://cx0laqv80fdxi" path="res://main/components/combat_component.gd" id="6_kdw2b"]
+[ext_resource type="PackedScene" uid="uid://dd2x7hm18y1gm" path="res://main/sensor/hitbox.tscn" id="8_efywl"]
 [ext_resource type="Script" uid="uid://baoovdts8slvq" path="res://main/states/body_moving_state.gd" id="9_enjxq"]
+[ext_resource type="Script" uid="uid://di7dnrrxv3kv4" path="res://main/sensor/pickup_sensor.gd" id="9_qvaa3"]
 [ext_resource type="Script" uid="uid://ccdd8pxqp8bym" path="res://main/components/interaction_component.gd" id="10_243e6"]
 [ext_resource type="Script" uid="uid://dqww7qb3cvxoo" path="res://main/sensor/sensor.gd" id="10_elonm"]
 [ext_resource type="Script" uid="uid://rv1tyr5x36h4" path="res://main/states/body_interacting_state.gd" id="12_qe6dv"]
+
+[sub_resource type="Resource" id="Resource_o4e80"]
+script = ExtResource("4_enjxq")
+item = ExtResource("5_3tj71")
+count = 1
+metadata/_custom_type_script = "uid://cwi55co0pga55"
 
 [sub_resource type="Resource" id="Resource_kdw2b"]
 script = ExtResource("4_enjxq")
@@ -21,6 +30,7 @@ metadata/_custom_type_script = "uid://cwi55co0pga55"
 
 [sub_resource type="Resource" id="Resource_fc701"]
 script = ExtResource("3_la1ju")
+stacks = Array[ExtResource("4_enjxq")]([SubResource("Resource_o4e80")])
 weapon_stack = SubResource("Resource_kdw2b")
 metadata/_custom_type_script = "uid://d1l0dy163gnc5"
 
@@ -30,6 +40,9 @@ size = Vector2(10, 4)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_elonm"]
 radius = 7.0
 height = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5f27t"]
+radius = 22.022715
 
 [sub_resource type="Animation" id="Animation_elonm"]
 resource_name = "idle_down"
@@ -108,6 +121,8 @@ _data = {
 [node name="Player" unique_id=920390172 node_paths=PackedStringArray("interaction_sensor") instance=ExtResource("1_8x8hf")]
 collision_layer = 11
 script = ExtResource("2_ihp3c")
+entity_id = &"player"
+authored_id = &"Bitwit"
 interaction_sensor = NodePath("InteractionSensor")
 inventory = SubResource("Resource_fc701")
 
@@ -131,9 +146,19 @@ collision_layer = 0
 script = ExtResource("10_elonm")
 metadata/_custom_type_script = "uid://dqww7qb3cvxoo"
 
-[node name="InteractionArea" type="CollisionShape2D" parent="InteractionSensor" index="0" unique_id=1833372749]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionSensor" index="0" unique_id=1833372749]
 position = Vector2(7, 0)
 shape = SubResource("CapsuleShape2D_elonm")
+debug_color = Color(0.7, 0.7, 0.7, 0)
+
+[node name="PickupSensor" parent="." index="4" unique_id=1611579010 instance=ExtResource("8_efywl")]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("9_qvaa3")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="PickupSensor" index="1" unique_id=1243160566]
+modulate = Color(1, 1, 1, 0.3882353)
+shape = SubResource("CircleShape2D_5f27t")
 debug_color = Color(0.7, 0.7, 0.7, 0)
 
 [node name="PlayerMovementComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="0" unique_id=1696674147 node_paths=PackedStringArray("dir_ray")]
@@ -158,14 +183,14 @@ script = ExtResource("9_enjxq")
 script = ExtResource("12_qe6dv")
 metadata/_custom_type_script = "uid://rv1tyr5x36h4"
 
-[node name="CenterMarker" parent="." index="6" unique_id=1538757570]
+[node name="CenterMarker" parent="." index="7" unique_id=1538757570]
 position = Vector2(0, -7)
 
-[node name="DirRay" parent="." index="7" unique_id=1334925714]
+[node name="DirRay" parent="." index="8" unique_id=1334925714]
 position = Vector2(0, -7)
 target_position = Vector2(20, 0)
 
-[node name="BodyAnimPlayer" parent="." index="8" unique_id=1242108839]
+[node name="BodyAnimPlayer" parent="." index="9" unique_id=1242108839]
 libraries/player = SubResource("AnimationLibrary_elonm")
 
 [editable path="Hurtbox"]

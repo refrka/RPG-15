@@ -223,4 +223,8 @@ func _on_dialogue_option_selected(option: DialogueOption) -> void:
 
 	selected_options.append(option)
 
+	if option.on_select_command_set:
+
+		option.on_select_command_set.execute_all()
+
 	set_dialogue_node(option.node)

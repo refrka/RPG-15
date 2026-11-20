@@ -36,6 +36,12 @@ func execute_all(_data:= {}) -> void:
 
 	data = _data
 
+	if commands.is_empty():
+
+		all_commands_executed.emit()
+
+		return
+
 	execute_index(0)
 
 

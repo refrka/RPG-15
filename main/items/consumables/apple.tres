@@ -7,3 +7,4 @@
 script = ExtResource("1_b4o4a")
 item_id = &"apple"
 icon_texture = ExtResource("1_cwt31")
+sprite_offset = Vector2(0, -8)

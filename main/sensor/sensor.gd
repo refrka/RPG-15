@@ -78,6 +78,14 @@ func activate() -> void:
 
 	connect_signals()
 
+	for area in get_overlapping_areas():
+
+		_on_area_entered(area)
+
+	for body in get_overlapping_bodies():
+
+		_on_body_entered(body)
+
 
 
 
@@ -140,7 +148,7 @@ func _on_area_entered(area: Area2D) -> void:
 
 		return
 
-	if area is Sensor and not sensors.has(area) and area.entity != entity:
+	if area is Sensor and not sensors.has(area) and area.entity != entity and area.active:
 
 		sensors.append(area)
 

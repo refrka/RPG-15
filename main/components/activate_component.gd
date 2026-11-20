@@ -10,8 +10,23 @@ func initialize(_entity: Entity) -> void:
 
 	super(_entity)
 
+	if not activate_command_set:
+
+		return
+
 	activate_command_set.all_commands_executed.connect(_on_all_commands_executed)
 
+
+
+
+
+func can_interact() -> bool:
+
+	if not activate_command_set:
+
+		return false
+
+	return true
 
 
 

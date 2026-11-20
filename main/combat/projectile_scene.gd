@@ -123,9 +123,12 @@ func _on_arc_tween_finished() -> void:
 
 
 
+
 func _on_hitbox_hit_detected(hurtbox: Hurtbox) -> void:
 
 	hurtbox.receive_damage_package(damage_package)
+
+	reparent.call_deferred(hurtbox.entity)
 
 	trajectory = Vector2.ZERO
 
@@ -143,7 +146,13 @@ func _physics_process(delta: float) -> void:
 
 		move_and_slide()
 
-		if get_last_slide_collision() != null:
+		var last_collision = get_last_slide_collision()
+
+		if last_collision != null:
+
+			var collider = last_collision.get_collider()
+
+			reparent.call_deferred(collider)
 
 			trajectory = Vector2.ZERO
 

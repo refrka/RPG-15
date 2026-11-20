@@ -43,6 +43,10 @@ func get_root_options(source_entity: Entity) -> Array:
 
 		for objective in current_objectives:
 
+			if not objective.dialogue_target_ref or not objective.dialogue_option:
+
+				continue
+
 			if objective.dialogue_target_ref.matches(source_entity) and objective.dialogue_option:
 
 				if not objective.dialogue_option.passes_conditions():
@@ -78,6 +82,15 @@ func get_quest_data(quest: Quest) -> QuestData:
 
 	return null
 
+
+
+func get_quest(quest_id: StringName) -> Quest:
+
+	if quest_registry.has(quest_id):
+
+		return quest_registry[quest_id]
+
+	return null
 
 
 

@@ -7,8 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://uyr51w3s5ed6" path="res://textures/characters/merchant_sprite_texture.png" id="4_v47wg"]
 [ext_resource type="Script" uid="uid://bgdddqoa78u1i" path="res://main/components/health_component.gd" id="5_msveb"]
 [ext_resource type="Script" uid="uid://opu1es3c8l74" path="res://main/dialogue/dialogue_library.gd" id="5_rrlfr"]
+[ext_resource type="Script" uid="uid://crb5u1k1b1ilj" path="res://main/loot/loot_entry.gd" id="6_1fo6r"]
+[ext_resource type="Script" uid="uid://bnidtcohky0xn" path="res://main/dialogue/dialogue_greeting.gd" id="6_u7eep"]
 [ext_resource type="Texture2D" uid="uid://biqfawyncmraf" path="res://textures/characters/merchant_speaker_texture.png" id="6_ugwj6"]
 [ext_resource type="Script" uid="uid://b6fqxhq3e8wi3" path="res://main/dialogue/dialogue_option.gd" id="6_wcr1e"]
+[ext_resource type="Script" uid="uid://jlm5jqxs7txp" path="res://main/items/item.gd" id="7_va07x"]
+[ext_resource type="Script" uid="uid://dmr4v28gqmw1h" path="res://main/loot/loot_table.gd" id="8_8750o"]
+[ext_resource type="Resource" uid="uid://fq4ssaq2ck3x" path="res://main/items/consumables/apple.tres" id="8_jfe7e"]
+[ext_resource type="Resource" uid="uid://cu3yrs5y5mirp" path="res://main/items/consumables/bread.tres" id="9_ulyxi"]
+[ext_resource type="Script" uid="uid://buwbh3f25d74m" path="res://main/components/movement_component.gd" id="11_a5j4f"]
 
 [sub_resource type="Resource" id="Resource_msveb"]
 script = ExtResource("2_stbip")
@@ -18,6 +25,24 @@ metadata/_custom_type_script = "uid://bilm5ege1cif1"
 [sub_resource type="Resource" id="Resource_f0nyr"]
 script = ExtResource("2_1coy8")
 metadata/_custom_type_script = "uid://d1l0dy163gnc5"
+
+[sub_resource type="Resource" id="Resource_a5j4f"]
+script = ExtResource("6_1fo6r")
+items = Dictionary[ExtResource("7_va07x"), int]({
+ExtResource("8_jfe7e"): 1,
+ExtResource("9_ulyxi"): 1
+})
+weight = 50
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_8750o"]
+script = ExtResource("6_1fo6r")
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_u7eep"]
+script = ExtResource("8_8750o")
+entries = Array[ExtResource("6_1fo6r")]([SubResource("Resource_a5j4f"), SubResource("Resource_8750o")])
+metadata/_custom_type_script = "uid://dmr4v28gqmw1h"
 
 [sub_resource type="Resource" id="Resource_l8v81"]
 script = ExtResource("5_rrlfr")
@@ -30,10 +55,10 @@ size = Vector2(10, 6)
 size = Vector2(10, 14)
 
 [node name="Merchant" unique_id=920390172 instance=ExtResource("1_floog")]
-entity_id = "merchant"
 speaker_texture = ExtResource("6_ugwj6")
 stats = SubResource("Resource_msveb")
 inventory = SubResource("Resource_f0nyr")
+death_loot_table = SubResource("Resource_u7eep")
 dialogue_library = SubResource("Resource_l8v81")
 
 [node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(1546177270) index="0" unique_id=2072653577]
@@ -50,6 +75,10 @@ shape = SubResource("RectangleShape2D_msveb")
 [node name="HealthComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="1" unique_id=1147873646]
 script = ExtResource("5_msveb")
 metadata/_custom_type_script = "uid://bgdddqoa78u1i"
+
+[node name="MovementComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="2" unique_id=1723350700]
+script = ExtResource("11_a5j4f")
+metadata/_custom_type_script = "uid://buwbh3f25d74m"
 
 [node name="CenterMarker" parent="." index="5" unique_id=1538757570]
 position = Vector2(0, -6)

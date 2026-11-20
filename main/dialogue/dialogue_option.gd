@@ -11,6 +11,8 @@ class_name DialogueOption extends Resource
 
 @export var forced_greeting: DialogueGreeting
 
+@export var on_select_command_set: CommandSet
+
 
 
 

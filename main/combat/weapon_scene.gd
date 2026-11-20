@@ -17,6 +17,28 @@ signal projectile_requested
 func _ready() -> void:
 
 	anim_player.animation_finished.connect(_on_anim_finished)
+	
+	hitbox.initialize()
+
+	hitbox.deactivate()
+
+
+
+func activate() -> void:
+
+	show()
+
+	hitbox.activate()
+
+
+
+func deactivate() -> void:
+
+	hide()
+
+	hitbox.clear_hit_list()
+
+	hitbox.deactivate()
 
 
 

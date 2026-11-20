@@ -27,7 +27,7 @@ border_width_bottom = 1
 border_color = Color(0.61246645, 0.67168605, 0.6865612, 1)
 
 [node name="ItemSlot" type="MarginContainer" unique_id=163527939 node_paths=PackedStringArray("panel", "texture_rect", "count_label")]
-custom_minimum_size = Vector2(18, 18)
+custom_minimum_size = Vector2(24, 24)
 mouse_filter = 0
 script = ExtResource("1_m0q4r")
 default_stylebox = SubResource("StyleBoxFlat_aajxx")
@@ -51,3 +51,5 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+theme_override_font_sizes/font_size = 8
+text = "99"

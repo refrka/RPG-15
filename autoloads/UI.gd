@@ -10,6 +10,10 @@ var pause_count:= 0
 
 
 
+var player_health_bar: HealthBar
+
+
+
 
 func _ready() -> void:
 
@@ -20,6 +24,10 @@ func _ready() -> void:
 		overlays[overlay.get_script()] = overlay
 
 		overlay.hide()
+
+	player_health_bar = get_tree().get_first_node_in_group("player_health_bar")
+
+	Events.subscribe(PlayerInitializedEvent, _on_player_initialized)
 
 
 
@@ -76,6 +84,15 @@ func get_overlay(script: Script) -> Overlay:
 	return null
 
 
+
+
+
+func _on_player_initialized(_event: Event) -> void:
+
+	var health_component = Game.player.get_component(HealthComponent)
+
+	player_health_bar.load_health_component(health_component)
+	
 
 
 

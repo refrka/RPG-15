@@ -63,7 +63,15 @@ func clear_slot() -> void:
 
 func set_stack(_item_stack: ItemStack) -> void:
 
+	if item_stack:
+
+		item_stack.count_updated.disconnect(update_visuals)
+
 	item_stack = _item_stack
+
+	if item_stack:
+
+		item_stack.count_updated.connect(update_visuals)
 
 	update_visuals()
 
@@ -102,7 +110,7 @@ func update_visuals() -> void:
 
 	panel.add_theme_stylebox_override("panel", stylebox)
 
-	if item_stack:
+	if item_stack and not item_stack.is_empty():
 
 		texture_rect.texture = item_stack.item.icon_texture
 

@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bkmh7jm822bx3" path="res://main/states/state_machine.gd" id="2_gosl2"]
 [ext_resource type="Script" uid="uid://bwmuuh1t4m42u" path="res://main/components/animation_component.gd" id="2_ruoji"]
 [ext_resource type="Script" uid="uid://cmnf584nwr2gv" path="res://main/states/body_idle_state.gd" id="3_0k2p7"]
+[ext_resource type="Script" uid="uid://3yv8u2on3fne" path="res://main/components/effects_component.gd" id="4_nqau1"]
 [ext_resource type="Script" uid="uid://boe5p3w2lcghw" path="res://main/states/combat_idle_state.gd" id="4_ruoji"]
 
 [sub_resource type="Animation" id="Animation_6ows6"]
@@ -184,6 +185,10 @@ debug_color = Color(0.7, 0.43166667, 0, 0)
 [node name="AnimationComponent" type="Node" parent="ComponentRoot" unique_id=798352642]
 script = ExtResource("2_ruoji")
 metadata/_custom_type_script = "uid://bwmuuh1t4m42u"
+
+[node name="EffectsComponent" type="Node" parent="ComponentRoot" unique_id=2142414488]
+script = ExtResource("4_nqau1")
+metadata/_custom_type_script = "uid://3yv8u2on3fne"
 
 [node name="StateMachine" type="Node" parent="." unique_id=1393344 node_paths=PackedStringArray("body_root", "combat_root", "initial_body_state", "initial_combat_state")]
 script = ExtResource("2_gosl2")

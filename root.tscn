@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c1nlltw4d11kc" path="res://main/locations/scenes/debug_location.scn" id="2_pyidc"]
 [ext_resource type="Script" uid="uid://dy0n8ihmni5qm" path="res://system/input_config.gd" id="2_vvh5c"]
 [ext_resource type="PackedScene" uid="uid://w2vrij3o1p87" path="res://ui/profile_overlay.tscn" id="4_28aoi"]
+[ext_resource type="PackedScene" uid="uid://heyl2b60ajh1" path="res://ui/health_bar.tscn" id="4_bf3um"]
 [ext_resource type="PackedScene" uid="uid://cesr4eybdnurm" path="res://ui/dialogue_overlay.tscn" id="4_l8v81"]
 [ext_resource type="PackedScene" uid="uid://xldnyi01j1e3" path="res://ui/cursor_slot.tscn" id="5_jnlp7"]
 [ext_resource type="PackedScene" uid="uid://ccbqbh5n24ied" path="res://ui/container_overlay.tscn" id="5_vyht1"]
@@ -73,6 +74,14 @@ horizontal_alignment = 1
 follow_viewport_enabled = true
 
 [node name="LocationRoot" type="Node2D" parent="LocationCanvas" unique_id=1900246751 groups=["location_root"]]
+
+[node name="HUDCanvas" type="CanvasLayer" parent="." unique_id=1198719313]
+
+[node name="HealthBar" parent="HUDCanvas" unique_id=836411931 groups=["player_health_bar"] instance=ExtResource("4_bf3um")]
+offset_left = 478.0
+offset_top = 11.0
+offset_right = 628.0
+offset_bottom = 26.0
 
 [node name="OverlayCanvas" type="CanvasLayer" parent="." unique_id=1056750394]
 

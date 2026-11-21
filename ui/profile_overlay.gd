@@ -1,6 +1,7 @@
 class_name ProfileOverlay extends Overlay
 
 
+@export var gold_count_label: Label
 
 @export var inventory_grid: InventoryGrid
 
@@ -21,6 +22,8 @@ func _ready() -> void:
 func open() -> void:
 
 	super()
+
+	gold_count_label.text = str(Game.player.inventory.currency_stack.count)
 
 	inventory_grid.load_inventory(Game.player.inventory)
 

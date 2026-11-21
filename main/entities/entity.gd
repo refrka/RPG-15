@@ -223,6 +223,17 @@ func die() -> void:
 
 
 
+func consume(consumable: Consumable) -> void:
+
+	var effects_component = get_component(EffectsComponent)
+
+	for effect in consumable.effects_on_consume:
+
+		effects_component.add_effect(effect)
+		
+
+
+
 func _on_death_animation_finished() -> void:
 
 	var corpse_component = get_component(InteractableComponent)

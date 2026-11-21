@@ -50,6 +50,18 @@ func handle_slot_input(item_slot: ItemSlot, event: InputEvent) -> void:
 
 						cursor_slot.copy_slot(item_slot)
 
+	elif event.button_index == 2:
+
+		match [item_slot.is_empty(), cursor_slot.is_empty()]:
+
+			[false, true]:
+
+				if item_slot.item_stack.item is Consumable:
+
+					Game.player.consume(item_slot.item_stack.item)
+
+					item_slot.item_stack.remove_amount(1)
+
 
 
 

@@ -4,8 +4,10 @@
 [ext_resource type="Script" uid="uid://i22ro207a1vo" path="res://main/entities/player/player.gd" id="2_ihp3c"]
 [ext_resource type="Texture2D" uid="uid://cglaueypgd0b5" path="res://main/entities/player/player_sprite_sheet_texture.png" id="3_ihp3c"]
 [ext_resource type="Script" uid="uid://d1l0dy163gnc5" path="res://main/items/inventory.gd" id="3_la1ju"]
+[ext_resource type="Resource" uid="uid://2vovknpo4hli" path="res://main/items/valuables/coin.tres" id="3_uo66l"]
 [ext_resource type="Script" uid="uid://dui1ijtj6i8no" path="res://main/components/player_movement_component.gd" id="4_0kxhf"]
 [ext_resource type="Script" uid="uid://cwi55co0pga55" path="res://main/items/item_stack.gd" id="4_enjxq"]
+[ext_resource type="Script" uid="uid://bss1722x2b57c" path="res://main/items/currency_stack.gd" id="4_uo66l"]
 [ext_resource type="Resource" uid="uid://fq4ssaq2ck3x" path="res://main/items/consumables/apple.tres" id="5_3tj71"]
 [ext_resource type="Resource" uid="uid://dyg2duv8uioh6" path="res://main/items/equipment/weapons/bow.tres" id="5_elonm"]
 [ext_resource type="Script" uid="uid://cx0laqv80fdxi" path="res://main/components/combat_component.gd" id="6_kdw2b"]
@@ -15,6 +17,12 @@
 [ext_resource type="Script" uid="uid://ccdd8pxqp8bym" path="res://main/components/interaction_component.gd" id="10_243e6"]
 [ext_resource type="Script" uid="uid://dqww7qb3cvxoo" path="res://main/sensor/sensor.gd" id="10_elonm"]
 [ext_resource type="Script" uid="uid://rv1tyr5x36h4" path="res://main/states/body_interacting_state.gd" id="12_qe6dv"]
+[ext_resource type="Script" uid="uid://bgdddqoa78u1i" path="res://main/components/health_component.gd" id="16_s4fyv"]
+
+[sub_resource type="Resource" id="Resource_wsknm"]
+script = ExtResource("4_uo66l")
+item = ExtResource("3_uo66l")
+count = 0
 
 [sub_resource type="Resource" id="Resource_o4e80"]
 script = ExtResource("4_enjxq")
@@ -31,6 +39,7 @@ metadata/_custom_type_script = "uid://cwi55co0pga55"
 [sub_resource type="Resource" id="Resource_fc701"]
 script = ExtResource("3_la1ju")
 stacks = Array[ExtResource("4_enjxq")]([SubResource("Resource_o4e80")])
+currency_stack = SubResource("Resource_wsknm")
 weapon_stack = SubResource("Resource_kdw2b")
 metadata/_custom_type_script = "uid://d1l0dy163gnc5"
 
@@ -42,7 +51,46 @@ radius = 7.0
 height = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5f27t"]
-radius = 22.022715
+radius = 15.033297
+
+[sub_resource type="Animation" id="Animation_s4fyv"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/BodySprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -1.5707963267948966]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/BodySprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -8)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasGroup/BodySprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.16666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -8), Vector2(0, -5)]
+}
 
 [sub_resource type="Animation" id="Animation_elonm"]
 resource_name = "idle_down"
@@ -112,6 +160,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_elonm"]
 _data = {
+&"die": SubResource("Animation_s4fyv"),
 &"idle_down": SubResource("Animation_elonm"),
 &"idle_up": SubResource("Animation_243e6"),
 &"move_down": SubResource("Animation_enjxq"),
@@ -175,6 +224,10 @@ metadata/_custom_type_script = "uid://cx0laqv80fdxi"
 [node name="InteractionComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="3" unique_id=607242513]
 script = ExtResource("10_243e6")
 metadata/_custom_type_script = "uid://ccdd8pxqp8bym"
+
+[node name="HealthComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="4" unique_id=1853372784]
+script = ExtResource("16_s4fyv")
+metadata/_custom_type_script = "uid://bgdddqoa78u1i"
 
 [node name="BodyMovingState" type="Node" parent="StateMachine/BodyRoot" parent_id_path=PackedInt32Array(2018266311) index="1" unique_id=1212966244]
 script = ExtResource("9_enjxq")

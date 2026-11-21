@@ -45,7 +45,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_aajxx")
 [node name="TextureRect" type="TextureRect" parent="PanelContainer" unique_id=1095555993]
 layout_mode = 2
 mouse_filter = 2
-stretch_mode = 5
+stretch_mode = 3
 
 [node name="CountLabel" type="Label" parent="PanelContainer" unique_id=772141228]
 layout_mode = 2

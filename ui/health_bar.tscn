@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://heyl2b60ajh1"]
+
+[ext_resource type="Script" uid="uid://di2ocq84iitoa" path="res://ui/health_bar.gd" id="1_rwxrv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rwxrv"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[node name="HealthBar" type="MarginContainer" unique_id=836411931 node_paths=PackedStringArray("progress_bar")]
+script = ExtResource("1_rwxrv")
+progress_bar = NodePath("ProgressBar")
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=646411018]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_rwxrv")

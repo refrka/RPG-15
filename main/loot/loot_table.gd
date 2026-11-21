@@ -25,7 +25,15 @@ func get_loot(roll: float) -> Array[ItemStack]:
 
 				var count = entry.items[item]
 
-				var item_stack = ItemStack.create(item, count)
+				var item_stack: ItemStack = null
+
+				if item.item_id == "coin":
+
+					item_stack = CurrencyStack.create(item, count)
+
+				else:
+
+					item_stack = ItemStack.create(item, count)
 
 				loot.append(item_stack)
 
@@ -45,7 +53,15 @@ func get_loot(roll: float) -> Array[ItemStack]:
 
 					var count = entry.items[item]
 
-					var item_stack = ItemStack.create(item, count)
+					var item_stack: ItemStack = null
+
+					if item.item_id == "coin":
+
+						item_stack = CurrencyStack.create(item, count)
+
+					else:
+
+						item_stack = ItemStack.create(item, count)
 
 					loot.append(item_stack)
 

@@ -31,9 +31,11 @@ func start() -> void:
 
 		opened_once = true
 
-		var loot = loot_table.get_loot(randf())
+		if loot_table:
 
-		entity.inventory.add_stack(loot)
+			var loot = loot_table.get_loot(randf())
+
+			entity.inventory.add_stack(loot)
 
 	var overlay = UI.get_overlay(ContainerOverlay)
 

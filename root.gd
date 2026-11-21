@@ -40,7 +40,7 @@ func drop() -> void:
 
 	var item = load("res://main/items/valuables/coin.tres")
 
-	var stack = ItemStack.create(item, 1)
+	var stack = CurrencyStack.create(item, 1)
 
 	var pickup = Pickup.create(stack)
 

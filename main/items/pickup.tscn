@@ -61,11 +61,12 @@ _data = {
 &"float": SubResource("Animation_0yu50")
 }
 
-[node name="Pickup" type="CharacterBody2D" unique_id=1314014851 node_paths=PackedStringArray("sprite", "anim_player")]
+[node name="Pickup" type="CharacterBody2D" unique_id=1314014851 node_paths=PackedStringArray("sprite", "shadow", "anim_player")]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("1_ep31m")
 sprite = NodePath("Sprite2D")
+shadow = NodePath("ShadowSprite")
 anim_player = NodePath("AnimationPlayer")
 
 [node name="ShadowSprite" parent="." unique_id=1787777379 instance=ExtResource("2_5f27t")]
@@ -74,7 +75,7 @@ texture = ExtResource("2_ep31m")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=923878116]
 position = Vector2(0, -3)
 texture = ExtResource("4_5f27t")
-offset = Vector2(0, -3)
+offset = Vector2(0, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1184566159]
 modulate = Color(1, 1, 1, 0.23529412)

@@ -10,6 +10,8 @@ signal weapon_updated
 
 @export var size:= 9
 
+@export var currency_stack:= CurrencyStack.new()
+
 @export var weapon_stack: ItemStack
 
 
@@ -35,6 +37,12 @@ func add_stack(stack: ItemStack) -> void:
 
 	resize()
 
+	if stack is CurrencyStack:
+
+		currency_stack.merge_stack(stack)
+
+		return
+
 	var stacks_with_item = get_stacks_with(stack.item)
 
 	if stacks_with_item.is_empty():
@@ -44,6 +52,8 @@ func add_stack(stack: ItemStack) -> void:
 		if index != -1:
 
 			set_stack_index(index, stack)
+
+			stack.set_count(0)
 
 	else:
 

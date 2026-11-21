@@ -13,8 +13,7 @@
 [ext_resource type="Script" uid="uid://b6fqxhq3e8wi3" path="res://main/dialogue/dialogue_option.gd" id="6_wcr1e"]
 [ext_resource type="Script" uid="uid://jlm5jqxs7txp" path="res://main/items/item.gd" id="7_va07x"]
 [ext_resource type="Script" uid="uid://dmr4v28gqmw1h" path="res://main/loot/loot_table.gd" id="8_8750o"]
-[ext_resource type="Resource" uid="uid://fq4ssaq2ck3x" path="res://main/items/consumables/apple.tres" id="8_jfe7e"]
-[ext_resource type="Resource" uid="uid://cu3yrs5y5mirp" path="res://main/items/consumables/bread.tres" id="9_ulyxi"]
+[ext_resource type="Resource" uid="uid://bv547bjtfya6w" path="res://main/items/consumables/health_potion_small.tres" id="8_va07x"]
 [ext_resource type="Script" uid="uid://buwbh3f25d74m" path="res://main/components/movement_component.gd" id="11_a5j4f"]
 
 [sub_resource type="Resource" id="Resource_msveb"]
@@ -29,19 +28,19 @@ metadata/_custom_type_script = "uid://d1l0dy163gnc5"
 [sub_resource type="Resource" id="Resource_a5j4f"]
 script = ExtResource("6_1fo6r")
 items = Dictionary[ExtResource("7_va07x"), int]({
-ExtResource("8_jfe7e"): 1,
-ExtResource("9_ulyxi"): 1
+ExtResource("8_va07x"): 1
 })
 weight = 50
 metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
 
-[sub_resource type="Resource" id="Resource_8750o"]
+[sub_resource type="Resource" id="Resource_fwb3x"]
 script = ExtResource("6_1fo6r")
+weight = 50
 metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
 
 [sub_resource type="Resource" id="Resource_u7eep"]
 script = ExtResource("8_8750o")
-entries = Array[ExtResource("6_1fo6r")]([SubResource("Resource_a5j4f"), SubResource("Resource_8750o")])
+entries = Array[ExtResource("6_1fo6r")]([SubResource("Resource_a5j4f"), SubResource("Resource_fwb3x")])
 metadata/_custom_type_script = "uid://dmr4v28gqmw1h"
 
 [sub_resource type="Resource" id="Resource_l8v81"]

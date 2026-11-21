@@ -2,9 +2,16 @@
 
 [ext_resource type="Script" uid="uid://cw6a1oafm3u0g" path="res://main/items/consumable.gd" id="1_b4o4a"]
 [ext_resource type="Texture2D" uid="uid://cs86a5ilw1gmw" path="res://textures/items/apple_icon_texture.png" id="1_cwt31"]
+[ext_resource type="Script" uid="uid://cb8051efpe7su" path="res://main/effects/effect.gd" id="1_five0"]
+[ext_resource type="Script" uid="uid://d16157jshvhex" path="res://main/effects/restore_health_instant_effect.gd" id="2_xqr75"]
+
+[sub_resource type="Resource" id="Resource_s4fyv"]
+script = ExtResource("2_xqr75")
+amount = 1
 
 [resource]
 script = ExtResource("1_b4o4a")
+effects_on_consume = Array[ExtResource("1_five0")]([SubResource("Resource_s4fyv")])
 item_id = &"apple"
 icon_texture = ExtResource("1_cwt31")
 sprite_offset = Vector2(0, -8)

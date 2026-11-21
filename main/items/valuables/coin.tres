@@ -8,5 +8,5 @@ script = ExtResource("1_bg6qm")
 item_id = &"coin"
 max_stack = 200
 icon_texture = ExtResource("1_ftn4p")
-sprite_offset = Vector2(0, -2)
+sprite_offset = Vector2(0, -1)
 metadata/_custom_type_script = "uid://jlm5jqxs7txp"

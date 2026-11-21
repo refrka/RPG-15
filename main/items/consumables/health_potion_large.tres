@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Consumable" format=3 uid="uid://huosvbslfy6p"]
+
+[ext_resource type="Script" uid="uid://cw6a1oafm3u0g" path="res://main/items/consumable.gd" id="1_00rpu"]
+[ext_resource type="Texture2D" uid="uid://ccfl6sq5qvtme" path="res://textures/items/health_potion_large_icon_texture.png" id="1_hfhgq"]
+
+[resource]
+script = ExtResource("1_00rpu")
+item_id = &"health_potion_large"
+icon_texture = ExtResource("1_hfhgq")
+sprite_offset = Vector2(0, -3)
+metadata/_custom_type_script = "uid://cw6a1oafm3u0g"

@@ -35,7 +35,7 @@ item = ExtResource("7_3t5dm")
 count = 1
 metadata/_custom_type_script = "uid://cwi55co0pga55"
 
-[node name="ProfileOverlay" type="MarginContainer" unique_id=1283527882 node_paths=PackedStringArray("inventory_grid", "weapon_slot") groups=["overlay"]]
+[node name="ProfileOverlay" type="MarginContainer" unique_id=1283527882 node_paths=PackedStringArray("gold_count_label", "inventory_grid", "weapon_slot") groups=["overlay"]]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,6 +44,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_ihex5")
+gold_count_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/GoldCountLabel")
 inventory_grid = NodePath("PanelContainer/MarginContainer/VBoxContainer/InventoryGrid")
 weapon_slot = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentSlot")
 pause = true
@@ -65,6 +66,18 @@ theme_override_constants/margin_bottom = 4
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1299024219]
 layout_mode = 2
 theme_override_constants/separation = 16
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1141671769]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1981128743]
+layout_mode = 2
+text = "Gold:"
+
+[node name="GoldCountLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1312882852]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "0"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=978791420]
 layout_mode = 2

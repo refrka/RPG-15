@@ -37,6 +37,10 @@ func start() -> void:
 
 	activate_command_set.execute_all()
 
+	var health_component = Game.player.get_component(HealthComponent)
+
+	health_component.reduce_health(1)
+
 
 
 

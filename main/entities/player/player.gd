@@ -1,7 +1,7 @@
 class_name Player extends Character
 
 
-@export var pickup_sensor: PickupSensor
+@export var tool_icon_rect: ToolIconRect
 
 
 
@@ -20,7 +20,5 @@ func initialize() -> bool:
 func get_component(script: Script) -> Component:
 
 	script = PlayerMovementComponent if script == MovementComponent else script
-
-	
 
 	return super(script)

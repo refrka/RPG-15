@@ -18,7 +18,7 @@ func matches(entity: Entity) -> bool:
 
 		is_match = false
 
-	if authored_id and entity.authored_id != authored_id:
+	if authored_id != &"" and entity.authored_id != authored_id:
 
 		is_match = false
 

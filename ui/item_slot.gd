@@ -24,7 +24,7 @@ signal stack_updated
 
 
 
-
+var parent_inventory: Inventory
 
 var hovered:= false
 
@@ -63,7 +63,7 @@ func clear_slot() -> void:
 
 func set_stack(_item_stack: ItemStack) -> void:
 
-	if item_stack:
+	if item_stack and item_stack.count_updated.is_connected(update_visuals):
 
 		item_stack.count_updated.disconnect(update_visuals)
 

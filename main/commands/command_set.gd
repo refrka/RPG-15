@@ -10,7 +10,7 @@ signal all_commands_executed
 
 
 
-var current_index:= 0
+var current_index:= -1
 
 var data:= {}
 
@@ -57,7 +57,11 @@ func next_command() -> void:
 
 	else:
 
+		current_index = -1
+
 		all_commands_executed.emit()
+
+
 
 
 
@@ -74,6 +78,12 @@ func get_command(index: int) -> Command:
 func is_index_valid(index: int) -> bool:
 
 	return commands.size() - 1 >= index
+
+
+
+func is_executing() -> bool:
+
+	return current_index != -1
 
 
 
@@ -97,6 +107,8 @@ func execute_index(index: int) -> void:
 
 
 
-func _on_command_executed(_command: Command) -> void:
+func _on_command_executed(command: Command) -> void:
+
+	data = command.data
 
 	next_command()

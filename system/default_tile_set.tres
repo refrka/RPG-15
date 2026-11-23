@@ -1,0 +1,15 @@
+[gd_resource type="TileSet" format=3 uid="uid://dh06c6qn4dt2x"]
+
+[ext_resource type="Texture2D" uid="uid://dni7wima45msy" path="res://textures/tile_sheets/forest_tile_sheet.png" id="1_85lit"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x500s"]
+texture = ExtResource("1_85lit")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:2/0 = 0
+0:3/0 = 0
+
+[resource]
+physics_layer_0/collision_layer = 1024
+sources/0 = SubResource("TileSetAtlasSource_x500s")

@@ -1,6 +1,8 @@
 class_name Entity extends PhysicsBody2D
 
 
+signal deactivated
+
 
 
 @export var entity_id: StringName
@@ -145,6 +147,8 @@ func deactivate() -> bool:
 	if interaction_sensor:
 
 		interaction_sensor.deactivate()
+
+	deactivated.emit()
 
 	return true
 

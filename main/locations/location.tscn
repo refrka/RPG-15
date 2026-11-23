@@ -1,20 +1,25 @@
 [gd_scene format=3 uid="uid://dpkxaqx8pn8qx"]
 
 [ext_resource type="Script" uid="uid://b0sw0v5y17w7s" path="res://main/locations/location.gd" id="1_rethr"]
+[ext_resource type="TileSet" uid="uid://dh06c6qn4dt2x" path="res://system/default_tile_set.tres" id="2_ftcat"]
+[ext_resource type="Script" uid="uid://bel2v4sctr7am" path="res://main/features/feature.gd" id="2_gk7iq"]
+[ext_resource type="Script" uid="uid://cgh4peg28c4u7" path="res://main/features/spawn_point.gd" id="3_kceww"]
 
-[node name="Location" type="Node2D" unique_id=670555715 node_paths=PackedStringArray("entity_root", "projectile_root", "pickup_root")]
+[node name="Location" type="Node2D" unique_id=670555715 node_paths=PackedStringArray("entity_root", "projectile_root", "pickup_root", "feature_root")]
 script = ExtResource("1_rethr")
 entity_root = NodePath("NavigationRegion2D/YSortRoot/Entities")
 projectile_root = NodePath("NavigationRegion2D/YSortRoot/Projectiles")
 pickup_root = NodePath("NavigationRegion2D/YSortRoot/Pickups")
+feature_root = NodePath("NavigationRegion2D/Features")
 metadata/_custom_type_script = "uid://b0sw0v5y17w7s"
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=557022044]
 
-[node name="YSortRoot" type="Node2D" parent="NavigationRegion2D" unique_id=2018006890]
+[node name="TileMapLayer" type="TileMapLayer" parent="NavigationRegion2D" unique_id=2045091492]
 y_sort_enabled = true
+tile_set = ExtResource("2_ftcat")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="NavigationRegion2D/YSortRoot" unique_id=2045091492]
+[node name="YSortRoot" type="Node2D" parent="NavigationRegion2D" unique_id=2018006890]
 y_sort_enabled = true
 
 [node name="Entities" type="Node2D" parent="NavigationRegion2D/YSortRoot" unique_id=1602233272]
@@ -25,3 +30,11 @@ y_sort_enabled = true
 
 [node name="Pickups" type="Node2D" parent="NavigationRegion2D/YSortRoot" unique_id=303855106]
 y_sort_enabled = true
+
+[node name="Features" type="Node2D" parent="NavigationRegion2D" unique_id=586368805]
+script = ExtResource("2_gk7iq")
+metadata/_custom_type_script = "uid://bel2v4sctr7am"
+
+[node name="DefaultSpawn" type="Marker2D" parent="NavigationRegion2D/Features" unique_id=1726135829]
+script = ExtResource("3_kceww")
+feature_id = &"default_spawn"

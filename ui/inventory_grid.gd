@@ -15,6 +15,8 @@ func clear() -> void:
 
 	for child in get_children():
 
+		remove_child(child)
+
 		child.queue_free()
 
 
@@ -30,13 +32,15 @@ func load_inventory(_inventory: Inventory) -> void:
 
 		var item_slot = item_slot_scene.instantiate()
 
+		item_slot.parent_inventory = inventory
+
 		add_child(item_slot)
 
 		var stack = inventory.get_item_stack(i)
 
-		item_slot.set_stack(stack)
-
 		item_slot.stack_updated.connect(_on_slot_stack_updated.bind(item_slot))
+
+		item_slot.set_stack(stack)
 
 
 

@@ -66,3 +66,4 @@ func get_loot(roll: float) -> Array[ItemStack]:
 					loot.append(item_stack)
 
 	return loot
+

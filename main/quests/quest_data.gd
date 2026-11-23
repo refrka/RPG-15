@@ -25,7 +25,9 @@ func initialize_stage(index: int) -> void:
 
 	if stage:
 
-		stage.initialize()
+		stage.initialize(self)
+
+
 
 
 
@@ -47,6 +49,10 @@ func set_stage_index(index: int) -> void:
 func set_state(_state: Quest.QuestState) -> void:
 
 	state = _state
+
+	state_changed.emit(state)
+
+	Events.fire_script(QuestStateChangedEvent, {"quest_data": self})
 
 
 

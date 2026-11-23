@@ -11,12 +11,15 @@ enum LocationState {
 
 }
 
+@export var location_id: StringName
 
 @export var entity_root: Node2D
 
 @export var projectile_root: Node2D
 
 @export var pickup_root: Node2D
+
+@export var feature_root: Node2D
 
 var location_state: LocationState
 
@@ -37,6 +40,8 @@ func initialize() -> bool:
 
 	entity_root.get_children().map(func(e): e.initialize())
 
+	feature_root.get_children().map(func(f): f.initialize())
+
 	return true
 
 
@@ -50,6 +55,8 @@ func activate() -> void:
 
 	entity_root.get_children().map(func(e): e.activate())
 
+	feature_root.get_children().map(func(f): f.activate())
+
 
 
 
@@ -57,7 +64,11 @@ func deactivate() -> void:
 
 	set_location_state(LocationState.INACTIVE)
 
-	entity_root.get_children().map(func(e): e.activate())
+	entity_root.get_children().map(func(e): e.deactivate())
+
+	feature_root.get_children().map(func(f): f.deactivate())
+
+
 
 
 
@@ -83,7 +94,7 @@ func add_entity(entity: Entity, target_position: Vector2) -> void:
 
 
 
-func add_pickup(pickup: Pickup, origin: Vector2) -> void:
+func add_pickup(pickup: Pickup, origin: Vector2, move_out:= true) -> void:
 
 	pickup_root.add_child.call_deferred(pickup)
 
@@ -91,9 +102,54 @@ func add_pickup(pickup: Pickup, origin: Vector2) -> void:
 
 	var dir = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
 
-	var tween = get_tree().create_tween()
+	if move_out:
 
-	tween.tween_property(pickup, "global_position", origin + (dir * 16.0), 0.5)
+		var tween = get_tree().create_tween()
+
+		tween.tween_property(pickup, "global_position", origin + (dir * 16.0), 0.5)
+
+
+
+func spawn_player(spawn_id: StringName) -> void:
+
+	var spawn_point = get_feature(spawn_id)
+
+	if spawn_point:
+
+		Game.hold_player()
+
+		Game.player.global_position = spawn_point.global_position
+
+		Game.player.reparent(entity_root)
+
+		AttachCameraToPlayerCommand.run()
+
+
+
+
+func get_feature(feature_id: StringName) -> Feature:
+
+	for child in feature_root.get_children():
+
+		if child.feature_id == feature_id:
+
+			return child
+
+	return null
+
+
+
+func get_entities_by_entity_id(entity_id: StringName) -> Array:
+
+	var entities = []
+
+	for entity in entity_root.get_children():
+
+		if entity.entity_id == entity_id:
+
+			entities.append(entity)
+
+	return entities
 
 
 

@@ -50,6 +50,8 @@ func try_dialogue(entity: Entity) -> void:
 
 func open_dialogue(entity: Entity) -> void:
 
+	Game.player.state_machine.request_state(BodyInteractingState)
+
 	set_dialogue_source(entity)
 
 	UI.add_overlay(dialogue_overlay)
@@ -69,6 +71,8 @@ func open_dialogue(entity: Entity) -> void:
 
 
 func close_dialogue() -> void:
+
+	Game.player.state_machine.request_state(BodyIdleState)
 
 	UI.remove_overlay(dialogue_overlay)
 
@@ -225,6 +229,14 @@ func _on_dialogue_option_selected(option: DialogueOption) -> void:
 
 	if option.on_select_command_set:
 
-		option.on_select_command_set.execute_all()
+		var data = {} if not option is DialogueQuestOption else {"quest_data": option.quest_data, "quest_objective": option.quest_objective}
 
-	set_dialogue_node(option.node)
+		option.on_select_command_set.execute_all(data)
+
+	if not option.node:
+
+		close_dialogue()
+
+	else:
+
+		set_dialogue_node(option.node)

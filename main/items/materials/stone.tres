@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dodsfecrfikie"]
+
+[ext_resource type="Script" uid="uid://jlm5jqxs7txp" path="res://main/items/item.gd" id="1_p3yok"]
+[ext_resource type="Texture2D" uid="uid://bxgy5v7uqvvgo" path="res://textures/items/stone_icon_texture.png" id="1_rywj5"]
+
+[resource]
+script = ExtResource("1_p3yok")
+item_id = &"stone"
+icon_texture = ExtResource("1_rywj5")
+sprite_offset = Vector2(0, -4)
+metadata/_custom_type_script = "uid://jlm5jqxs7txp"

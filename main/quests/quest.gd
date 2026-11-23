@@ -33,3 +33,13 @@ enum QuestState {
 func get_stage(index: int) -> QuestStage:
 
 	return null if stages.size() - 1 < index else stages[index]
+
+
+
+func is_valid() -> bool:
+
+	if stages.is_empty():
+
+		return false
+
+	return true

@@ -6,13 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://w2vrij3o1p87" path="res://ui/profile_overlay.tscn" id="4_28aoi"]
 [ext_resource type="PackedScene" uid="uid://heyl2b60ajh1" path="res://ui/health_bar.tscn" id="4_bf3um"]
 [ext_resource type="PackedScene" uid="uid://cesr4eybdnurm" path="res://ui/dialogue_overlay.tscn" id="4_l8v81"]
+[ext_resource type="PackedScene" uid="uid://cpg0dmngoe6r4" path="res://main/locations/scenes/forest.scn" id="4_tw3kd"]
 [ext_resource type="PackedScene" uid="uid://xldnyi01j1e3" path="res://ui/cursor_slot.tscn" id="5_jnlp7"]
 [ext_resource type="PackedScene" uid="uid://ccbqbh5n24ied" path="res://ui/container_overlay.tscn" id="5_vyht1"]
+[ext_resource type="PackedScene" uid="uid://bci53ctylpbcv" path="res://ui/main_menu.tscn" id="9_huihk"]
 
 [sub_resource type="Resource" id="Resource_ihp3c"]
 script = ExtResource("2_vvh5c")
 game_state = 1
-allowed_actions = Array[StringName]([&"move_left", &"move_right", &"move_up", &"move_down", &"profile", &"attack", &"interact", &"back"])
+allowed_actions = Array[StringName]([&"move_left", &"move_right", &"move_up", &"move_down", &"profile", &"attack", &"interact", &"back", &"left_ctrl"])
 metadata/_custom_type_script = "uid://dy0n8ihmni5qm"
 
 [sub_resource type="Resource" id="Resource_28aoi"]
@@ -25,7 +27,8 @@ metadata/_custom_type_script = "uid://dy0n8ihmni5qm"
 script = ExtResource("1_pyidc")
 input_configs = Array[ExtResource("2_vvh5c")]([SubResource("Resource_ihp3c"), SubResource("Resource_28aoi")])
 location_scenes = Dictionary[StringName, PackedScene]({
-&"debug_location": ExtResource("2_pyidc")
+&"debug_location": ExtResource("2_pyidc"),
+&"forest": ExtResource("4_tw3kd")
 })
 
 [node name="BGCanvas" type="CanvasLayer" parent="." unique_id=321048143]
@@ -40,44 +43,18 @@ mouse_filter = 2
 color = Color(0.03529412, 0.047058824, 0.050980393, 1)
 metadata/_edit_lock_ = true
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1041153592]
-
-[node name="ControlRoot" type="Control" parent="CanvasLayer2" unique_id=1252898016]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="CanvasLayer2/ControlRoot" unique_id=990995713]
-layout_mode = 0
-offset_left = 92.0
-offset_top = 4.0
-offset_right = 160.0
-offset_bottom = 29.0
-text = "this button
-does nothing"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="CanvasLayer2/ControlRoot" unique_id=160829255]
-layout_mode = 0
-offset_left = 181.0
-offset_top = 19.0
-offset_right = 249.0
-offset_bottom = 44.0
-text = "start quest"
-horizontal_alignment = 1
-
 [node name="LocationCanvas" type="CanvasLayer" parent="." unique_id=2101171486]
 follow_viewport_enabled = true
 
-[node name="LocationRoot" type="Node2D" parent="LocationCanvas" unique_id=1900246751 groups=["location_root"]]
+[node name="LocationRoot" type="Node2D" parent="LocationCanvas" unique_id=1900246751 groups=["location_root", "root"]]
+
+[node name="CutsceneCanvas" type="CanvasLayer" parent="." unique_id=1302013900]
+
+[node name="CutsceneLocationRoot" type="Node2D" parent="CutsceneCanvas" unique_id=1316593672 groups=["cutscene_location_root"]]
 
 [node name="HUDCanvas" type="CanvasLayer" parent="." unique_id=1198719313]
 
-[node name="HealthBar" parent="HUDCanvas" unique_id=836411931 groups=["player_health_bar"] instance=ExtResource("4_bf3um")]
+[node name="HealthBar" parent="HUDCanvas" unique_id=836411931 groups=["hud", "player_health_bar"] instance=ExtResource("4_bf3um")]
 offset_left = 478.0
 offset_top = 11.0
 offset_right = 628.0
@@ -89,14 +66,47 @@ offset_bottom = 26.0
 visible = false
 
 [node name="ContainerOverlay" parent="OverlayCanvas" unique_id=1552684798 instance=ExtResource("5_vyht1")]
+visible = false
 
 [node name="ProfileCanvas" type="CanvasLayer" parent="." unique_id=127699270]
 
 [node name="ProfileOverlay" parent="ProfileCanvas" unique_id=1283527882 instance=ExtResource("4_28aoi")]
 visible = false
 
-[node name="CursorRoot" type="CanvasLayer" parent="." unique_id=1737291134]
+[node name="CursorCanvas" type="CanvasLayer" parent="." unique_id=1737291134]
 
-[node name="CursorSlot" parent="CursorRoot" unique_id=609063128 instance=ExtResource("5_jnlp7")]
+[node name="CursorSlot" parent="CursorCanvas" unique_id=609063128 instance=ExtResource("5_jnlp7")]
 custom_minimum_size = Vector2(18, 18)
 selected_stylebox = null
+
+[node name="NoticeCanvas" type="CanvasLayer" parent="." unique_id=1177334563]
+
+[node name="NoticeRoot" type="Control" parent="NoticeCanvas" unique_id=1650008211 groups=["notice_root", "root"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MainMenuCanvas" type="CanvasLayer" parent="." unique_id=385023001]
+
+[node name="MainMenu" parent="MainMenuCanvas" unique_id=560946578 instance=ExtResource("9_huihk")]
+
+[node name="FGCanvas" type="CanvasLayer" parent="." unique_id=911550628]
+
+[node name="FGRect" type="ColorRect" parent="FGCanvas" unique_id=2043068772 groups=["fg_rect"]]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="GameCamera" type="Camera2D" parent="." unique_id=918686225 groups=["game_camera"]]
+process_mode = 3
+position_smoothing_enabled = true
+position_smoothing_speed = 7.5

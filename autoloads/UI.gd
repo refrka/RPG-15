@@ -2,6 +2,9 @@ extends Node
 
 
 
+var fg_rect: ColorRect
+
+
 var overlays: Dictionary[Script, Overlay]
 
 var active_overlays: Array
@@ -24,6 +27,8 @@ func _ready() -> void:
 		overlays[overlay.get_script()] = overlay
 
 		overlay.hide()
+
+	fg_rect = get_tree().get_first_node_in_group("fg_rect")
 
 	player_health_bar = get_tree().get_first_node_in_group("player_health_bar")
 
@@ -85,6 +90,21 @@ func get_overlay(script: Script) -> Overlay:
 
 
 
+func show_hud() -> void:
+
+	for node in get_tree().get_nodes_in_group("hud"):
+
+		node.show()
+
+
+
+func hide_hud() -> void:
+
+	for node in get_tree().get_nodes_in_group("hud"):
+
+		node.hide()
+
+
 
 
 func _on_player_initialized(_event: Event) -> void:
@@ -93,6 +113,9 @@ func _on_player_initialized(_event: Event) -> void:
 
 	player_health_bar.load_health_component(health_component)
 	
+
+
+
 
 
 

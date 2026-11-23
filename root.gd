@@ -18,21 +18,21 @@ func _ready() -> void:
 
 	Game.start(launch_mode)
 
-	drop()
+	# drop()
 
-	drop()
+	# drop()
 
-	drop()
+	# drop()
 
-	drop()
+	# drop()
 
-	drop()
+	# drop()
 
-	drop()
+	# drop()
 
-	drop()
+	# drop()
 
-	drop()
+	# drop()
 
 
 

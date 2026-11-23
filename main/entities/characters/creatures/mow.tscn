@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://y4cukg661uwr"]
+
+[ext_resource type="PackedScene" uid="uid://bxhe8lv6h7cau" path="res://main/entities/character.tscn" id="1_3vwuq"]
+[ext_resource type="Script" uid="uid://crb5u1k1b1ilj" path="res://main/loot/loot_entry.gd" id="2_5x5xw"]
+[ext_resource type="Script" uid="uid://bilm5ege1cif1" path="res://main/entities/entity_stats.gd" id="2_7k5lq"]
+[ext_resource type="Texture2D" uid="uid://b1r1tj2qaj533" path="res://textures/characters/mow_sprite_texture.png" id="2_oll6h"]
+[ext_resource type="Script" uid="uid://jlm5jqxs7txp" path="res://main/items/item.gd" id="3_7k5lq"]
+[ext_resource type="Script" uid="uid://buwbh3f25d74m" path="res://main/components/movement_component.gd" id="3_oll6h"]
+[ext_resource type="Script" uid="uid://bgdddqoa78u1i" path="res://main/components/health_component.gd" id="4_fxwmh"]
+[ext_resource type="Resource" uid="uid://fyjucfpk72e2" path="res://main/items/materials/mow_leather.tres" id="4_y06eq"]
+[ext_resource type="Script" uid="uid://dmr4v28gqmw1h" path="res://main/loot/loot_table.gd" id="5_31leu"]
+[ext_resource type="Script" uid="uid://bnfw81624qqdu" path="res://main/components/behavior_component.gd" id="5_55bx4"]
+[ext_resource type="Script" uid="uid://ciixxeo5s6dul" path="res://main/behavior/behavior_phase.gd" id="6_4ddop"]
+[ext_resource type="Script" uid="uid://dkta1jljyvgwr" path="res://main/commands/command.gd" id="7_3thh1"]
+[ext_resource type="Script" uid="uid://c5xfnmvdtcclx" path="res://main/commands/move_to_target_position_command.gd" id="8_3thh1"]
+[ext_resource type="Script" uid="uid://bkrsy4jfnj608" path="res://main/behavior/behavior.gd" id="8_jhncj"]
+
+[sub_resource type="Resource" id="Resource_y5i5g"]
+script = ExtResource("2_7k5lq")
+base_health = 1
+metadata/_custom_type_script = "uid://bilm5ege1cif1"
+
+[sub_resource type="Resource" id="Resource_x7o2m"]
+script = ExtResource("2_5x5xw")
+items = Dictionary[ExtResource("3_7k5lq"), int]({
+ExtResource("4_y06eq"): 1
+})
+weight = -1
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_kgmfl"]
+script = ExtResource("5_31leu")
+entries = Array[ExtResource("2_5x5xw")]([SubResource("Resource_x7o2m")])
+metadata/_custom_type_script = "uid://dmr4v28gqmw1h"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vwuq"]
+size = Vector2(13, 5)
+
+[sub_resource type="Resource" id="Resource_4ddop"]
+script = ExtResource("8_3thh1")
+target_position = Vector2(100, 100)
+metadata/_custom_type_script = "uid://c5xfnmvdtcclx"
+
+[sub_resource type="Resource" id="Resource_niaws"]
+script = ExtResource("6_4ddop")
+commands = Array[ExtResource("7_3thh1")]([SubResource("Resource_4ddop")])
+metadata/_custom_type_script = "uid://ciixxeo5s6dul"
+
+[sub_resource type="Resource" id="Resource_4x82b"]
+script = ExtResource("8_jhncj")
+phases = Array[ExtResource("6_4ddop")]([SubResource("Resource_niaws")])
+metadata/_custom_type_script = "uid://bkrsy4jfnj608"
+
+[sub_resource type="Animation" id="Animation_fxwmh"]
+resource_name = "die"
+length = 0.009999999999999998
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/BodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_55bx4"]
+_data = {
+&"die": SubResource("Animation_fxwmh")
+}
+
+[node name="Mow" unique_id=920390172 instance=ExtResource("1_3vwuq")]
+entity_id = &"mow"
+stats = SubResource("Resource_y5i5g")
+death_loot_table = SubResource("Resource_kgmfl")
+
+[node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(1546177270) index="0" unique_id=2072653577]
+texture = ExtResource("2_oll6h")
+hframes = 3
+
+[node name="BodyCollision" parent="." index="1" unique_id=934894713]
+position = Vector2(-0.5, -2.5)
+shape = SubResource("RectangleShape2D_3vwuq")
+
+[node name="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1587296689) index="0" unique_id=135124436]
+position = Vector2(-2, -7)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1587296689) index="1" unique_id=1539942159]
+modulate = Color(1, 1, 1, 0.21568628)
+polygon = PackedVector2Array(-7, 0, -7, -10, -6, -10, -6, -11, 2, -11, 2, -10, 3, -10, 3, -7, 6, -7, 6, -6, 7, -6, 7, -3, 3, -3, 3, 0, 1, 0, 1, -3, -5, -3, -5, 0)
+
+[node name="MovementComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="2" unique_id=1881488671]
+script = ExtResource("3_oll6h")
+metadata/_custom_type_script = "uid://buwbh3f25d74m"
+
+[node name="HealthComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="3" unique_id=1085535051]
+script = ExtResource("4_fxwmh")
+metadata/_custom_type_script = "uid://bgdddqoa78u1i"
+
+[node name="BehaviorComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="4" unique_id=1897306509]
+script = ExtResource("5_55bx4")
+default_behavior = SubResource("Resource_4x82b")
+metadata/_custom_type_script = "uid://bnfw81624qqdu"
+
+[node name="BodyAnimPlayer" parent="." index="7" unique_id=1242108839]
+libraries/mow = SubResource("AnimationLibrary_55bx4")
+
+[editable path="Hurtbox"]

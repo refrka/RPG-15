@@ -2,9 +2,19 @@
 
 [ext_resource type="Script" uid="uid://cw6a1oafm3u0g" path="res://main/items/consumable.gd" id="1_bfaqu"]
 [ext_resource type="Texture2D" uid="uid://2ftqy5kdyow0" path="res://textures/items/health_potion_small_icon_texture.png" id="1_m6eym"]
+[ext_resource type="Script" uid="uid://cb8051efpe7su" path="res://main/effects/effect.gd" id="1_puu05"]
+[ext_resource type="Script" uid="uid://r2k8wvpjv24y" path="res://main/effects/restore_health_duration_effect.gd" id="2_i8adq"]
+
+[sub_resource type="Resource" id="Resource_va07x"]
+script = ExtResource("2_i8adq")
+amount = 1
+duration = 4.0
+tick_rate = 1.0
 
 [resource]
 script = ExtResource("1_bfaqu")
+effects_on_consume = Array[ExtResource("1_puu05")]([SubResource("Resource_va07x")])
 item_id = &"health_potion_small"
-icon_texture = ExtResource("1_m6eym")
 max_stack = 10
+icon_texture = ExtResource("1_m6eym")
+sprite_offset = Vector2(0, -8)

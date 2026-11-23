@@ -23,11 +23,18 @@ var data:= {}
 
 var result: Result
 
+var actor: Entity
+
+
 
 
 func execute(_data:= {}) -> Result:
 
 	data = _data
+
+	if data.has("actor"):
+
+		actor = data.actor
 
 	return Result.SUCCESS
 

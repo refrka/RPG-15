@@ -14,6 +14,12 @@ var multi_select_enabled:= false
 
 
 
+func _ready() -> void:
+
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
+
+
 
 
 func handle_slot_input(item_slot: ItemSlot, event: InputEvent) -> void:
@@ -44,11 +50,15 @@ func handle_slot_input(item_slot: ItemSlot, event: InputEvent) -> void:
 
 				else:
 
-					if cursor_slot.held_slot.can_accept_contents(item_slot) and item_slot.can_accept_contents(cursor_slot.held_slot):
+					if item_slot.item_stack.can_merge_stack(cursor_slot.item_stack):
+
+						item_slot.item_stack.merge_stack(cursor_slot.item_stack)
+
+					elif cursor_slot.held_slot.can_accept_contents(item_slot) and item_slot.can_accept_contents(cursor_slot.held_slot):
 
 						cursor_slot.held_slot.swap(item_slot)
 
-						cursor_slot.copy_slot(item_slot)
+					cursor_slot.drop_slot()
 
 	elif event.button_index == 2:
 
@@ -95,3 +105,23 @@ func set_slot_hover_state(slot: ItemSlot, state: bool) -> void:
 	slot.set_hovered_state(state)
 
 	hovered_slot = null if state == false else slot
+
+
+
+
+
+func _unhandled_input(event: InputEvent) -> void:
+
+	if event is InputEventMouseButton and event.button_index == 1 and event.is_pressed() and not cursor_slot.is_empty():
+
+		var pickup = Pickup.create(cursor_slot.item_stack)
+
+		pickup.player_dropped = true
+
+		cursor_slot.held_slot.set_stack(null)
+
+		cursor_slot.drop_slot()
+
+		var target_position = Game.player.global_position + (Game.player.global_position.direction_to(Scenes.current_location.get_global_mouse_position()) * 16.0)
+
+		Scenes.current_location.add_pickup(pickup, target_position, false)

@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://bh4mfnsfv2mvn"]
+
+[ext_resource type="PackedScene" uid="uid://7krrh8p7u6uf" path="res://main/entities/harvestable.tscn" id="1_jsm4d"]
+[ext_resource type="Texture2D" uid="uid://0arg0o5rvqm" path="res://textures/props/stone_chunk_sprite_texture.png" id="2_26s37"]
+[ext_resource type="Script" uid="uid://crb5u1k1b1ilj" path="res://main/loot/loot_entry.gd" id="3_856m7"]
+[ext_resource type="Script" uid="uid://jlm5jqxs7txp" path="res://main/items/item.gd" id="4_rghqe"]
+[ext_resource type="Resource" uid="uid://dodsfecrfikie" path="res://main/items/materials/stone.tres" id="5_aov8t"]
+[ext_resource type="Resource" uid="uid://dr6x7uoerbnpj" path="res://main/items/valuables/ruby.tres" id="6_rghqe"]
+[ext_resource type="Script" uid="uid://dmr4v28gqmw1h" path="res://main/loot/loot_table.gd" id="6_tlqy3"]
+[ext_resource type="Resource" uid="uid://u1mkws6x6xw5" path="res://main/items/valuables/sapphire.tres" id="7_tlqy3"]
+[ext_resource type="Resource" uid="uid://c4fg25oiivepe" path="res://main/items/equipment/tools/pickaxe.tres" id="8_aov8t"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vf41u"]
+radius = 1.0
+height = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tlqy3"]
+radius = 4.0
+
+[sub_resource type="Resource" id="Resource_kdtxm"]
+script = ExtResource("3_856m7")
+items = Dictionary[ExtResource("4_rghqe"), int]({
+ExtResource("5_aov8t"): 1
+})
+weight = -1
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_0w6s6"]
+script = ExtResource("3_856m7")
+items = Dictionary[ExtResource("4_rghqe"), int]({
+ExtResource("6_rghqe"): 1
+})
+weight = 10
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_ya5lx"]
+script = ExtResource("3_856m7")
+weight = 50
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_uqloo"]
+script = ExtResource("3_856m7")
+items = Dictionary[ExtResource("4_rghqe"), int]({
+ExtResource("7_tlqy3"): 1
+})
+weight = 10
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_rywj5"]
+script = ExtResource("6_tlqy3")
+entries = Array[ExtResource("3_856m7")]([SubResource("Resource_kdtxm"), SubResource("Resource_0w6s6"), SubResource("Resource_ya5lx"), SubResource("Resource_uqloo")])
+metadata/_custom_type_script = "uid://dmr4v28gqmw1h"
+
+[node name="StoneChunk" unique_id=1222908469 instance=ExtResource("1_jsm4d")]
+collision_layer = 69
+
+[node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(549313783) index="0" unique_id=1612993214]
+position = Vector2(0, -5)
+texture = ExtResource("2_26s37")
+hframes = 2
+
+[node name="BodyCollision" parent="." index="1" unique_id=892046188]
+position = Vector2(0, -1)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_vf41u")
+
+[node name="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1587296689) index="0" unique_id=135124436]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_tlqy3")
+
+[node name="HarvestComponent" parent="ComponentRoot" parent_id_path=PackedInt32Array(1493594875) index="1" unique_id=550237833]
+loot_table = SubResource("Resource_rywj5")
+duration = 0.7
+required_tool = ExtResource("8_aov8t")
+
+[editable path="Hurtbox"]

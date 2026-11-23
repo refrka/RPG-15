@@ -7,11 +7,13 @@ class_name Pickup extends CharacterBody2D
 
 @export var anim_player: AnimationPlayer
 
+@export var stack: ItemStack
+
 var pick_up_enabled:= false
 
-var stack: ItemStack
-
 var pickup_target: Entity
+
+var player_dropped:= false
 
 
 
@@ -29,7 +31,9 @@ func _ready() -> void:
 
 func float_to_entity(entity: Entity) -> void:
 
-	pick_up_enabled = true
+	if not anim_player.current_animation == "drop":
+
+		pick_up_enabled = true
 
 	pickup_target = entity
 
@@ -79,13 +83,13 @@ func _physics_process(_delta: float) -> void:
 
 	if pickup_target and pick_up_enabled:
 
-		var dist = sprite.global_position.distance_to(pickup_target.global_position)
+		var dist = sprite.global_position.distance_to(pickup_target.center_marker.global_position)
 
-		if dist < 12.0:
+		if dist < 8.0:
 
 			pick_up.call_deferred()
 
-		var dir = sprite.global_position.direction_to(pickup_target.global_position)
+		var dir = sprite.global_position.direction_to(pickup_target.center_marker.global_position)
 
 		velocity = dir * 150.0
 

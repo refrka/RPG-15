@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Tool" format=3 uid="uid://nqpe8x3bscwf"]
+
+[ext_resource type="Script" uid="uid://ccsom65yrr3sr" path="res://main/items/tool.gd" id="1_i5h8f"]
+[ext_resource type="Texture2D" uid="uid://cn3ewm7qg5eo0" path="res://textures/items/ladle_icon_texture.png" id="1_u1trs"]
+
+[resource]
+script = ExtResource("1_i5h8f")
+item_id = &"ladle"
+display_name = "Ladle"
+max_stack = 1
+icon_texture = ExtResource("1_u1trs")
+sprite_offset = Vector2(0, -4)

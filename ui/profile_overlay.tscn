@@ -2,12 +2,26 @@
 
 [ext_resource type="Script" uid="uid://2565sv2tfrc7" path="res://ui/profile_overlay.gd" id="1_ihex5"]
 [ext_resource type="PackedScene" uid="uid://dfl48hjw5fn52" path="res://ui/item_slot.tscn" id="2_4idp5"]
+[ext_resource type="Texture2D" uid="uid://6p73f5y74lam" path="res://textures/items/coin_icon_texture.png" id="2_5pum5"]
 [ext_resource type="Script" uid="uid://cxw6uu73bv8y" path="res://ui/inventory_grid.gd" id="2_tyu4j"]
 [ext_resource type="Resource" uid="uid://fq4ssaq2ck3x" path="res://main/items/consumables/apple.tres" id="3_8yg2g"]
 [ext_resource type="Script" uid="uid://cwi55co0pga55" path="res://main/items/item_stack.gd" id="4_5loy3"]
 [ext_resource type="Resource" uid="uid://cu3yrs5y5mirp" path="res://main/items/consumables/bread.tres" id="5_3t5dm"]
 [ext_resource type="PackedScene" uid="uid://c34f5hlq4mhb6" path="res://ui/equipment_slot.tscn" id="6_5loy3"]
 [ext_resource type="Resource" uid="uid://c58tpeps5btc6" path="res://main/items/equipment/weapons/sword.tres" id="7_3t5dm"]
+[ext_resource type="Texture2D" uid="uid://d1isv7c782aa" path="res://textures/items/pickaxe_icon_texture.png" id="10_8sfw0"]
+[ext_resource type="Texture2D" uid="uid://bhsae6lbrbjdx" path="res://textures/items/shovel_icon_texture.png" id="11_n3wk2"]
+[ext_resource type="Script" uid="uid://cgwyhf556mkw" path="res://ui/tool_rect.gd" id="11_qhy5y"]
+[ext_resource type="Texture2D" uid="uid://c7fpe531ckunv" path="res://textures/items/axe_icon_texture.png" id="12_qhy5y"]
+[ext_resource type="Resource" uid="uid://c4fg25oiivepe" path="res://main/items/equipment/tools/pickaxe.tres" id="12_w22wf"]
+[ext_resource type="Texture2D" uid="uid://cn3ewm7qg5eo0" path="res://textures/items/ladle_icon_texture.png" id="13_w22wf"]
+[ext_resource type="Resource" uid="uid://3jmr3dpn6xph" path="res://main/items/equipment/tools/shovel.tres" id="14_4oyfa"]
+[ext_resource type="Resource" uid="uid://dvy7rax5t4ios" path="res://main/items/equipment/tools/axe.tres" id="16_2mgne"]
+[ext_resource type="Resource" uid="uid://nqpe8x3bscwf" path="res://main/items/equipment/tools/ladle.tres" id="18_07rek"]
+[ext_resource type="Script" uid="uid://8bevyibgwl6q" path="res://ui/profile_tab_button.gd" id="19_07rek"]
+[ext_resource type="PackedScene" uid="uid://dtv73dcqwye4x" path="res://ui/journal_quest_panel.tscn" id="20_77202"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_07rek"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28aoi"]
 bg_color = Color(0.1221207, 0.14522305, 0.15285042, 1)
@@ -35,7 +49,7 @@ item = ExtResource("7_3t5dm")
 count = 1
 metadata/_custom_type_script = "uid://cwi55co0pga55"
 
-[node name="ProfileOverlay" type="MarginContainer" unique_id=1283527882 node_paths=PackedStringArray("gold_count_label", "inventory_grid", "weapon_slot") groups=["overlay"]]
+[node name="ProfileOverlay" type="MarginContainer" unique_id=1283527882 node_paths=PackedStringArray("gold_count_label", "inventory_grid", "weapon_slot", "tool_rect_hbox") groups=["overlay"]]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,82 +57,222 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 script = ExtResource("1_ihex5")
-gold_count_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/GoldCountLabel")
-inventory_grid = NodePath("PanelContainer/MarginContainer/VBoxContainer/InventoryGrid")
-weapon_slot = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentSlot")
+gold_count_label = NodePath("Inventory/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/GoldCountLabel")
+inventory_grid = NodePath("Inventory/MarginContainer/HBoxContainer/VBoxContainer/InventoryGrid")
+weapon_slot = NodePath("Inventory/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentSlot")
+tool_rect_hbox = NodePath("Profile/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer")
+tab_button_group = SubResource("ButtonGroup_07rek")
 pause = true
 metadata/_custom_type_script = "uid://dw1aw6urlvg27"
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1722764651]
+[node name="Inventory" type="PanelContainer" parent="." unique_id=1722764651]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_28aoi")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=838182737]
+[node name="MarginContainer" type="MarginContainer" parent="Inventory" unique_id=838182737]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1299024219]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1141671769]
+[node name="HBoxContainer" type="HBoxContainer" parent="Inventory/MarginContainer" unique_id=191931302]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1981128743]
+[node name="VBoxContainer" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer" unique_id=1299024219]
 layout_mode = 2
-text = "Gold:"
+theme_override_constants/separation = 8
 
-[node name="GoldCountLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1312882852]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Inventory/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1141671769]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="Inventory/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1719486063]
+custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 10
+texture = ExtResource("2_5pum5")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="GoldCountLabel" type="Label" parent="Inventory/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1312882852]
+layout_mode = 2
+size_flags_horizontal = 8
 text = "0"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=978791420]
+[node name="HBoxContainer" type="HBoxContainer" parent="Inventory/MarginContainer/HBoxContainer/VBoxContainer" unique_id=978791420]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=128958089]
+[node name="VBoxContainer" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=128958089]
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1144413179]
+[node name="Label" type="Label" parent="Inventory/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1144413179]
 layout_mode = 2
 text = "Weapon"
 
-[node name="EquipmentSlot" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=163527939 instance=ExtResource("6_5loy3")]
+[node name="EquipmentSlot" parent="Inventory/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=163527939 instance=ExtResource("6_5loy3")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="InventoryGrid" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1731855994]
+[node name="InventoryGrid" type="GridContainer" parent="Inventory/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1731855994]
 layout_mode = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
 columns = 3
 script = ExtResource("2_tyu4j")
 
-[node name="ItemSlot" parent="PanelContainer/MarginContainer/VBoxContainer/InventoryGrid" unique_id=260476297 instance=ExtResource("2_4idp5")]
+[node name="ItemSlot" parent="Inventory/MarginContainer/HBoxContainer/VBoxContainer/InventoryGrid" unique_id=260476297 instance=ExtResource("2_4idp5")]
 layout_mode = 2
 item_stack = SubResource("Resource_28aoi")
 
-[node name="ItemSlot2" parent="PanelContainer/MarginContainer/VBoxContainer/InventoryGrid" unique_id=795038393 instance=ExtResource("2_4idp5")]
+[node name="ItemSlot2" parent="Inventory/MarginContainer/HBoxContainer/VBoxContainer/InventoryGrid" unique_id=795038393 instance=ExtResource("2_4idp5")]
 layout_mode = 2
 item_stack = SubResource("Resource_jnlp7")
 
-[node name="ItemSlot3" parent="PanelContainer/MarginContainer/VBoxContainer/InventoryGrid" unique_id=1803070594 instance=ExtResource("2_4idp5")]
+[node name="ItemSlot3" parent="Inventory/MarginContainer/HBoxContainer/VBoxContainer/InventoryGrid" unique_id=1803070594 instance=ExtResource("2_4idp5")]
 layout_mode = 2
 
-[node name="ItemSlot4" parent="PanelContainer/MarginContainer/VBoxContainer/InventoryGrid" unique_id=844183927 instance=ExtResource("2_4idp5")]
+[node name="ItemSlot4" parent="Inventory/MarginContainer/HBoxContainer/VBoxContainer/InventoryGrid" unique_id=844183927 instance=ExtResource("2_4idp5")]
 layout_mode = 2
 
-[node name="EquipmentSlot" parent="PanelContainer/MarginContainer/VBoxContainer/InventoryGrid" unique_id=515841138 instance=ExtResource("6_5loy3")]
+[node name="EquipmentSlot" parent="Inventory/MarginContainer/HBoxContainer/VBoxContainer/InventoryGrid" unique_id=515841138 instance=ExtResource("6_5loy3")]
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 item_stack = SubResource("Resource_3t5dm")
 
-[node name="EquipmentSlot2" parent="PanelContainer/MarginContainer/VBoxContainer/InventoryGrid" unique_id=819561582 instance=ExtResource("6_5loy3")]
+[node name="EquipmentSlot2" parent="Inventory/MarginContainer/HBoxContainer/VBoxContainer/InventoryGrid" unique_id=819561582 instance=ExtResource("6_5loy3")]
 custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+
+[node name="Profile" type="PanelContainer" parent="." unique_id=551551278]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_28aoi")
+
+[node name="MarginContainer" type="MarginContainer" parent="Profile" unique_id=1256193579]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Profile/MarginContainer" unique_id=195723671]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Profile/MarginContainer/VBoxContainer" unique_id=1389070011]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Profile/MarginContainer/VBoxContainer/MarginContainer" unique_id=942020182]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="PickaxeToolRect" type="TextureRect" parent="Profile/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=599565880]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("10_8sfw0")
+script = ExtResource("11_qhy5y")
+tool = ExtResource("12_w22wf")
+
+[node name="ShovelToolRect" type="TextureRect" parent="Profile/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=958929420]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("11_n3wk2")
+script = ExtResource("11_qhy5y")
+tool = ExtResource("14_4oyfa")
+
+[node name="AxeToolRect" type="TextureRect" parent="Profile/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1429834478]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("12_qhy5y")
+script = ExtResource("11_qhy5y")
+tool = ExtResource("16_2mgne")
+
+[node name="LadleToolRect" type="TextureRect" parent="Profile/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=2043441256]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("13_w22wf")
+script = ExtResource("11_qhy5y")
+tool = ExtResource("18_07rek")
+
+[node name="Label" type="Label" parent="Profile/MarginContainer/VBoxContainer/MarginContainer" unique_id=1630857975]
+layout_mode = 2
+text = "Tools:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Profile/MarginContainer/VBoxContainer" unique_id=372545471]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="StatsTabButton" type="Button" parent="Profile/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1499597193 node_paths=PackedStringArray("tab")]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 1
+toggle_mode = true
+button_group = SubResource("ButtonGroup_07rek")
+text = "STATS"
+script = ExtResource("19_07rek")
+tab = NodePath("../../Contents/StatsTab")
+metadata/_custom_type_script = "uid://8bevyibgwl6q"
+
+[node name="JournalTabButton" type="Button" parent="Profile/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1863594414 node_paths=PackedStringArray("tab")]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 1
+toggle_mode = true
+button_group = SubResource("ButtonGroup_07rek")
+text = "JOURNAL"
+script = ExtResource("19_07rek")
+tab = NodePath("../../Contents/JournalTab")
+metadata/_custom_type_script = "uid://8bevyibgwl6q"
+
+[node name="HSeparator" type="HSeparator" parent="Profile/MarginContainer/VBoxContainer" unique_id=1022614881]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Contents" type="MarginContainer" parent="Profile/MarginContainer/VBoxContainer" unique_id=1998245230]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="StatsTab" type="MarginContainer" parent="Profile/MarginContainer/VBoxContainer/Contents" unique_id=1679802119]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Profile/MarginContainer/VBoxContainer/Contents/StatsTab" unique_id=224995020]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Profile/MarginContainer/VBoxContainer/Contents/StatsTab/VBoxContainer" unique_id=2127620880]
+layout_mode = 2
+text = "STATS"
+horizontal_alignment = 1
+
+[node name="JournalTab" type="MarginContainer" parent="Profile/MarginContainer/VBoxContainer/Contents" unique_id=1532974484]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Profile/MarginContainer/VBoxContainer/Contents/JournalTab" unique_id=1334132128]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Profile/MarginContainer/VBoxContainer/Contents/JournalTab/VBoxContainer" unique_id=490483002]
+layout_mode = 2
+text = "JOURNAL"
+horizontal_alignment = 1
+
+[node name="JournalQuestPanel" parent="Profile/MarginContainer/VBoxContainer/Contents/JournalTab/VBoxContainer" unique_id=1774396229 instance=ExtResource("20_77202")]
 layout_mode = 2

@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://bci53ctylpbcv"]
+
+[ext_resource type="Script" uid="uid://h7d8sja43fni" path="res://ui/main_menu.gd" id="1_t7e0r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28aoi"]
+bg_color = Color(0.1221207, 0.14522305, 0.15285042, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25674063, 0.29679266, 0.31015244, 1)
+
+[node name="MainMenu" type="MarginContainer" unique_id=560946578 node_paths=PackedStringArray("new_save_container", "load_save_container", "name_line_edit", "start_button", "current_save_label", "load_button", "delete_button") groups=["overlay"]]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_t7e0r")
+new_save_container = NodePath("PanelContainer/MarginContainer/NewSaveContainer")
+load_save_container = NodePath("PanelContainer/MarginContainer/LoadSaveContainer")
+name_line_edit = NodePath("PanelContainer/MarginContainer/NewSaveContainer/VBoxContainer/NewSaveLineEdit")
+start_button = NodePath("PanelContainer/MarginContainer/NewSaveContainer/VBoxContainer/StartButton")
+current_save_label = NodePath("PanelContainer/MarginContainer/LoadSaveContainer/VBoxContainer/CurrentSaveLabel")
+load_button = NodePath("PanelContainer/MarginContainer/LoadSaveContainer/VBoxContainer/LoadButton")
+delete_button = NodePath("PanelContainer/MarginContainer/LoadSaveContainer/VBoxContainer/DeleteButton")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1248730706]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_28aoi")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1176939849]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="NewSaveContainer" type="MarginContainer" parent="PanelContainer/MarginContainer" unique_id=1453697382]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/NewSaveContainer" unique_id=449474719]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/NewSaveContainer/VBoxContainer" unique_id=1651761367]
+layout_mode = 2
+text = "Choose Your Name"
+horizontal_alignment = 1
+
+[node name="NewSaveLineEdit" type="LineEdit" parent="PanelContainer/MarginContainer/NewSaveContainer/VBoxContainer" unique_id=1395831641]
+layout_mode = 2
+size_flags_vertical = 0
+alignment = 1
+max_length = 20
+select_all_on_focus = true
+caret_blink = true
+
+[node name="StartButton" type="Button" parent="PanelContainer/MarginContainer/NewSaveContainer/VBoxContainer" unique_id=167607193]
+layout_mode = 2
+text = "Start"
+
+[node name="LoadSaveContainer" type="MarginContainer" parent="PanelContainer/MarginContainer" unique_id=1898026015]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/LoadSaveContainer" unique_id=1017577599]
+layout_mode = 2
+
+[node name="CurrentSaveLabel" type="Label" parent="PanelContainer/MarginContainer/LoadSaveContainer/VBoxContainer" unique_id=1602304064]
+layout_mode = 2
+text = "Saved Name | Lvl 1"
+horizontal_alignment = 1
+
+[node name="LoadButton" type="Button" parent="PanelContainer/MarginContainer/LoadSaveContainer/VBoxContainer" unique_id=390675887]
+layout_mode = 2
+text = "Load"
+
+[node name="DeleteButton" type="Button" parent="PanelContainer/MarginContainer/LoadSaveContainer/VBoxContainer" unique_id=1546652772]
+layout_mode = 2
+text = "Delete"

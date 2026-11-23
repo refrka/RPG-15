@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://bpg4nl5i3vbok"]
+
+[ext_resource type="PackedScene" uid="uid://7krrh8p7u6uf" path="res://main/entities/harvestable.tscn" id="1_ip1co"]
+[ext_resource type="Texture2D" uid="uid://cndk7do0w0obw" path="res://textures/props/berry_bush_sprite_texture.png" id="2_27t7j"]
+[ext_resource type="Script" uid="uid://crb5u1k1b1ilj" path="res://main/loot/loot_entry.gd" id="3_lwo3c"]
+[ext_resource type="Script" uid="uid://dmr4v28gqmw1h" path="res://main/loot/loot_table.gd" id="4_iawwh"]
+[ext_resource type="Script" uid="uid://jlm5jqxs7txp" path="res://main/items/item.gd" id="4_weow0"]
+[ext_resource type="Script" uid="uid://bpy7nn0h2kwp8" path="res://main/sensor/movement_sensor.gd" id="5_iawwh"]
+[ext_resource type="Resource" uid="uid://bmrhwrcif8myu" path="res://main/items/consumables/berries.tres" id="5_nvrv6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_27t7j"]
+radius = 3.0
+height = 16.0
+
+[sub_resource type="Resource" id="Resource_rk536"]
+script = ExtResource("3_lwo3c")
+items = Dictionary[ExtResource("4_weow0"), int]({
+ExtResource("5_nvrv6"): 1
+})
+weight = -1
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_77m01"]
+script = ExtResource("3_lwo3c")
+items = Dictionary[ExtResource("4_weow0"), int]({
+ExtResource("5_nvrv6"): 1
+})
+weight = 50
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_t15ke"]
+script = ExtResource("3_lwo3c")
+weight = 50
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_ip1co"]
+script = ExtResource("4_iawwh")
+entries = Array[ExtResource("3_lwo3c")]([SubResource("Resource_rk536"), SubResource("Resource_77m01"), SubResource("Resource_t15ke")])
+metadata/_custom_type_script = "uid://dmr4v28gqmw1h"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g158l"]
+radius = 3.0
+height = 6.0
+
+[node name="BerryBush" unique_id=1222908469 instance=ExtResource("1_ip1co")]
+
+[node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(549313783) index="0" unique_id=1612993214]
+position = Vector2(0, -8)
+texture = ExtResource("2_27t7j")
+hframes = 2
+
+[node name="BodyCollision" parent="." index="1" unique_id=892046188]
+position = Vector2(0, -3)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_27t7j")
+
+[node name="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1587296689) index="0" unique_id=135124436]
+position = Vector2(0, -7.5)
+
+[node name="HarvestComponent" parent="ComponentRoot" parent_id_path=PackedInt32Array(1493594875) index="1" unique_id=550237833]
+loot_table = SubResource("Resource_ip1co")
+duration = 0.5
+harvest_on_death_chance = 0.5
+
+[node name="MovementSensor" type="Area2D" parent="." index="7" unique_id=1864824395]
+collision_layer = 0
+script = ExtResource("5_iawwh")
+move_speed_override = 0.25
+metadata/_custom_type_script = "uid://bpy7nn0h2kwp8"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementSensor" index="0" unique_id=1579923548]
+position = Vector2(0, -3)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_g158l")
+debug_color = Color(0, 0, 0, 0.2)
+
+[editable path="Hurtbox"]

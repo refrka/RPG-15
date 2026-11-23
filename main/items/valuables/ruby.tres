@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dr6x7uoerbnpj"]
+
+[ext_resource type="Script" uid="uid://jlm5jqxs7txp" path="res://main/items/item.gd" id="1_r4pk3"]
+[ext_resource type="Texture2D" uid="uid://cc0g8abxtp3pw" path="res://textures/items/ruby_icon_texture.png" id="1_uqloo"]
+
+[resource]
+script = ExtResource("1_r4pk3")
+item_id = &"ruby"
+display_name = "Ruby"
+gold_value = 100.0
+icon_texture = ExtResource("1_uqloo")
+sprite_offset = Vector2(0, -4)
+metadata/_custom_type_script = "uid://jlm5jqxs7txp"

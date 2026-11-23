@@ -7,9 +7,23 @@ signal move_started
 
 signal move_ended
 
+signal target_position_reached
+
+
+
+enum MovementState {
+
+	DIR,
+
+	TARGET,
+
+}
+
+
 
 @export var dir_ray: RayCast2D
 
+var movement_state: MovementState
 
 var move_dir: Vector2
 
@@ -18,6 +32,9 @@ var face_dir:= Vector2.RIGHT
 var move_velocity: Vector2
 
 var move_speed:= 0.0
+
+
+var target_position:= Vector2.ZERO
 
 
 var modifier_tracker:= ModifierTracker.new()
@@ -32,8 +49,34 @@ var turn_locked:= false
 
 
 
+func halt() -> void:
+
+	movement_state = MovementState.DIR
+
+	target_position = Vector2.INF
+
+	entity.velocity = Vector2.ZERO
+
+	move_velocity = Vector2.ZERO
+
+
+
+
+
 
 func get_move_dir() -> Vector2:
+
+	match movement_state:
+
+		MovementState.DIR:
+
+			return Vector2.ZERO
+
+		MovementState.TARGET:
+
+			if target_position != Vector2.INF:
+
+				return entity.global_position.direction_to(target_position)
 
 	return Vector2.ZERO
 
@@ -49,6 +92,23 @@ func set_face_dir(dir: Vector2) -> void:
 		dir_ray.rotation = dir.angle()
 
 		face_dir_updated.emit(dir)
+
+
+
+
+func set_target_position(_target_position: Vector2) -> void:
+
+	target_position = _target_position
+
+	movement_state = MovementState.TARGET
+
+
+
+func clear_target_position() -> void:
+
+	target_position = Vector2.INF
+
+	movement_state = MovementState.DIR
 
 
 
@@ -99,7 +159,11 @@ func get_velocity(delta: float) -> Vector2:
 
 func get_move_speed() -> float:
 
-	return 4000.0
+	var speed_multipler = modifier_tracker.get_float_multiply()
+
+	var speed_add = modifier_tracker.get_float_add()
+
+	return (4000.0 + speed_add) * speed_multipler
 
 
 
@@ -118,6 +182,25 @@ func _on_damage_package_received(damage_package: DamagePackage) -> void:
 		var modifier = Modifier.new_decay(value, 10.0, Modifier.Operator.ADD)
 
 		modifier_tracker.add_modifier(modifier)
+
+
+
+
+func _on_target_position_reached() -> void:
+
+	clear_target_position()
+
+	target_position_reached.emit()
+
+
+
+
+func _on_death() -> void:
+
+	if movement_state == MovementState.TARGET:
+
+		clear_target_position()
+
 
 
 
@@ -147,3 +230,9 @@ func _physics_process(delta: float) -> void:
 	entity.move_and_slide()
 
 	modifier_tracker.tick(delta)
+
+	if movement_state == MovementState.TARGET:
+
+		if entity.global_position.distance_to(target_position) <= 5.0:
+
+			_on_target_position_reached()

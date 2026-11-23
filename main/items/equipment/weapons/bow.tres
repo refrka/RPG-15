@@ -27,3 +27,4 @@ attack_cooldown = 0.3
 item_id = &"bow"
 max_stack = 1
 icon_texture = ExtResource("4_vmymc")
+sprite_offset = Vector2(0, -8)

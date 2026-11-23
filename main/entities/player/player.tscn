@@ -12,12 +12,15 @@
 [ext_resource type="Resource" uid="uid://dyg2duv8uioh6" path="res://main/items/equipment/weapons/bow.tres" id="5_elonm"]
 [ext_resource type="Script" uid="uid://cx0laqv80fdxi" path="res://main/components/combat_component.gd" id="6_kdw2b"]
 [ext_resource type="PackedScene" uid="uid://dd2x7hm18y1gm" path="res://main/sensor/hitbox.tscn" id="8_efywl"]
+[ext_resource type="Resource" uid="uid://bmrhwrcif8myu" path="res://main/items/consumables/berries.tres" id="8_wsknm"]
 [ext_resource type="Script" uid="uid://baoovdts8slvq" path="res://main/states/body_moving_state.gd" id="9_enjxq"]
+[ext_resource type="Script" uid="uid://ccsom65yrr3sr" path="res://main/items/tool.gd" id="9_n1onb"]
 [ext_resource type="Script" uid="uid://di7dnrrxv3kv4" path="res://main/sensor/pickup_sensor.gd" id="9_qvaa3"]
 [ext_resource type="Script" uid="uid://ccdd8pxqp8bym" path="res://main/components/interaction_component.gd" id="10_243e6"]
 [ext_resource type="Script" uid="uid://dqww7qb3cvxoo" path="res://main/sensor/sensor.gd" id="10_elonm"]
 [ext_resource type="Script" uid="uid://rv1tyr5x36h4" path="res://main/states/body_interacting_state.gd" id="12_qe6dv"]
 [ext_resource type="Script" uid="uid://bgdddqoa78u1i" path="res://main/components/health_component.gd" id="16_s4fyv"]
+[ext_resource type="PackedScene" uid="uid://bh7ip01t2cvqp" path="res://ui/tool_icon_rect.tscn" id="23_n1onb"]
 
 [sub_resource type="Resource" id="Resource_wsknm"]
 script = ExtResource("4_uo66l")
@@ -30,6 +33,12 @@ item = ExtResource("5_3tj71")
 count = 1
 metadata/_custom_type_script = "uid://cwi55co0pga55"
 
+[sub_resource type="Resource" id="Resource_ereea"]
+script = ExtResource("4_enjxq")
+item = ExtResource("8_wsknm")
+count = 5
+metadata/_custom_type_script = "uid://cwi55co0pga55"
+
 [sub_resource type="Resource" id="Resource_kdw2b"]
 script = ExtResource("4_enjxq")
 item = ExtResource("5_elonm")
@@ -38,7 +47,7 @@ metadata/_custom_type_script = "uid://cwi55co0pga55"
 
 [sub_resource type="Resource" id="Resource_fc701"]
 script = ExtResource("3_la1ju")
-stacks = Array[ExtResource("4_enjxq")]([SubResource("Resource_o4e80")])
+stacks = Array[ExtResource("4_enjxq")]([SubResource("Resource_o4e80"), SubResource("Resource_ereea")])
 currency_stack = SubResource("Resource_wsknm")
 weapon_stack = SubResource("Resource_kdw2b")
 metadata/_custom_type_script = "uid://d1l0dy163gnc5"
@@ -55,6 +64,7 @@ radius = 15.033297
 
 [sub_resource type="Animation" id="Animation_s4fyv"]
 resource_name = "die"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -167,9 +177,10 @@ _data = {
 &"move_up": SubResource("Animation_qe6dv")
 }
 
-[node name="Player" unique_id=920390172 node_paths=PackedStringArray("interaction_sensor") instance=ExtResource("1_8x8hf")]
+[node name="Player" unique_id=920390172 node_paths=PackedStringArray("tool_icon_rect", "interaction_sensor") instance=ExtResource("1_8x8hf")]
 collision_layer = 11
 script = ExtResource("2_ihp3c")
+tool_icon_rect = NodePath("ToolIconRect")
 entity_id = &"player"
 authored_id = &"Bitwit"
 interaction_sensor = NodePath("InteractionSensor")
@@ -245,5 +256,9 @@ target_position = Vector2(20, 0)
 
 [node name="BodyAnimPlayer" parent="." index="9" unique_id=1242108839]
 libraries/player = SubResource("AnimationLibrary_elonm")
+
+[node name="ToolIconRect" parent="." index="10" unique_id=1307352774 instance=ExtResource("23_n1onb")]
+offset_top = -29.0
+offset_bottom = -13.0
 
 [editable path="Hurtbox"]

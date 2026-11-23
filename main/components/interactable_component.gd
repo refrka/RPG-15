@@ -9,7 +9,11 @@ signal ended
 
 signal closed
 
+signal cancelled
 
+
+
+@export var required_tool: Tool
 
 
 var animation_component: AnimationComponent
@@ -46,7 +50,17 @@ func end() -> void:
 	pass
 
 
+func cancel() -> void:
+
+	cancelled.emit()
+
 
 func complete() -> void:
 
 	completed.emit()
+
+
+
+func _on_failed_interaction() -> void:
+
+	pass

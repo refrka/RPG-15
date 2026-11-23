@@ -26,6 +26,7 @@ func close() -> void:
 
 	Inputs.enable_action("profile")
 
+	Cursor.cursor_slot.drop_slot()
 
 
 

@@ -2,6 +2,58 @@
 
 [ext_resource type="FontFile" uid="uid://cj5sqms8n42u0" path="res://system/MesloLGS-Regular.ttf" id="1_iuegx"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oe2kw"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.18338072, 0.21642798, 0.22587162, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2578227, 0.29848108, 0.31373546, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2g8iu"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.13993472, 0.16699684, 0.17714348, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.17975459, 0.21232891, 0.22163719, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rc4bm"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.21620429, 0.25345182, 0.2640976, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.50759536, 0.56775737, 0.5849776, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cjjnb"]
+bg_color = Color(0.07031674, 0.08727873, 0.09067107, 1)
+border_width_bottom = 1
+border_color = Color(0.4667247, 0.528231, 0.54504526, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iuegx"]
+content_margin_left = 4.0
+bg_color = Color(0.07031674, 0.08727873, 0.09067107, 1)
+border_width_bottom = 1
+border_color = Color(0.25674063, 0.29679266, 0.31015244, 1)
+
 [resource]
 default_font = ExtResource("1_iuegx")
 default_font_size = 8
+Button/styles/hover = SubResource("StyleBoxFlat_oe2kw")
+Button/styles/normal = SubResource("StyleBoxFlat_2g8iu")
+Button/styles/pressed = SubResource("StyleBoxFlat_rc4bm")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_cjjnb")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_iuegx")

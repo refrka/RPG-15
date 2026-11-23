@@ -84,6 +84,21 @@ func get_quest_data(quest: Quest) -> QuestData:
 
 
 
+
+func get_quest_data_with_state(quest_state: Quest.QuestState) -> Array:
+
+	var quests_with_state = []
+
+	for quest_data in active_quests:
+
+		if quest_data.state == quest_state:
+
+			quests_with_state.append(quest_data)
+
+	return quests_with_state
+
+
+
 func get_quest(quest_id: StringName) -> Quest:
 
 	if quest_registry.has(quest_id):
@@ -112,7 +127,14 @@ func get_quest_objectives(quest_data: QuestData) -> Array:
 
 
 
+
+
+
 func set_quest_stage(quest: Quest, index: int) -> void:
+
+	if not quest.is_valid():
+
+		return
 
 	var quest_data = get_quest_data(quest)
 
@@ -120,15 +142,21 @@ func set_quest_stage(quest: Quest, index: int) -> void:
 
 		quest_data = QuestData.create(quest)
 
-		quest_data.state_changed.connect(_on_quest_state_changed)
+		quest_data.state_changed.connect(_on_quest_state_changed.bind(quest_data))
 
 		active_quests.append(quest_data)
+
+		Notices.new_notice("Quest started: %s" % quest.quest_title)
+
+	if quest_data.stage_index == index:
+
+		return
 
 	quest_data.set_stage_index(index)
 
 	var stage = quest.get_stage(index)
 
-	stage.objective_completed.connect(_on_stage_objective_completed.bind(quest_data))
+	stage.objective_completed.connect(_on_stage_objective_completed.bind(quest_data), CONNECT_ONE_SHOT)
 
 
 
@@ -170,16 +198,20 @@ func _on_quest_stage_completed(quest_data: QuestData) -> void:
 
 	if next_stage:
 
+		Notices.new_notice("Quest stage completed")
+
 		quest_data.set_stage_index(next_stage_index)
 
 	else:
 
 		quest_data.set_state(Quest.QuestState.COMPLETE)
 
+		Notices.new_notice("Quest completed: %s" % quest_data.quest.quest_title)
 
 
 
-func _on_quest_state_changed(new_state: Quest.QuestState) -> void:
+
+func _on_quest_state_changed(new_state: Quest.QuestState, quest_data: QuestData) -> void:
 
 	match new_state:
 

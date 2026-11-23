@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://cqbxfdbcvybvn"]
+
+[ext_resource type="PackedScene" uid="uid://7krrh8p7u6uf" path="res://main/entities/harvestable.tscn" id="1_07khf"]
+[ext_resource type="Texture2D" uid="uid://b2xknscxlkmnr" path="res://textures/items/mushroom_icon_texture.png" id="2_4653l"]
+[ext_resource type="Script" uid="uid://crb5u1k1b1ilj" path="res://main/loot/loot_entry.gd" id="3_f62tg"]
+[ext_resource type="Script" uid="uid://jlm5jqxs7txp" path="res://main/items/item.gd" id="4_0d1rf"]
+[ext_resource type="Resource" uid="uid://spax8lbjdy4f" path="res://main/items/consumables/mushroom.tres" id="5_0d1rf"]
+[ext_resource type="Script" uid="uid://dmr4v28gqmw1h" path="res://main/loot/loot_table.gd" id="5_mnn4d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07khf"]
+size = Vector2(6, 6)
+
+[sub_resource type="Resource" id="Resource_4653l"]
+script = ExtResource("3_f62tg")
+items = Dictionary[ExtResource("4_0d1rf"), int]({
+ExtResource("5_0d1rf"): 1
+})
+weight = -1
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_f62tg"]
+script = ExtResource("3_f62tg")
+items = Dictionary[ExtResource("4_0d1rf"), int]({
+ExtResource("5_0d1rf"): 1
+})
+weight = 25
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_0d1rf"]
+script = ExtResource("3_f62tg")
+weight = 50
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_07khf"]
+script = ExtResource("5_mnn4d")
+entries = Array[ExtResource("3_f62tg")]([SubResource("Resource_4653l"), SubResource("Resource_f62tg"), SubResource("Resource_0d1rf")])
+metadata/_custom_type_script = "uid://dmr4v28gqmw1h"
+
+[node name="Harvestable" unique_id=1222908469 instance=ExtResource("1_07khf")]
+
+[node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(549313783) index="0" unique_id=1612993214]
+position = Vector2(0, -4)
+texture = ExtResource("2_4653l")
+
+[node name="BodyCollision" parent="." index="1" unique_id=892046188]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_07khf")
+
+[node name="HarvestComponent" parent="ComponentRoot" parent_id_path=PackedInt32Array(1493594875) index="1" unique_id=550237833]
+loot_table = SubResource("Resource_07khf")
+free_on_harvest = true
+
+[editable path="Hurtbox"]

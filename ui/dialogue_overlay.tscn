@@ -48,43 +48,8 @@ _data = {
 &"blink": SubResource("Animation_5jq6f")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6w78s"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.13993472, 0.16699684, 0.17714348, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.17975459, 0.21232891, 0.22163719, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jq6f"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.13993472, 0.16699684, 0.17714348, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.14117648, 0.16862746, 0.1764706, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tm4tl"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.18338072, 0.21642798, 0.22587162, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.2578227, 0.29848108, 0.31373546, 1)
-
 [node name="DialogueOverlay" type="MarginContainer" unique_id=779482418 node_paths=PackedStringArray("texture_rect", "text_label", "input_bg_vbox", "option_vbox", "close_button", "anim_player") groups=["dialogue_overlay", "overlay"]]
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -102,6 +67,7 @@ input_bg_vbox = NodePath("PanelContainer/MarginContainer/HBoxContainer/InputBGVB
 option_vbox = NodePath("PanelContainer/MarginContainer/HBoxContainer/InputBGVBox/MarginContainer2/OptionVBox")
 close_button = NodePath("PanelContainer/MarginContainer/HBoxContainer/InputBGVBox/MarginContainer2/CloseButton")
 anim_player = NodePath("PanelContainer/MarginContainer/HBoxContainer/InputBGVBox/MarginContainer3/NextLineLabel/AnimationPlayer")
+pause = true
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=610389764]
 custom_minimum_size = Vector2(400, 0)
@@ -135,10 +101,10 @@ theme_override_constants/separation = 0
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer/InputBGVBox/MarginContainer3" unique_id=132368667]
 custom_minimum_size = Vector2(300, 0)
@@ -147,6 +113,7 @@ size_flags_horizontal = 0
 mouse_filter = 2
 text = "Dialogue text"
 fit_content = true
+horizontal_alignment = 1
 
 [node name="NextLineLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/InputBGVBox/MarginContainer3" unique_id=1927373242]
 visible = false
@@ -174,7 +141,4 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_styles/normal = SubResource("StyleBoxFlat_6w78s")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_5jq6f")
-theme_override_styles/hover = SubResource("StyleBoxFlat_tm4tl")
 text = "Close [x]"

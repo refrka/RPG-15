@@ -13,17 +13,17 @@ signal objective_completed(objective: QuestObjective)
 
 
 
-func initialize() -> void:
+func initialize(quest_data: QuestData) -> void:
 
 	for objective in objectives:
 
-		objective.initialize()
+		objective.initialize(quest_data)
 
 		objective.completed.connect(_on_objective_completed.bind(objective))
 
 
 
 
-func _on_objective_completed(objective: QuestObjective) -> void:
+func _on_objective_completed(objective: QuestObjective) -> void:	
 
 	objective_completed.emit(objective)

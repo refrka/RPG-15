@@ -8,18 +8,20 @@ signal completed
 
 @export var optional:= false
 
-@export var dialogue_node: DialogueNode
-
-@export var dialogue_option: DialogueOption
+@export var dialogue_option: DialogueQuestOption
 
 @export var dialogue_target_ref: EntityRef
 
 
 
 
-func initialize() -> void:
+func initialize(quest_data: QuestData) -> void:
 
-	pass
+	if dialogue_option:
+
+		dialogue_option.quest_data = quest_data
+
+		dialogue_option.quest_objective = self
 
 
 

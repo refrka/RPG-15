@@ -17,17 +17,21 @@ enum ProjectileType {
 
 @export var projectile_type: ProjectileType
 
-@export var origin_at_center:= false
-
 @export var sprite: Sprite2D
+
+@export var collision: CollisionShape2D
 
 @export var hitbox: Hitbox
 
 @export var anim_player: AnimationPlayer
 
+@export var origin_at_center:= false
+
 @export var on_screen_notifier: VisibleOnScreenNotifier2D
 
 @export var timer: Timer
+
+@export var speed:= 5000.0
 
 
 
@@ -52,6 +56,15 @@ func _ready() -> void:
 
 	hitbox.activate()
 
+
+
+func set_projectile_rotation(angle: float) -> void:
+
+	sprite.rotation = angle
+
+	hitbox.rotation = angle
+
+	collision.rotation = angle
 
 
 
@@ -142,7 +155,7 @@ func _physics_process(delta: float) -> void:
 
 	if trajectory != Vector2.ZERO and not disabled:
 
-		velocity = trajectory * 5000.0 * delta
+		velocity = trajectory * speed * delta
 
 		move_and_slide()
 

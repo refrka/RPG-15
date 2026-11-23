@@ -107,6 +107,8 @@ func deactivate() -> void:
 
 func request_state(script: Script) -> void:
 
+	print("requesting state: ", script)
+
 	if body_states.has(script):
 
 		change_state(body_states[script])
@@ -120,6 +122,8 @@ func request_state(script: Script) -> void:
 
 
 func change_state(state: State) -> void:
+
+	print("changing to state ", state.name)
 	
 	if state is BodyState:
 

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Tool" format=3 uid="uid://c4fg25oiivepe"]
+
+[ext_resource type="Script" uid="uid://ccsom65yrr3sr" path="res://main/items/tool.gd" id="1_2xl1j"]
+[ext_resource type="Texture2D" uid="uid://d1isv7c782aa" path="res://textures/items/pickaxe_icon_texture.png" id="1_qm7m8"]
+
+[resource]
+script = ExtResource("1_2xl1j")
+item_id = &"pickaxe"
+display_name = "Pickaxe"
+max_stack = 1
+icon_texture = ExtResource("1_qm7m8")
+sprite_offset = Vector2(0, -4)

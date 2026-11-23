@@ -14,4 +14,4 @@ script = ExtResource("1_b4o4a")
 effects_on_consume = Array[ExtResource("1_five0")]([SubResource("Resource_s4fyv")])
 item_id = &"apple"
 icon_texture = ExtResource("1_cwt31")
-sprite_offset = Vector2(0, -8)
+sprite_offset = Vector2(0, -4)

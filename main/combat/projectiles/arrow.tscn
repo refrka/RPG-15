@@ -11,10 +11,12 @@ size = Vector2(1, 1)
 
 [node name="Arrow" unique_id=1236751785 instance=ExtResource("1_qhg55")]
 origin_at_center = true
+speed = 8000.0
 
 [node name="Sprite2D" parent="." index="0" unique_id=1220180525]
 position = Vector2(0, -0.5)
 texture = ExtResource("2_xlonn")
+offset = Vector2(0, 0)
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=1122584934]
 position = Vector2(4, 0)

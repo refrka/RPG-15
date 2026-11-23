@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://7krrh8p7u6uf"]
+
+[ext_resource type="PackedScene" uid="uid://ir8hcomoadvf" path="res://main/entities/prop.tscn" id="1_7cq1q"]
+[ext_resource type="Script" uid="uid://dmalrf64jnknc" path="res://main/components/harvest_component.gd" id="2_mqx55"]
+
+[sub_resource type="Animation" id="Animation_mqx55"]
+length = 0.06255597
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/BodySprite:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0028671378, 0.025022376, 0.047612034),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(3, 1.5), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cy8if"]
+_data = {
+&"failed_harvest": SubResource("Animation_mqx55")
+}
+
+[node name="Harvestable" unique_id=1222908469 instance=ExtResource("1_7cq1q")]
+
+[node name="HarvestComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1493594875) index="1" unique_id=550237833]
+script = ExtResource("2_mqx55")
+metadata/_custom_type_script = "uid://dmalrf64jnknc"
+
+[node name="BodyAnimPlayer" parent="." index="6" unique_id=527948352]
+libraries/harvestable = SubResource("AnimationLibrary_cy8if")
+
+[editable path="Hurtbox"]

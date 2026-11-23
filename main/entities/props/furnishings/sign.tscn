@@ -19,6 +19,7 @@ entity_id = &"sign"
 speaker_texture = ExtResource("2_wqa5a")
 
 [node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(549313783) index="0" unique_id=1612993214]
+position = Vector2(0, -8)
 texture = ExtResource("2_wqa5a")
 
 [node name="BodyCollision" parent="." index="1" unique_id=892046188]

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b3j2i4n1wn2ed"]
+
+[ext_resource type="Script" uid="uid://qi5ft86n5137" path="res://main/features/transition_zone.gd" id="1_dg1c6"]
+
+[node name="TransitionZone" type="Area2D" unique_id=1792214859]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_dg1c6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=802511774]
+debug_color = Color(1, 0.98333335, 0, 0.015686275)

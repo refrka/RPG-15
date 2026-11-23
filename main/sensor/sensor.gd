@@ -122,6 +122,8 @@ func _on_body_entered(body: PhysicsBody2D) -> void:
 
 		entities.append(body)
 
+		body.deactivated.connect(_on_entity_deactivated.bind(body), CONNECT_ONE_SHOT)
+
 		entity_entered.emit(body)
 
 
@@ -136,6 +138,10 @@ func _on_body_exited(body: PhysicsBody2D) -> void:
 	if entities.has(body):
 
 		entities.erase(body)
+
+		if body.deactivated.is_connected(_on_entity_deactivated):
+
+			body.deactivated.disconnect(_on_entity_deactivated)
 
 		entity_exited.emit(body)
 
@@ -168,3 +174,13 @@ func _on_area_exited(area: Area2D) -> void:
 		sensors.erase(area)
 
 		sensor_exited.emit(area)
+
+
+
+
+
+func _on_entity_deactivated(_entity: Entity) -> void:
+
+	if entities.has(_entity):
+
+		entities.erase(_entity)

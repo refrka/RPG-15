@@ -7,6 +7,9 @@ class_name ProfileOverlay extends Overlay
 
 @export var weapon_slot: EquipmentSlot
 
+@export var tool_rect_hbox: HBoxContainer
+
+@export var tab_button_group: ButtonGroup
 
 
 
@@ -15,6 +18,11 @@ func _ready() -> void:
 
 	weapon_slot.stack_updated.connect(_on_weapon_stack_updated)
 
+	tab_button_group.pressed.connect(_on_tab_button_pressed)
+
+	tab_button_group.get_buttons()[0].button_pressed = true
+
+	tab_button_group.get_buttons()[0].pressed.emit()
 
 
 
@@ -29,6 +37,28 @@ func open() -> void:
 
 	weapon_slot.set_stack(Game.player.inventory.weapon_stack)
 
+	for tool_rect in tool_rect_hbox.get_children():
+
+		tool_rect.update()
+
+
+
+
+
+func close() -> void:
+
+	super()
+
+	Cursor.cursor_slot.drop_slot()
+
+
+
+
+
+
+
+
+
 
 
 
@@ -37,6 +67,19 @@ func _on_weapon_stack_updated() -> void:
 
 	Game.player.inventory.set_weapon_stack(weapon_slot.item_stack)
 
+
+
+func _on_tab_button_pressed(button: Button) -> void:
+
+	for tab_button in tab_button_group.get_buttons():
+
+		if tab_button == button:
+
+			tab_button.tab.show()
+
+		else:
+
+			tab_button.tab.hide()
 
 
 

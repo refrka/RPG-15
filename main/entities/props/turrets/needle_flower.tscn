@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://o4arbscs654x"]
+
+[ext_resource type="PackedScene" uid="uid://ir8hcomoadvf" path="res://main/entities/prop.tscn" id="1_5ac6l"]
+
+[node name="NeedleFlower" unique_id=1222908469 instance=ExtResource("1_5ac6l")]
+
+[editable path="Hurtbox"]

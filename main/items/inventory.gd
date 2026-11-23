@@ -14,6 +14,8 @@ signal weapon_updated
 
 @export var weapon_stack: ItemStack
 
+@export var tools: Array[Tool]
+
 
 
 
@@ -51,7 +53,7 @@ func add_stack(stack: ItemStack) -> void:
 
 		if index != -1:
 
-			set_stack_index(index, stack)
+			set_stack_index(index, stack.duplicate(true))
 
 			stack.set_count(0)
 
@@ -70,9 +72,43 @@ func add_stack(stack: ItemStack) -> void:
 
 
 
-func add_item(item: Item, count:= 1) -> void:
+func add_item(item: Item, amount:= 1) -> void:
 
 	resize()
+
+	var stacks_with_item = get_stacks_with(item)
+
+	var remaining = amount
+
+	while remaining > 0 and not stacks_with_item.is_empty():
+
+		var stack = stacks_with_item.pop_back()
+
+		remaining = stack.remove_amount(remaining)
+
+
+
+func add_tool(tool: Tool) -> void:
+
+	if not tools.has(tool):
+
+		tools.append(tool)
+
+		Events.fire_script(PlayerAcquiredToolEvent, {"tool": tool}, true)
+
+
+
+func remove_item(item: Item, amount:= 1) -> void:
+
+	var stacks_with_item = get_stacks_with(item)
+
+	var remaining = amount
+
+	while remaining > 0 and not stacks_with_item.is_empty():
+
+		var stack = stacks_with_item.pop_back()
+
+		remaining = stack.remove_amount(remaining)
 
 
 
@@ -102,6 +138,22 @@ func is_empty() -> bool:
 
 
 
+func has_item(item: Item, amount:= 1) -> bool:
+
+	if item is Tool:
+
+		return tools.has(item)
+
+	var stacks_with_item = get_stacks_with(item)
+
+	var remaining = amount
+
+	for stack in stacks_with_item:
+
+		remaining -= stack.count
+
+	return remaining <= 0
+
 
 
 
@@ -124,7 +176,7 @@ func get_item_stack(index: int) -> ItemStack:
 
 func get_first_empty_index() -> int:
 
-	for i in range(stacks.size() - 1):
+	for i in range(stacks.size()):
 
 		var stack = get_item_stack(i)
 

@@ -8,6 +8,9 @@ var current_interactable: Entity
 var current_interactable_component: InteractableComponent
 
 
+var nearest_interactable: Entity
+
+
 
 
 func initialize(_entity: Entity) -> void:
@@ -19,6 +22,10 @@ func initialize(_entity: Entity) -> void:
 	if movement_component:
 
 		movement_component.face_dir_updated.connect(_on_face_dir_updated)
+
+	entity.interaction_sensor.entity_entered.connect(_on_entity_entered_interaction_sensor)
+
+	entity.interaction_sensor.entity_exited.connect(_on_entity_exited_interaction_sensor)
 
 
 
@@ -37,13 +44,27 @@ func try_interaction() -> void:
 
 	var interactable_component = interactable.get_interactable_component()
 
-	while not interactable_entities.is_empty() and not interactable_component.can_interact():
+	while not is_instance_valid(interactable) and not interactable_entities.is_empty() and not interactable_component.can_interact():
 
 		interactable = interactable_entities.pop_back()
 
 		interactable_component = interactable.get_interactable_component()
 
+	if not is_instance_valid(interactable_component):
+
+		Dialogue.try_dialogue(interactable)
+
+		return
+
+	if interactable_component.required_tool and not entity.inventory.tools.has(interactable_component.required_tool):
+
+		interactable_component._on_failed_interaction()
+
+		return
+
 	if not interactable_component.can_interact():
+
+		interactable_component._on_failed_interaction()
 
 		return
 
@@ -61,22 +82,57 @@ func try_end_interaction() -> void:
 
 	if current_interactable_component.can_end():
 
-		end_interaction()
+		end_interaction(false)
 
+
+
+
+
+func set_nearest_interactable(interactable: Entity) -> void:
+
+	if nearest_interactable == interactable:
+
+		return
+
+	nearest_interactable = interactable
+
+	entity.tool_icon_rect.texture = null
+
+	entity.tool_icon_rect.modulate.a = 1.0
+
+	if not nearest_interactable:
+
+		return
+
+	var interactable_component = nearest_interactable.get_interactable_component()
+
+	if interactable_component and interactable_component.required_tool and interactable_component.can_interact():
+
+		entity.tool_icon_rect.texture = interactable_component.required_tool.icon_texture
+
+		if not entity.inventory.tools.has(interactable_component.required_tool):
+
+			entity.tool_icon_rect.modulate.a = 0.15
+
+		
+
+	
 
 
 
 func start_interaction(interactable: Entity, interactable_component: InteractableComponent) -> void:
 
-	entity.state_machine.request_state(BodyInteractingState)
-
 	current_interactable = interactable
 
 	current_interactable_component = interactable_component
 
+	entity.state_machine.request_state(BodyInteractingState)
+
 	current_interactable_component.completed.connect(_on_current_interaction_completed)
 
 	current_interactable_component.closed.connect(_on_current_interaction_closed)
+
+	current_interactable_component.cancelled.connect(_on_current_interaction_cancelled)
 
 	current_interactable_component.start()
 
@@ -84,29 +140,21 @@ func start_interaction(interactable: Entity, interactable_component: Interactabl
 
 
 
-func end_interaction() -> void:
+func end_interaction(retry:= true) -> void:
 
 	current_interactable_component.end()
 
-	close_interaction()
-
-
-
-
-func complete_interaction() -> void:
-
-	current_interactable_component.complete()
-
-	close_interaction()
+	close_interaction(retry)
 
 
 
 
 
+func close_interaction(retry:= true) -> void:
 
-func close_interaction() -> void:
+	if entity.is_alive():
 
-	entity.state_machine.request_state(BodyIdleState)
+		entity.state_machine.request_state(BodyIdleState)
 
 	if current_interactable_component.completed.is_connected(_on_current_interaction_completed):
 
@@ -116,11 +164,36 @@ func close_interaction() -> void:
 
 		current_interactable_component.closed.disconnect(_on_current_interaction_closed)
 
-	current_interactable = null
+	if current_interactable_component.cancelled.is_connected(_on_current_interaction_cancelled):
 
-	current_interactable_component = null
+		current_interactable_component.cancelled.disconnect(_on_current_interaction_cancelled)
+
+	if retry:
+
+		var interactable_entities = get_interactable_entities()
+
+		if not interactable_entities.is_empty() and not interactable_entities.back() == current_interactable:
+
+			if Input.is_action_pressed("interact") and Inputs.is_action_allowed("interact"):
+
+				try_interaction()
+
+	else:
+
+		current_interactable = null
+
+		current_interactable_component = null
+
+	nearest_interactable = null
+
+	set_nearest_interactable(get_nearest_interactable())
 
 
+
+
+func cancel_interaction() -> void:
+
+	close_interaction()
 
 
 
@@ -145,6 +218,10 @@ func get_interactable_entities() -> Array:
 
 			entities.append(_entity)
 
+		if _entity.dialogue_library and not entities.has(_entity):
+
+			entities.append(_entity)
+
 	entities.sort_custom(_sort_nearest_interactable)
 
 	return entities
@@ -164,6 +241,17 @@ func get_interactable_component(_entity: Entity) -> InteractableComponent:
 	return null
 
 
+
+
+func get_nearest_interactable() -> Entity:
+	
+	var interactable_entities = get_interactable_entities()
+
+	if interactable_entities.is_empty():
+
+		return null
+
+	return interactable_entities.pop_back()
 
 
 
@@ -187,7 +275,7 @@ func _on_face_dir_updated(dir: Vector2) -> void:
 
 func _on_current_interaction_completed() -> void:
 
-	end_interaction()
+	close_interaction()
 
 
 
@@ -203,8 +291,47 @@ func _on_current_interaction_ended() -> void:
 
 
 
+func _on_current_interaction_cancelled() -> void:
+
+	cancel_interaction()
+
+
+
+	
+
+
+func _on_death() -> void:
+
+	if current_interactable and current_interactable_component:
+
+		current_interactable_component.end()
+
+
+
+func _on_entity_entered_interaction_sensor(_entity: Entity) -> void:
+
+	set_nearest_interactable(get_nearest_interactable())
+
+	if Input.is_action_pressed("interact") and Inputs.is_action_allowed("interact"):
+
+		try_interaction()
+
+		
+
+func _on_entity_exited_interaction_sensor(_entity: Entity) -> void:
+
+	set_nearest_interactable(get_nearest_interactable())
+
+
+
+
+
 
 func _unhandled_input(event: InputEvent) -> void:
+
+	if not active:
+
+		return
 
 	if event.is_action_pressed("interact") and Inputs.is_action_allowed("interact"):
 
@@ -216,6 +343,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 			try_interaction()
 
+	if event.is_action_released("interact") and Inputs.is_action_allowed("interact"):
+
+		if is_interacting() and current_interactable_component is HarvestComponent:
+
+			if current_interactable_component.duration > 0.0:
+
+				current_interactable_component.cancel()
 
 
 

@@ -26,7 +26,7 @@ func get_move_dir() -> Vector2:
 
 		dir += Vector2.LEFT
 
-		if not move_right_pressed and not move_up_pressed and not move_down_pressed:
+		if not move_right_pressed:
 
 			if _face_dir == Vector2.ZERO:
 
@@ -36,7 +36,7 @@ func get_move_dir() -> Vector2:
 
 		dir += Vector2.RIGHT
 
-		if not move_left_pressed and not move_up_pressed and not move_down_pressed:
+		if not move_left_pressed:
 
 			if _face_dir == Vector2.ZERO:
 

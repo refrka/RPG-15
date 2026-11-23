@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Tool" format=3 uid="uid://3jmr3dpn6xph"]
+
+[ext_resource type="Texture2D" uid="uid://bhsae6lbrbjdx" path="res://textures/items/shovel_icon_texture.png" id="1_l2nf7"]
+[ext_resource type="Script" uid="uid://ccsom65yrr3sr" path="res://main/items/tool.gd" id="1_wwl5y"]
+
+[resource]
+script = ExtResource("1_wwl5y")
+item_id = &"shovel"
+display_name = "Shovel"
+max_stack = 1
+icon_texture = ExtResource("1_l2nf7")
+sprite_offset = Vector2(0, -4)

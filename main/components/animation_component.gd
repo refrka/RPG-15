@@ -25,6 +25,9 @@ func initialize(_entity: Entity) -> void:
 
 
 
+
+
+
 func update_face_dir(dir: Vector2) -> void:
 
 	entity.body_sprite.flip_h = dir.x < 0

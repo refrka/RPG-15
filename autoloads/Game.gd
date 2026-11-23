@@ -56,6 +56,18 @@ var root: Node:
 
 
 
+var camera: Camera2D:
+
+	get:
+
+		if not camera:
+
+			camera = get_tree().get_first_node_in_group("game_camera")
+
+		return camera
+
+
+
 var game_state: GameState
 
 
@@ -77,7 +89,55 @@ func start(launch_mode: LaunchMode) -> void:
 
 			Scenes.load_location_scene("debug_location")
 
+			Scenes.current_location.activate()
+
+		LaunchMode.NORMAL:
+
+			UI.hide_hud()
+
+			var main_menu = UI.get_overlay(MainMenu)
+
+			UI.add_overlay(main_menu)
+
+			if Saves.last_save_dict.is_empty():
+
+				main_menu.new_save_container.show()
+
+				main_menu.load_save_container.hide()
+
+			else:
+
+				main_menu.new_save_container.hide()
+
+				main_menu.load_save_container.show()
+
+				main_menu.update_load_save_container()
+
 	set_game_state(GameState.ACTIVE)
+
+
+
+
+func load_save() -> void:
+
+	var main_menu = UI.get_overlay(MainMenu)
+
+	UI.remove_overlay(main_menu)
+
+	Scenes.load_location_scene(Saves.last_save_dict["location_id"])
+
+	Scenes.current_location.activate()
+
+	UI.show_hud()
+
+
+
+
+func save_game() -> void:
+
+	var save_dict = collect_save_data()
+
+	Saves.write_dict_to_file(save_dict)
 
 
 
@@ -129,3 +189,19 @@ func set_game_state(_game_state: GameState) -> void:
 	game_state = _game_state
 
 	game_state_changed.emit(game_state)
+
+
+
+
+
+
+
+
+
+func collect_save_data() -> Dictionary:
+
+	var dict = Saves.last_save_dict.duplicate()
+
+	dict = Scenes.collect_save_data(dict)
+
+	return dict

@@ -1,6 +1,7 @@
 class_name DialogueOption extends Resource
 
 
+
 @export var persist:= false
 
 @export var gate_conditions: Array[Condition]

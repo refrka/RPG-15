@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://fyjucfpk72e2"]
+
+[ext_resource type="Script" uid="uid://jlm5jqxs7txp" path="res://main/items/item.gd" id="1_o3g3f"]
+[ext_resource type="Texture2D" uid="uid://d2rs84r1vxjkl" path="res://textures/items/mow_leather_icon_sprite.png" id="1_y5i5g"]
+
+[resource]
+script = ExtResource("1_o3g3f")
+item_id = &"mow_leather"
+icon_texture = ExtResource("1_y5i5g")
+sprite_offset = Vector2(0, -4)
+metadata/_custom_type_script = "uid://jlm5jqxs7txp"

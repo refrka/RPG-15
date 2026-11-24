@@ -27,14 +27,14 @@ var movement_state: MovementState
 
 var move_dir: Vector2
 
-var face_dir:= Vector2.RIGHT
-
 var move_velocity: Vector2
 
 var move_speed:= 0.0
 
 
 var target_position:= Vector2.ZERO
+
+
 
 
 var modifier_tracker:= ModifierTracker.new()
@@ -44,6 +44,18 @@ var modifier_tracker:= ModifierTracker.new()
 var move_locked:= false
 
 var turn_locked:= false
+
+var nav_enabled:= true
+
+
+
+
+func initialize(_entity: Entity) -> void:
+
+	super(_entity)
+
+	entity.nav_agent.navigation_finished.connect(_on_target_position_reached)
+
 
 
 
@@ -66,6 +78,8 @@ func halt() -> void:
 
 func get_move_dir() -> Vector2:
 
+	var dir = Vector2.ZERO
+
 	match movement_state:
 
 		MovementState.DIR:
@@ -76,22 +90,19 @@ func get_move_dir() -> Vector2:
 
 			if target_position != Vector2.INF:
 
-				return entity.global_position.direction_to(target_position)
+				dir = entity.global_position.direction_to(entity.nav_agent.get_next_path_position())
 
-	return Vector2.ZERO
+	if move_dir == Vector2.ZERO and dir != Vector2.ZERO:
+
+		move_started.emit()
+
+	move_dir = dir
+
+	entity.set_face_dir(dir)
+
+	return dir
 
 
-
-
-func set_face_dir(dir: Vector2) -> void:
-
-	if dir != face_dir and dir != Vector2.ZERO and not turn_locked:
-
-		face_dir = dir
-
-		dir_ray.rotation = dir.angle()
-
-		face_dir_updated.emit(dir)
 
 
 
@@ -102,6 +113,11 @@ func set_target_position(_target_position: Vector2) -> void:
 
 	movement_state = MovementState.TARGET
 
+	if nav_enabled:
+
+		entity.nav_agent.target_position = target_position
+	
+
 
 
 func clear_target_position() -> void:
@@ -111,27 +127,6 @@ func clear_target_position() -> void:
 	movement_state = MovementState.DIR
 
 
-
-
-func get_face_dir_string() -> String:
-
-	if face_dir == Vector2.RIGHT:
-
-		return "right"
-
-	if face_dir == Vector2.LEFT:
-
-		return "left"
-
-	if face_dir == Vector2.UP:
-
-		return "up"
-
-	if face_dir == Vector2.DOWN:
-
-		return "down"
-
-	return ""
 
 
 
@@ -163,7 +158,7 @@ func get_move_speed() -> float:
 
 	var speed_add = modifier_tracker.get_float_add()
 
-	return (4000.0 + speed_add) * speed_multipler
+	return (entity.stats.move_speed + speed_add) * speed_multipler
 
 
 

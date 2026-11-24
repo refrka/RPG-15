@@ -25,3 +25,15 @@ func matches(entity: Entity) -> bool:
 	return is_match
 
 	
+
+
+
+static func create(entity: Entity) -> EntityRef:
+
+	var ref = EntityRef.new()
+
+	ref.entity_id = entity.entity_id
+
+	ref.authored_id = entity.authored_id
+
+	return ref

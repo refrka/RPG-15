@@ -33,6 +33,8 @@ enum ProjectileType {
 
 @export var speed:= 5000.0
 
+@export var ignore_entity_ref:= false
+
 
 
 var owning_entity: Entity
@@ -117,6 +119,20 @@ func set_trajectory(_trajectory: Vector2) -> void:
 
 
 
+func set_owning_entity(_owning_entity: Entity) -> void:
+
+	owning_entity = _owning_entity
+
+	hitbox.hurtbox_blacklist.append(owning_entity.hurtbox)
+
+	if ignore_entity_ref:
+
+		var ref = EntityRef.create(owning_entity)
+
+		hitbox.entity_ref_blacklist.append(ref)
+
+
+
 func _on_screen_exited() -> void:
 
 	if not timer.time_left == 0.0:
@@ -145,6 +161,8 @@ func _on_hitbox_hit_detected(hurtbox: Hurtbox) -> void:
 
 	trajectory = Vector2.ZERO
 
+	hitbox.deactivate()
+
 	timer.start()
 
 
@@ -165,8 +183,13 @@ func _physics_process(delta: float) -> void:
 
 			var collider = last_collision.get_collider()
 
-			reparent.call_deferred(collider)
+			if not collider is TileMapLayer:
+
+				reparent.call_deferred(collider)
 
 			trajectory = Vector2.ZERO
 
 			timer.start()
+
+
+

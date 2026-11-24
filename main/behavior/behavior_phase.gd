@@ -21,6 +21,16 @@ func start() -> void:
 
 
 
+func end() -> void:
+
+	var current_command = get_command(command_index)
+
+	if current_command.result == Command.Result.PENDING:
+
+		current_command.cancel()
+
+
+
 
 func execute_index(index: int) -> void:
 
@@ -36,7 +46,12 @@ func execute_index(index: int) -> void:
 
 		Command.Result.PENDING:
 
-			command.command_executed.connect(_on_command_executed)
+			command.command_executed.connect(_on_command_executed, CONNECT_ONE_SHOT)
+
+		Command.Result.SUCCESS:
+
+			_on_command_executed()
+		
 
 
 
@@ -54,4 +69,12 @@ func get_command(index: int) -> Command:
 
 func _on_command_executed() -> void:
 
-	execute_index(command_index + 1)
+	var next_command_index = command_index + 1
+
+	if commands.size() - 1 < next_command_index:
+
+		ended.emit()
+
+	else:
+
+		execute_index(next_command_index)

@@ -11,7 +11,9 @@ class_name ObjectiveRow extends HBoxContainer
 @export var icon_active_texture: Texture2D
 
 
-func load_objective(quest_data: QuestData, objective: QuestObjective) -> void:
+
+
+func load_objective(_quest_data: QuestData, objective: QuestObjective) -> void:
 
 	objective_label.text = objective.description
 

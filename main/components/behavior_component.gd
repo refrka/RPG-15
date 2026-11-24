@@ -39,3 +39,10 @@ func start_behavior(behavior: Behavior) -> void:
 	current_behavior = behavior
 
 	current_behavior.start_phase(0)
+
+
+
+
+func _on_death() -> void:
+
+	current_behavior.end()

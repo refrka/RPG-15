@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://bsdpolq2op80x"]
+
+[ext_resource type="PackedScene" uid="uid://bxhe8lv6h7cau" path="res://main/entities/character.tscn" id="1_iivdv"]
+[ext_resource type="Texture2D" uid="uid://phas4seyfmde" path="res://textures/props/needle_flower_sprite_texture.png" id="2_b077t"]
+[ext_resource type="Script" uid="uid://bgdddqoa78u1i" path="res://main/components/health_component.gd" id="4_g6342"]
+[ext_resource type="Script" uid="uid://p6bwral64oot" path="res://main/components/turret_component.gd" id="5_uma50"]
+[ext_resource type="Script" uid="uid://vqmdx5cwp2ie" path="res://main/combat/attack_entry.gd" id="5_vlhms"]
+[ext_resource type="PackedScene" uid="uid://bwbd1trukdceq" path="res://main/combat/projectiles/needle.tscn" id="6_vlhms"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iivdv"]
+size = Vector2(2, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b077t"]
+size = Vector2(6, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6342"]
+size = Vector2(2, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hv40w"]
+size = Vector2(5, 5)
+
+[sub_resource type="Resource" id="Resource_hv40w"]
+script = ExtResource("5_vlhms")
+knockback_force = 1000.0
+metadata/_custom_type_script = "uid://vqmdx5cwp2ie"
+
+[node name="NeedleFlower" unique_id=920390172 instance=ExtResource("1_iivdv")]
+entity_id = &"needle_flower"
+starting_face_dir = Vector2(-1, 0)
+
+[node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(1546177270) index="0" unique_id=2072653577]
+position = Vector2(0, -16)
+texture = ExtResource("2_b077t")
+
+[node name="BodyCollision" parent="." index="1" unique_id=934894713]
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_iivdv")
+
+[node name="BodyCollision2" type="CollisionShape2D" parent="." index="2" unique_id=937065737]
+position = Vector2(4, -10.5)
+shape = SubResource("RectangleShape2D_b077t")
+debug_color = Color(0.7, 0.43166667, 0, 0)
+
+[node name="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1587296689) index="0" unique_id=135124436]
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_g6342")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1587296689) index="1" unique_id=995900340]
+position = Vector2(4.5, -10.5)
+shape = SubResource("RectangleShape2D_hv40w")
+debug_color = Color(0.00010030448, 0.33072382, 0.9520852, 0)
+
+[node name="HealthComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="2" unique_id=876865614]
+script = ExtResource("4_g6342")
+metadata/_custom_type_script = "uid://bgdddqoa78u1i"
+
+[node name="TurretComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="3" unique_id=129976400 node_paths=PackedStringArray("ray_root")]
+script = ExtResource("5_uma50")
+attack_entry = SubResource("Resource_hv40w")
+projectile_scene = ExtResource("6_vlhms")
+ray_root = NodePath("../../TurretRays")
+metadata/_custom_type_script = "uid://p6bwral64oot"
+
+[node name="CenterMarker" parent="." index="7" unique_id=1538757570]
+position = Vector2(0, -10.5)
+
+[node name="TurretRays" type="Node2D" parent="." index="9" unique_id=491874564]
+position = Vector2(0, -11)
+
+[node name="RayCast2D" type="RayCast2D" parent="TurretRays" index="0" unique_id=184136697]
+position = Vector2(0, 3)
+target_position = Vector2(100, 0)
+collision_mask = 512
+collide_with_areas = true
+
+[node name="RayCast2D2" type="RayCast2D" parent="TurretRays" index="1" unique_id=251042419]
+position = Vector2(0, -2)
+target_position = Vector2(100, 0)
+collision_mask = 512
+collide_with_areas = true
+
+[editable path="Hurtbox"]

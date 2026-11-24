@@ -20,14 +20,19 @@ metadata/_custom_type_script = "uid://dy0n8ihmni5qm"
 [sub_resource type="Resource" id="Resource_28aoi"]
 script = ExtResource("2_vvh5c")
 game_state = 2
-allowed_actions = Array[StringName]([&"profile"])
+allowed_actions = Array[StringName]([&"profile", &"interact"])
+metadata/_custom_type_script = "uid://dy0n8ihmni5qm"
+
+[sub_resource type="Resource" id="Resource_28rpg"]
+script = ExtResource("2_vvh5c")
 metadata/_custom_type_script = "uid://dy0n8ihmni5qm"
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_tw3kd"]
 
 [node name="Root" type="Node" unique_id=425788085 groups=["root"]]
 script = ExtResource("1_pyidc")
-input_configs = Array[ExtResource("2_vvh5c")]([SubResource("Resource_ihp3c"), SubResource("Resource_28aoi")])
+input_configs = Array[ExtResource("2_vvh5c")]([SubResource("Resource_ihp3c"), SubResource("Resource_28aoi"), SubResource("Resource_28rpg")])
+launch_mode = 1
 location_scenes = Dictionary[StringName, PackedScene]({
 &"debug_location": ExtResource("2_pyidc"),
 &"forest": ExtResource("4_tw3kd")

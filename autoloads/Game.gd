@@ -91,6 +91,8 @@ func start(launch_mode: LaunchMode) -> void:
 
 			Scenes.current_location.activate()
 
+			set_game_state(GameState.ACTIVE)
+
 		LaunchMode.NORMAL:
 
 			UI.hide_hud()
@@ -113,7 +115,8 @@ func start(launch_mode: LaunchMode) -> void:
 
 				main_menu.update_load_save_container()
 
-	set_game_state(GameState.ACTIVE)
+			set_game_state(GameState.MAIN_MENU)
+
 
 
 
@@ -129,6 +132,8 @@ func load_save() -> void:
 	Scenes.current_location.activate()
 
 	UI.show_hud()
+
+	set_game_state(GameState.ACTIVE)
 
 
 

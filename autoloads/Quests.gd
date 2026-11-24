@@ -64,6 +64,10 @@ func get_root_options(source_entity: Entity) -> Array:
 
 					continue
 
+				if objective.dialogue_option is DialogueQuestOption:
+
+					objective.dialogue_option.quest_data = quest_data
+
 				root_options.append(objective.dialogue_option)
 
 	return root_options
@@ -163,6 +167,10 @@ func set_quest_stage(quest: Quest, index: int) -> void:
 
 		return
 
+	if quest_data.state == Quest.QuestState.COMPLETE:
+
+		return
+
 	quest_data.set_stage_index(index)
 
 	var stage = quest.get_stage(index)
@@ -215,7 +223,7 @@ func _on_quest_stage_completed(quest_data: QuestData) -> void:
 
 		Notices.new_notice("Quest stage completed")
 
-		quest_data.set_stage_index(next_stage_index)
+		set_quest_stage(quest_data.quest, next_stage_index)
 
 	else:
 

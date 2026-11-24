@@ -102,7 +102,17 @@ func execute_index(index: int) -> void:
 
 		Command.Result.PENDING:
 
+			command.command_cancelled.connect(_on_command_cancelled.bind(command), CONNECT_ONE_SHOT)
+
 			command.command_executed.connect(_on_command_executed.bind(command), CONNECT_ONE_SHOT)
+
+
+
+
+func _on_command_cancelled(_command: Command) -> void:
+
+	current_index = -1
+
 
 
 

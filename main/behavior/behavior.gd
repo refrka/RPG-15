@@ -37,6 +37,14 @@ func start_phase(index: int) -> void:
 
 
 
+func end() -> void:
+
+	var phase = get_phase(phase_index)
+
+	phase.end()
+
+
+
 func get_phase(index: int) -> BehaviorPhase:
 
 	if phases.size() - 1 >= index:

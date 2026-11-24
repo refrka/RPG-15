@@ -10,7 +10,45 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.25674063, 0.29679266, 0.31015244, 1)
 
-[node name="Notice" type="MarginContainer" unique_id=1372737980 node_paths=PackedStringArray("message_label")]
+[sub_resource type="Animation" id="Animation_qm5pf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_bej3f"]
+resource_name = "fade"
+length = 0.50093865
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4876995),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l7cq4"]
+_data = {
+&"RESET": SubResource("Animation_qm5pf"),
+&"fade": SubResource("Animation_bej3f")
+}
+
+[node name="Notice" type="MarginContainer" unique_id=1372737980 node_paths=PackedStringArray("message_label", "anim_player")]
+process_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -28,6 +66,7 @@ theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 script = ExtResource("1_qm5pf")
 message_label = NodePath("PanelContainer/MarginContainer/Label")
+anim_player = NodePath("AnimationPlayer")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=725360463]
 layout_mode = 2
@@ -45,3 +84,6 @@ theme_override_constants/margin_bottom = 4
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer" unique_id=1335387850]
 layout_mode = 2
 text = "Something happened"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1749158005]
+libraries/ = SubResource("AnimationLibrary_l7cq4")

@@ -33,11 +33,6 @@ ExtResource("6_rghqe"): 1
 weight = 10
 metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
 
-[sub_resource type="Resource" id="Resource_ya5lx"]
-script = ExtResource("3_856m7")
-weight = 50
-metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
-
 [sub_resource type="Resource" id="Resource_uqloo"]
 script = ExtResource("3_856m7")
 items = Dictionary[ExtResource("4_rghqe"), int]({
@@ -46,9 +41,14 @@ ExtResource("7_tlqy3"): 1
 weight = 10
 metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
 
+[sub_resource type="Resource" id="Resource_ya5lx"]
+script = ExtResource("3_856m7")
+weight = 50
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
 [sub_resource type="Resource" id="Resource_rywj5"]
 script = ExtResource("6_tlqy3")
-entries = Array[ExtResource("3_856m7")]([SubResource("Resource_kdtxm"), SubResource("Resource_0w6s6"), SubResource("Resource_ya5lx"), SubResource("Resource_uqloo")])
+entries = Array[ExtResource("3_856m7")]([SubResource("Resource_kdtxm"), SubResource("Resource_0w6s6"), SubResource("Resource_uqloo"), SubResource("Resource_ya5lx")])
 metadata/_custom_type_script = "uid://dmr4v28gqmw1h"
 
 [node name="StoneChunk" unique_id=1222908469 instance=ExtResource("1_jsm4d")]

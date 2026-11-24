@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bxhe8lv6h7cau" path="res://main/entities/character.tscn" id="1_8x8hf"]
 [ext_resource type="Script" uid="uid://i22ro207a1vo" path="res://main/entities/player/player.gd" id="2_ihp3c"]
+[ext_resource type="Script" uid="uid://bilm5ege1cif1" path="res://main/entities/entity_stats.gd" id="3_fjjas"]
 [ext_resource type="Texture2D" uid="uid://cglaueypgd0b5" path="res://main/entities/player/player_sprite_sheet_texture.png" id="3_ihp3c"]
 [ext_resource type="Script" uid="uid://d1l0dy163gnc5" path="res://main/items/inventory.gd" id="3_la1ju"]
 [ext_resource type="Resource" uid="uid://2vovknpo4hli" path="res://main/items/valuables/coin.tres" id="3_uo66l"]
@@ -18,10 +19,14 @@
 [ext_resource type="Script" uid="uid://di7dnrrxv3kv4" path="res://main/sensor/pickup_sensor.gd" id="9_qvaa3"]
 [ext_resource type="Script" uid="uid://ccdd8pxqp8bym" path="res://main/components/interaction_component.gd" id="10_243e6"]
 [ext_resource type="Script" uid="uid://dqww7qb3cvxoo" path="res://main/sensor/sensor.gd" id="10_elonm"]
-[ext_resource type="Resource" uid="uid://dvy7rax5t4ios" path="res://main/items/equipment/tools/axe.tres" id="10_fjjas"]
 [ext_resource type="Script" uid="uid://rv1tyr5x36h4" path="res://main/states/body_interacting_state.gd" id="12_qe6dv"]
 [ext_resource type="Script" uid="uid://bgdddqoa78u1i" path="res://main/components/health_component.gd" id="16_s4fyv"]
 [ext_resource type="PackedScene" uid="uid://bh7ip01t2cvqp" path="res://ui/tool_icon_rect.tscn" id="23_n1onb"]
+
+[sub_resource type="Resource" id="Resource_o2a1x"]
+script = ExtResource("3_fjjas")
+move_speed = 3500.0
+metadata/_custom_type_script = "uid://bilm5ege1cif1"
 
 [sub_resource type="Resource" id="Resource_wsknm"]
 script = ExtResource("4_uo66l")
@@ -51,11 +56,13 @@ script = ExtResource("3_la1ju")
 stacks = Array[ExtResource("4_enjxq")]([SubResource("Resource_o4e80"), SubResource("Resource_ereea")])
 currency_stack = SubResource("Resource_wsknm")
 weapon_stack = SubResource("Resource_kdw2b")
-tools = Array[ExtResource("9_n1onb")]([ExtResource("10_fjjas")])
 metadata/_custom_type_script = "uid://d1l0dy163gnc5"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4e80"]
 size = Vector2(10, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_28rpg"]
+size = Vector2(10, 15)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_elonm"]
 radius = 7.0
@@ -185,6 +192,7 @@ script = ExtResource("2_ihp3c")
 tool_icon_rect = NodePath("ToolIconRect")
 entity_id = &"player"
 authored_id = &"Bitwit"
+stats = SubResource("Resource_o2a1x")
 interaction_sensor = NodePath("InteractionSensor")
 inventory = SubResource("Resource_fc701")
 
@@ -202,6 +210,10 @@ position = Vector2(0, -7)
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_o4e80")
 
+[node name="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1587296689) index="0" unique_id=135124436]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_28rpg")
+
 [node name="InteractionSensor" type="Area2D" parent="." index="3" unique_id=317631068]
 position = Vector2(0, -7)
 collision_layer = 0
@@ -217,11 +229,13 @@ debug_color = Color(0.7, 0.7, 0.7, 0)
 collision_layer = 0
 collision_mask = 32
 script = ExtResource("9_qvaa3")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="PickupSensor" index="1" unique_id=1243160566]
 modulate = Color(1, 1, 1, 0.3882353)
 shape = SubResource("CircleShape2D_5f27t")
 debug_color = Color(0.7, 0.7, 0.7, 0)
+metadata/_edit_lock_ = true
 
 [node name="PlayerMovementComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="0" unique_id=1696674147 node_paths=PackedStringArray("dir_ray")]
 script = ExtResource("4_0kxhf")
@@ -249,18 +263,19 @@ script = ExtResource("9_enjxq")
 script = ExtResource("12_qe6dv")
 metadata/_custom_type_script = "uid://rv1tyr5x36h4"
 
-[node name="CenterMarker" parent="." index="7" unique_id=1538757570]
+[node name="CenterMarker" parent="." index="8" unique_id=1538757570]
 position = Vector2(0, -7)
 
-[node name="DirRay" parent="." index="8" unique_id=1334925714]
+[node name="DirRay" parent="." index="9" unique_id=1334925714]
 position = Vector2(0, -7)
 target_position = Vector2(20, 0)
-
-[node name="BodyAnimPlayer" parent="." index="9" unique_id=1242108839]
-libraries/player = SubResource("AnimationLibrary_elonm")
 
 [node name="ToolIconRect" parent="." index="10" unique_id=1307352774 instance=ExtResource("23_n1onb")]
 offset_top = -29.0
 offset_bottom = -13.0
+metadata/_edit_lock_ = true
+
+[node name="BodyAnimPlayer" parent="." index="11" unique_id=1242108839]
+libraries/player = SubResource("AnimationLibrary_elonm")
 
 [editable path="Hurtbox"]

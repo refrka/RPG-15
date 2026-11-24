@@ -5,6 +5,8 @@ class_name Command extends Resource
 
 signal command_executed
 
+signal command_cancelled
+
 
 enum Result {
 
@@ -36,9 +38,18 @@ func execute(_data:= {}) -> Result:
 
 		actor = data.actor
 
-	return Result.SUCCESS
+	result = Result.SUCCESS
+
+	return result
 
 
+
+
+func cancel() -> void:
+
+	result = Result.CANCELLED
+
+	command_cancelled.emit()
 
 
 

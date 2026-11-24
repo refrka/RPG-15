@@ -14,14 +14,11 @@ func initialize(_entity: Entity) -> void:
 	
 	super(_entity)
 
-	movement_component = entity.get_component(MovementComponent)
-
-	if movement_component:
-
-		movement_component.face_dir_updated.connect(_on_face_dir_updated)
+	entity.face_dir_updated.connect(_on_face_dir_updated)
 
 	entity.body_anim_player.animation_finished.connect(_on_body_anim_finished)
 
+	movement_component = entity.get_component(MovementComponent)
 
 
 
@@ -84,6 +81,20 @@ func _on_body_anim_finished(anim_name: StringName) -> void:
 
 		death_animation_finished.emit()
 
+	if anim_name.ends_with("flinch"):
+
+		if movement_component.move_dir != Vector2.ZERO:
+
+			var new_anim_name = "%s/move_%s" % [entity.entity_id, "down" if entity.face_dir.y >= 0 else "up"]
+
+			play_body_animation(new_anim_name)
+
+		else:
+
+			var new_anim_name = "%s/idle_%s" % [entity.entity_id, "down" if entity.face_dir.y >= 0 else "up"]
+
+			play_body_animation(new_anim_name)
+
 
 
 
@@ -91,20 +102,3 @@ func _on_face_dir_updated(dir: Vector2) -> void:
 
 	update_face_dir(dir)
 
-
-
-
-func _on_move_started() -> void:
-
-	var anim_name = "%s/move_%s" % [entity.entity_id, movement_component.get_face_dir_string()]
-
-	if entity.body_anim_player.has_animation(anim_name):
-		
-		entity.body_anim_player.play(anim_name)
-
-
-
-
-func _on_move_ended() -> void:
-
-	entity.body_anim_player.play("RESET")

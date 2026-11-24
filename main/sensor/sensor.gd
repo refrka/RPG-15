@@ -112,9 +112,9 @@ func deactivate() -> void:
 
 
 
-func _on_body_entered(body: PhysicsBody2D) -> void:
+func _on_body_entered(body: Variant) -> void:
 
-	if not active or body == entity:
+	if not active or body == entity or body is TileMap:
 
 		return
 
@@ -129,9 +129,9 @@ func _on_body_entered(body: PhysicsBody2D) -> void:
 
 	
 
-func _on_body_exited(body: PhysicsBody2D) -> void:
+func _on_body_exited(body: Variant) -> void:
 
-	if not active:
+	if not active or body is TileMap:
 
 		return
 

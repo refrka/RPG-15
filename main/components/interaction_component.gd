@@ -17,11 +17,7 @@ func initialize(_entity: Entity) -> void:
 
 	super(_entity)
 
-	var movement_component = entity.get_component(MovementComponent)
-
-	if movement_component:
-
-		movement_component.face_dir_updated.connect(_on_face_dir_updated)
+	entity.face_dir_updated.connect(_on_face_dir_updated)
 
 	entity.interaction_sensor.entity_entered.connect(_on_entity_entered_interaction_sensor)
 
@@ -78,9 +74,11 @@ func try_interaction() -> void:
 
 func try_end_interaction() -> void:
 
-	if current_interactable_component.can_end():
+	if current_interactable and not current_interactable_component.can_end():
 
-		end_interaction(false)
+		return
+
+	end_interaction(false)
 
 
 
@@ -132,6 +130,8 @@ func start_interaction(interactable: Entity, interactable_component: Interactabl
 
 	current_interactable_component.cancelled.connect(_on_current_interaction_cancelled)
 
+	current_interactable_component.ended.connect(_on_current_interaction_ended)
+
 	current_interactable_component.start()
 
 
@@ -139,8 +139,6 @@ func start_interaction(interactable: Entity, interactable_component: Interactabl
 
 
 func end_interaction(retry:= true) -> void:
-
-	entity.tool_icon_rect.texture = null
 
 	current_interactable_component.end()
 
@@ -151,6 +149,8 @@ func end_interaction(retry:= true) -> void:
 
 
 func close_interaction(retry:= true) -> void:
+
+	entity.tool_icon_rect.texture = null
 
 	if entity.is_alive():
 
@@ -167,6 +167,10 @@ func close_interaction(retry:= true) -> void:
 	if current_interactable_component.cancelled.is_connected(_on_current_interaction_cancelled):
 
 		current_interactable_component.cancelled.disconnect(_on_current_interaction_cancelled)
+
+	if current_interactable_component.ended.is_connected(_on_current_interaction_ended):
+
+		current_interactable_component.ended.disconnect(_on_current_interaction_ended)
 
 	if retry:
 

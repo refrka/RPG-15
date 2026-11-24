@@ -7,7 +7,7 @@ class_name LootTable extends Resource
 
 
 
-func get_loot(roll: float) -> Array[ItemStack]:
+func get_loot(_roll: float) -> Array[ItemStack]:
 
 	var loot: Array[ItemStack] = []
 
@@ -47,7 +47,7 @@ func get_loot(roll: float) -> Array[ItemStack]:
 
 			var chance = float(entry.weight) / float(total_weight)
 
-			if roll <= chance:
+			if randf() <= chance:
 
 				for item in entry.items:
 

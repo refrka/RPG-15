@@ -141,11 +141,12 @@ _data = {
 &"flinch": SubResource("Animation_nqau1")
 }
 
-[node name="Character" type="CharacterBody2D" unique_id=920390172 node_paths=PackedStringArray("body_sprite", "body_collision", "combat_root", "hurtbox", "center_marker", "component_root", "state_machine", "body_anim_player")]
+[node name="Character" type="CharacterBody2D" unique_id=920390172 node_paths=PackedStringArray("nav_agent", "body_sprite", "body_collision", "combat_root", "hurtbox", "center_marker", "component_root", "state_machine", "body_anim_player", "face_dir_ray")]
 collision_layer = 3
 collision_mask = 1088
 motion_mode = 1
 script = ExtResource("1_u7xqv")
+nav_agent = NodePath("NavigationAgent2D")
 body_sprite = NodePath("CanvasGroup/BodySprite")
 body_collision = NodePath("BodyCollision")
 combat_root = NodePath("CanvasGroup/CombatRoot")
@@ -154,6 +155,7 @@ center_marker = NodePath("CenterMarker")
 component_root = NodePath("ComponentRoot")
 state_machine = NodePath("StateMachine")
 body_anim_player = NodePath("BodyAnimPlayer")
+face_dir_ray = NodePath("DirRay")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=1546177270]
 y_sort_enabled = true
@@ -196,13 +198,18 @@ script = ExtResource("3_0k2p7")
 [node name="CombatIdleState" type="Node" parent="StateMachine/CombatRoot" unique_id=1653228906]
 script = ExtResource("4_ruoji")
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1977854140]
+path_desired_distance = 8.0
+target_desired_distance = 8.0
+avoidance_enabled = true
+debug_enabled = true
+
 [node name="CenterMarker" type="Marker2D" parent="." unique_id=1538757570]
 
 [node name="DirRay" type="RayCast2D" parent="." unique_id=1334925714]
 target_position = Vector2(0, 20)
 
 [node name="BodyAnimPlayer" type="AnimationPlayer" parent="." unique_id=1242108839]
-process_mode = 3
 libraries/ = SubResource("AnimationLibrary_3m3yh")
 
 [editable path="Hurtbox"]

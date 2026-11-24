@@ -6,6 +6,8 @@ signal expired
 
 @export var duration:= 3.0
 
+@export var anim_player: AnimationPlayer
+
 var timer:= 0.0
 
 var timer_active:= false

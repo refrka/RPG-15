@@ -14,6 +14,14 @@ var move_down_pressed:= false
 
 
 
+func initialize(_entity: Entity) -> void:
+
+	super(_entity)
+
+	nav_enabled = false
+
+
+
 
 
 func get_move_dir() -> Vector2:
@@ -70,7 +78,13 @@ func get_move_dir() -> Vector2:
 
 		refresh_inputs()
 
-	set_face_dir(_face_dir)
+	entity.set_face_dir(_face_dir)
+
+	if move_dir == Vector2.ZERO and dir != Vector2.ZERO:
+
+		move_started.emit()
+
+	move_dir = dir.normalized()
 
 	return dir.normalized()
 

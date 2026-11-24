@@ -3,6 +3,8 @@ class_name Entity extends PhysicsBody2D
 
 signal deactivated
 
+signal face_dir_updated
+
 
 
 @export var entity_id: StringName
@@ -37,6 +39,10 @@ signal deactivated
 
 @export var dialogue_library: DialogueLibrary
 
+@export var starting_face_dir:= Vector2.RIGHT
+
+@export var face_dir_ray: RayCast2D
+
 
 
 var components: Dictionary[Script, Component]
@@ -47,7 +53,7 @@ var active:= false
 
 var initialized:= false
 
-
+var face_dir: Vector2
 
 
 func initialize() -> bool:
@@ -79,6 +85,8 @@ func initialize() -> bool:
 	var animation_component = get_component(AnimationComponent)
 	
 	animation_component.death_animation_finished.connect(_on_death_animation_finished)
+
+	set_face_dir(starting_face_dir)
 
 	return true
 
@@ -235,6 +243,44 @@ func consume(consumable: Consumable) -> void:
 
 		effects_component.add_effect(effect)
 		
+
+
+
+func set_face_dir(dir: Vector2) -> void:
+
+	if dir != face_dir and dir != Vector2.ZERO:
+
+		face_dir = dir.snapped(Vector2(1.0, 1.0))
+
+		face_dir_ray.rotation = face_dir.angle()
+
+		face_dir_updated.emit(dir)
+
+
+	
+
+
+
+func get_face_dir_string() -> String:
+
+	if face_dir == Vector2.RIGHT:
+
+		return "right"
+
+	if face_dir == Vector2.LEFT:
+
+		return "left"
+
+	if face_dir == Vector2.UP:
+
+		return "up"
+
+	if face_dir == Vector2.DOWN:
+
+		return "down"
+
+	return ""
+
 
 
 

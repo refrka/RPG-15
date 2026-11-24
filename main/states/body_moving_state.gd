@@ -8,13 +8,17 @@ func enter() -> void:
 
 	super()
 
+	movement_component.move_started.connect(_on_move_started)
+
 	movement_component.move_ended.connect(_on_move_ended)
 
-	movement_component.face_dir_updated.connect(_on_face_dir_updated)
+	entity.face_dir_updated.connect(_on_face_dir_updated)
 
-	var anim_name = "%s/move_%s" % [entity.entity_id, "down" if movement_component.face_dir.y >= 0 else "up"]
+	if movement_component.move_dir != Vector2.ZERO:
 
-	animation_component.play_body_animation(anim_name)
+		var anim_name = "%s/move_%s" % [entity.entity_id, "down" if entity.face_dir.y >= 0 else "up"]
+
+		animation_component.play_body_animation(anim_name)
 
 
 
@@ -25,9 +29,11 @@ func exit() -> void:
 
 	super()
 
+	movement_component.move_started.disconnect(_on_move_started)
+
 	movement_component.move_ended.disconnect(_on_move_ended)
 
-	movement_component.face_dir_updated.disconnect(_on_face_dir_updated)
+	entity.face_dir_updated.disconnect(_on_face_dir_updated)
 
 
 
@@ -39,6 +45,11 @@ func _on_face_dir_updated(dir: Vector2) -> void:
 	animation_component.play_body_animation(anim_name)
 
 
+
+
+func _on_move_started() -> void:
+
+	_on_face_dir_updated(movement_component.move_dir)
 
 
 

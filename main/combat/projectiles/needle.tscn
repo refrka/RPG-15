@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bwbd1trukdceq"]
+
+[ext_resource type="PackedScene" uid="uid://bul72yit1vyw" path="res://main/combat/projectile_scene.tscn" id="1_dfia4"]
+[ext_resource type="Texture2D" uid="uid://dbjk7bh7qpk4a" path="res://textures/projectiles/needle_sprite_texture.png" id="2_51ynx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51ynx"]
+size = Vector2(2, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_arnxk"]
+size = Vector2(2, 1)
+
+[node name="Needle" unique_id=1236751785 instance=ExtResource("1_dfia4")]
+origin_at_center = true
+speed = 10000.0
+ignore_entity_ref = true
+
+[node name="Sprite2D" parent="." index="0" unique_id=1220180525]
+texture = ExtResource("2_51ynx")
+offset = Vector2(0, -0.5)
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1122584934]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_51ynx")
+
+[node name="CollisionShape2D" parent="Hitbox" parent_id_path=PackedInt32Array(1611579010) index="0" unique_id=526524626]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_arnxk")
+
+[editable path="Hitbox"]

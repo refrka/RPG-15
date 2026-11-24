@@ -13,10 +13,14 @@
 [ext_resource type="Script" uid="uid://ciixxeo5s6dul" path="res://main/behavior/behavior_phase.gd" id="6_4ddop"]
 [ext_resource type="Script" uid="uid://dkta1jljyvgwr" path="res://main/commands/command.gd" id="7_3thh1"]
 [ext_resource type="Script" uid="uid://c5xfnmvdtcclx" path="res://main/commands/move_to_target_position_command.gd" id="8_3thh1"]
-[ext_resource type="Script" uid="uid://bkrsy4jfnj608" path="res://main/behavior/behavior.gd" id="8_jhncj"]
+[ext_resource type="Script" uid="uid://cyyu4bwxktuts" path="res://main/commands/choose_random_target_position_command.gd" id="13_31leu"]
+[ext_resource type="Script" uid="uid://dxtt8jidd21if" path="res://main/commands/delay_timer_command.gd" id="15_7tcck"]
+[ext_resource type="Script" uid="uid://bkrsy4jfnj608" path="res://main/behavior/behavior.gd" id="16_31leu"]
+[ext_resource type="Script" uid="uid://baoovdts8slvq" path="res://main/states/body_moving_state.gd" id="17_7tcck"]
 
 [sub_resource type="Resource" id="Resource_y5i5g"]
 script = ExtResource("2_7k5lq")
+move_speed = 750.0
 base_health = 1
 metadata/_custom_type_script = "uid://bilm5ege1cif1"
 
@@ -34,26 +38,35 @@ entries = Array[ExtResource("2_5x5xw")]([SubResource("Resource_x7o2m")])
 metadata/_custom_type_script = "uid://dmr4v28gqmw1h"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vwuq"]
-size = Vector2(13, 5)
+size = Vector2(14, 5)
 
-[sub_resource type="Resource" id="Resource_4ddop"]
+[sub_resource type="Resource" id="Resource_logex"]
+script = ExtResource("13_31leu")
+target_range = 150.0
+metadata/_custom_type_script = "uid://cyyu4bwxktuts"
+
+[sub_resource type="Resource" id="Resource_b4d63"]
 script = ExtResource("8_3thh1")
-target_position = Vector2(100, 100)
 metadata/_custom_type_script = "uid://c5xfnmvdtcclx"
 
-[sub_resource type="Resource" id="Resource_niaws"]
+[sub_resource type="Resource" id="Resource_qweye"]
+script = ExtResource("15_7tcck")
+duration = 4.0
+metadata/_custom_type_script = "uid://dxtt8jidd21if"
+
+[sub_resource type="Resource" id="Resource_xk3ts"]
 script = ExtResource("6_4ddop")
-commands = Array[ExtResource("7_3thh1")]([SubResource("Resource_4ddop")])
+commands = Array[ExtResource("7_3thh1")]([SubResource("Resource_logex"), SubResource("Resource_b4d63"), SubResource("Resource_qweye")])
 metadata/_custom_type_script = "uid://ciixxeo5s6dul"
 
-[sub_resource type="Resource" id="Resource_4x82b"]
-script = ExtResource("8_jhncj")
-phases = Array[ExtResource("6_4ddop")]([SubResource("Resource_niaws")])
+[sub_resource type="Resource" id="Resource_21sel"]
+script = ExtResource("16_31leu")
+phases = Array[ExtResource("6_4ddop")]([SubResource("Resource_xk3ts")])
 metadata/_custom_type_script = "uid://bkrsy4jfnj608"
 
 [sub_resource type="Animation" id="Animation_fxwmh"]
 resource_name = "die"
-length = 0.009999999999999998
+length = 0.00999999999999999
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -67,9 +80,43 @@ tracks/0/keys = {
 "values": [2]
 }
 
+[sub_resource type="Animation" id="Animation_31leu"]
+resource_name = "idle_down"
+length = 0.16
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/BodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.015999757),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_7tcck"]
+resource_name = "idle_down"
+length = 0.16
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/BodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.015999757),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_55bx4"]
 _data = {
-&"die": SubResource("Animation_fxwmh")
+&"die": SubResource("Animation_fxwmh"),
+&"idle_down": SubResource("Animation_31leu"),
+&"idle_up": SubResource("Animation_7tcck")
 }
 
 [node name="Mow" unique_id=920390172 instance=ExtResource("1_3vwuq")]
@@ -78,11 +125,13 @@ stats = SubResource("Resource_y5i5g")
 death_loot_table = SubResource("Resource_kgmfl")
 
 [node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(1546177270) index="0" unique_id=2072653577]
+position = Vector2(1, -8)
 texture = ExtResource("2_oll6h")
-hframes = 3
+hframes = 4
+vframes = 2
 
 [node name="BodyCollision" parent="." index="1" unique_id=934894713]
-position = Vector2(-0.5, -2.5)
+position = Vector2(1, -2.5)
 shape = SubResource("RectangleShape2D_3vwuq")
 
 [node name="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1587296689) index="0" unique_id=135124436]
@@ -90,10 +139,12 @@ position = Vector2(-2, -7)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1587296689) index="1" unique_id=1539942159]
 modulate = Color(1, 1, 1, 0.21568628)
+position = Vector2(1, 0)
 polygon = PackedVector2Array(-7, 0, -7, -10, -6, -10, -6, -11, 2, -11, 2, -10, 3, -10, 3, -7, 6, -7, 6, -6, 7, -6, 7, -3, 3, -3, 3, 0, 1, 0, 1, -3, -5, -3, -5, 0)
 
-[node name="MovementComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="2" unique_id=1881488671]
+[node name="MovementComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="2" unique_id=1881488671 node_paths=PackedStringArray("dir_ray")]
 script = ExtResource("3_oll6h")
+dir_ray = NodePath("../../DirRay")
 metadata/_custom_type_script = "uid://buwbh3f25d74m"
 
 [node name="HealthComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="3" unique_id=1085535051]
@@ -102,10 +153,25 @@ metadata/_custom_type_script = "uid://bgdddqoa78u1i"
 
 [node name="BehaviorComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="4" unique_id=1897306509]
 script = ExtResource("5_55bx4")
-default_behavior = SubResource("Resource_4x82b")
+default_behavior = SubResource("Resource_21sel")
 metadata/_custom_type_script = "uid://bnfw81624qqdu"
 
-[node name="BodyAnimPlayer" parent="." index="7" unique_id=1242108839]
+[node name="BodyMovingState" type="Node" parent="StateMachine/BodyRoot" parent_id_path=PackedInt32Array(2018266311) index="1" unique_id=1592141794]
+script = ExtResource("17_7tcck")
+metadata/_custom_type_script = "uid://baoovdts8slvq"
+
+[node name="NavigationAgent2D" parent="." index="5" unique_id=1977854140]
+radius = 16.0
+debug_enabled = false
+
+[node name="CenterMarker" parent="." index="6" unique_id=1538757570]
+position = Vector2(0, -5)
+
+[node name="DirRay" parent="." index="7" unique_id=1334925714]
+position = Vector2(0, -5)
+target_position = Vector2(20, 0)
+
+[node name="BodyAnimPlayer" parent="." index="8" unique_id=1242108839]
 libraries/mow = SubResource("AnimationLibrary_55bx4")
 
 [editable path="Hurtbox"]

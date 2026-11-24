@@ -73,7 +73,7 @@ func load_weapon(weapon_stack: ItemStack) -> void:
 
 func get_animation_name() -> String:
 
-	return "%s/attack_%s" % [current_weapon_stack.item.item_id, movement_component.get_face_dir_string()]
+	return "%s/attack_%s" % [current_weapon_stack.item.item_id, entity.get_face_dir_string()]
 
 
 
@@ -124,7 +124,7 @@ func get_projectile_scene() -> ProjectileScene:
 		
 		projectile_scene = current_weapon_stack.item_data.ammunition_stack.item.projectile_scene.instantiate()
 
-	projectile_scene.damage_package = DamagePackage.create(current_weapon.attack_entry, movement_component.face_dir, entity)
+	projectile_scene.damage_package = DamagePackage.create(current_weapon.attack_entry, entity.face_dir, entity)
 
 	return projectile_scene
 
@@ -149,11 +149,11 @@ func _on_weapon_projectile_requested() -> void:
 
 	if projectile_scene:
 
-		projectile_scene.owning_entity = entity
+		projectile_scene.set_owning_entity(entity)
 
 		Scenes.current_location.projectile_root.add_child(projectile_scene)
 
-		projectile_scene.global_position = entity.global_position + movement_component.face_dir
+		projectile_scene.global_position = entity.global_position + entity.face_dir
 
 		if projectile_scene.origin_at_center:
 
@@ -163,11 +163,11 @@ func _on_weapon_projectile_requested() -> void:
 
 			ProjectileScene.ProjectileType.LINEAR:
 
-				projectile_scene.set_trajectory(movement_component.face_dir)
+				projectile_scene.set_trajectory(entity.face_dir)
 
 			ProjectileScene.ProjectileType.ARC:
 
-				var target_position = movement_component.face_dir * 30.0
+				var target_position = entity.face_dir * 30.0
 
 				projectile_scene.set_arc(target_position, 30.0, 1.0)
 
@@ -188,7 +188,7 @@ func _on_weapon_updated() -> void:
 
 func _on_weapon_hit_detected(hurtbox: Hurtbox) -> void:
 
-	hurtbox.receive_damage_package(DamagePackage.create(current_weapon.attack_entry, movement_component.face_dir, entity))
+	hurtbox.receive_damage_package(DamagePackage.create(current_weapon.attack_entry, entity.face_dir, entity))
 
 
 

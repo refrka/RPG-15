@@ -6,7 +6,7 @@
 
 [node name="ProjectileScene" type="CharacterBody2D" unique_id=1236751785 node_paths=PackedStringArray("sprite", "collision", "hitbox", "anim_player", "on_screen_notifier", "timer")]
 collision_layer = 16
-collision_mask = 64
+collision_mask = 1088
 script = ExtResource("1_tuvjr")
 sprite = NodePath("Sprite2D")
 collision = NodePath("CollisionShape2D")

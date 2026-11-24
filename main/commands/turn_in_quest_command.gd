@@ -12,8 +12,6 @@ func execute(_data:= {}) -> Result:
 
 		quest_data = data.quest_data
 
-	print("quest data: ", quest_data)
-
 	if quest_data:
 
 		quest_data.set_state(Quest.QuestState.COMPLETE)

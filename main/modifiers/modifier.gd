@@ -56,6 +56,11 @@ var timer:= 0.0
 
 
 
+func expire() -> void:
+
+	expired.emit()
+
+
 
 
 func tick(delta: float) -> void:
@@ -66,7 +71,7 @@ func tick(delta: float) -> void:
 
 		if (value is Vector2 and value.length() <= 0.001) or (value is float and value <= 0.001):
 
-			expired.emit()
+			expire()
 
 	elif modifier_type == ModifierType.DURATION:
 
@@ -74,7 +79,7 @@ func tick(delta: float) -> void:
 
 		if timer <= 0.0:
 
-			expired.emit()
+			expire()
 
 
 

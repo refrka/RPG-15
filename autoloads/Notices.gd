@@ -43,16 +43,16 @@ func new_notice(message: String) -> void:
 
 	notice.size = Vector2.ZERO
 
+	notice.anim_player.animation_finished.connect(_on_notice_animation_finished.bind(notice))
+
 
 
 
 func _on_notice_expired(notice: Notice) -> void:
 
-	var tween = get_tree().create_tween()
+	notice.anim_player.play("fade")
 
-	tween.finished.connect(_on_fade_tween_finished.bind(notice))
 
-	tween.tween_property(notice, "modulate:a", 0.0, 1.0)
 
 
 
@@ -61,3 +61,17 @@ func _on_fade_tween_finished(notice: Notice) -> void:
 	notice.queue_free()
 
 	active_notices.erase(notice)
+
+
+
+
+
+func _on_notice_animation_finished(anim_name: StringName, notice: Notice) -> void:
+
+	if anim_name == "fade":
+
+		notice.anim_player.animation_finished.disconnect(_on_notice_animation_finished)
+
+		notice.queue_free()
+
+		active_notices.erase(notice)

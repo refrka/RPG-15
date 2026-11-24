@@ -64,8 +64,6 @@ func try_interaction() -> void:
 
 	if not interactable_component.can_interact():
 
-		interactable_component._on_failed_interaction()
-
 		return
 
 	if not interactable and not interactable_component:
@@ -141,6 +139,8 @@ func start_interaction(interactable: Entity, interactable_component: Interactabl
 
 
 func end_interaction(retry:= true) -> void:
+
+	entity.tool_icon_rect.texture = null
 
 	current_interactable_component.end()
 

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cuh27nbjfjubk"]
+
+[ext_resource type="Texture2D" uid="uid://jvil1kxsy6if" path="res://textures/ui/checkmark.png" id="1_ufggq"]
+[ext_resource type="Script" uid="uid://j34ly3kp26oo" path="res://ui/objective_row.gd" id="1_xujp5"]
+[ext_resource type="Texture2D" uid="uid://jawyfkvt1vbu" path="res://textures/ui/arrow_line.png" id="2_o1if6"]
+
+[node name="ObjectiveRow" type="HBoxContainer" unique_id=429367721 node_paths=PackedStringArray("objective_icon", "objective_label")]
+script = ExtResource("1_xujp5")
+objective_icon = NodePath("TextureRect")
+objective_label = NodePath("ObjectiveLabel")
+icon_complete_texture = ExtResource("1_ufggq")
+icon_active_texture = ExtResource("2_o1if6")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=741043758]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_o1if6")
+stretch_mode = 2
+
+[node name="ObjectiveLabel" type="Label" parent="." unique_id=597228417]
+layout_mode = 2
+text = "Description of the objective"

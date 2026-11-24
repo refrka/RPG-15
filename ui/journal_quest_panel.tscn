@@ -13,7 +13,7 @@ bg_color = Color(0.19023442, 0.2246694, 0.2349979, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4b8i4"]
 bg_color = Color(0.14117648, 0.16862746, 0.1764706, 1)
 
-[node name="JournalQuestPanel" type="MarginContainer" unique_id=1774396229 node_paths=PackedStringArray("panel", "arrow")]
+[node name="JournalQuestPanel" type="MarginContainer" unique_id=1774396229 node_paths=PackedStringArray("panel", "arrow", "quest_info", "title_label", "objective_vbox")]
 mouse_filter = 0
 script = ExtResource("1_8wi67")
 default_stylebox = SubResource("StyleBoxFlat_07rek")
@@ -23,6 +23,9 @@ panel = NodePath("PanelContainer")
 arrow = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TextureRect")
 right_texture = ExtResource("1_hb3l1")
 down_texture = ExtResource("3_4b8i4")
+quest_info = NodePath("PanelContainer/MarginContainer/VBoxContainer/QuestInfo")
+title_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/QuestTitleLabel")
+objective_vbox = NodePath("PanelContainer/MarginContainer/VBoxContainer/QuestInfo/VBoxContainer")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1801976759]
 layout_mode = 2
@@ -47,6 +50,7 @@ mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=167437918]
 layout_mode = 2
+size_flags_vertical = 4
 mouse_filter = 2
 texture = ExtResource("1_hb3l1")
 stretch_mode = 3
@@ -54,3 +58,10 @@ stretch_mode = 3
 [node name="QuestTitleLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=221558318]
 layout_mode = 2
 text = "Quest Title"
+
+[node name="QuestInfo" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2012705464]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/QuestInfo" unique_id=452910585]
+layout_mode = 2

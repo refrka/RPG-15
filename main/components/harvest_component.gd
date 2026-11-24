@@ -5,6 +5,8 @@ class_name HarvestComponent extends InteractableComponent
 
 @export var duration:= 0.0
 
+@export var die_on_harvest:= false
+
 @export var free_on_harvest:= false
 
 @export var harvest_state_frames:= Vector2i(0, 1)
@@ -44,7 +46,11 @@ func complete() -> void:
 
 	harvest()
 
-	if free_on_harvest:
+	if die_on_harvest:
+
+		entity.die()
+
+	elif free_on_harvest:
 
 		entity.deactivate()
 
@@ -63,6 +69,10 @@ func complete() -> void:
 
 
 func harvest() -> void:
+
+	if not loot_table:
+
+		return
 
 	var loot = loot_table.get_loot(randf())
 
@@ -101,6 +111,10 @@ func _on_death() -> void:
 func _on_failed_interaction() -> void:
 
 	entity.body_anim_player.play("harvestable/failed_harvest")
+
+
+
+
 
 
 

@@ -5,6 +5,7 @@ signal completed
 
 
 
+@export var description: String
 
 @export var optional:= false
 

@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dyxbtu4ed11ep"]
+
+[ext_resource type="PackedScene" uid="uid://7krrh8p7u6uf" path="res://main/entities/harvestable.tscn" id="1_ibn08"]
+[ext_resource type="Texture2D" uid="uid://b0360n5kch1td" path="res://textures/props/log_sprite_texture.png" id="2_w2wt6"]
+[ext_resource type="Resource" uid="uid://dvy7rax5t4ios" path="res://main/items/equipment/tools/axe.tres" id="3_w2wt6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0iyh"]
+size = Vector2(45, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w2wt6"]
+size = Vector2(45, 16)
+
+[sub_resource type="Animation" id="Animation_w2wt6"]
+resource_name = "successful_harvest"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w2wt6"]
+_data = {
+&"successful_harvest": SubResource("Animation_w2wt6")
+}
+
+[node name="Log" unique_id=1222908469 instance=ExtResource("1_ibn08")]
+collision_layer = 69
+entity_id = &"log"
+
+[node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(549313783) index="0" unique_id=1612993214]
+position = Vector2(0, -16)
+texture = ExtResource("2_w2wt6")
+
+[node name="BodyCollision" parent="." index="1" unique_id=892046188]
+position = Vector2(-0.5, -4)
+shape = SubResource("RectangleShape2D_b0iyh")
+
+[node name="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1587296689) index="0" unique_id=135124436]
+position = Vector2(-0.5, -8)
+shape = SubResource("RectangleShape2D_w2wt6")
+
+[node name="HarvestComponent" parent="ComponentRoot" parent_id_path=PackedInt32Array(1493594875) index="1" unique_id=550237833]
+duration = 2.0
+die_on_harvest = true
+required_tool = ExtResource("3_w2wt6")
+
+[node name="BodyAnimPlayer" parent="." index="6" unique_id=527948352]
+libraries/log = SubResource("AnimationLibrary_w2wt6")
+
+[editable path="Hurtbox"]

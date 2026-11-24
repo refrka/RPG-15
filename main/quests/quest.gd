@@ -24,7 +24,9 @@ enum QuestState {
 
 @export var stages: Array[QuestStage]
 
+@export var auto_complete:= true
 
+@export var turn_in_entity_ref: EntityRef
 
 
 

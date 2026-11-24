@@ -19,7 +19,8 @@
 [ext_resource type="Resource" uid="uid://dvy7rax5t4ios" path="res://main/items/equipment/tools/axe.tres" id="16_2mgne"]
 [ext_resource type="Resource" uid="uid://nqpe8x3bscwf" path="res://main/items/equipment/tools/ladle.tres" id="18_07rek"]
 [ext_resource type="Script" uid="uid://8bevyibgwl6q" path="res://ui/profile_tab_button.gd" id="19_07rek"]
-[ext_resource type="PackedScene" uid="uid://dtv73dcqwye4x" path="res://ui/journal_quest_panel.tscn" id="20_77202"]
+[ext_resource type="Script" uid="uid://b6ut2wvjnkyl6" path="res://ui/stats_tab.gd" id="20_7rvsd"]
+[ext_resource type="Script" uid="uid://cqbsyktvk2cuo" path="res://ui/journal_tab.gd" id="20_77202"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_07rek"]
 
@@ -49,7 +50,9 @@ item = ExtResource("7_3t5dm")
 count = 1
 metadata/_custom_type_script = "uid://cwi55co0pga55"
 
-[node name="ProfileOverlay" type="MarginContainer" unique_id=1283527882 node_paths=PackedStringArray("gold_count_label", "inventory_grid", "weapon_slot", "tool_rect_hbox") groups=["overlay"]]
+[sub_resource type="ButtonGroup" id="ButtonGroup_7rvsd"]
+
+[node name="ProfileOverlay" type="MarginContainer" unique_id=1283527882 node_paths=PackedStringArray("gold_count_label", "inventory_grid", "weapon_slot", "tool_rect_hbox", "quest_panel_vbox", "journal_tab") groups=["overlay"]]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,6 +70,8 @@ inventory_grid = NodePath("Inventory/MarginContainer/HBoxContainer/VBoxContainer
 weapon_slot = NodePath("Inventory/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentSlot")
 tool_rect_hbox = NodePath("Profile/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer")
 tab_button_group = SubResource("ButtonGroup_07rek")
+quest_panel_vbox = NodePath("Profile/MarginContainer/VBoxContainer/Contents/JournalTab/VBoxContainer/MarginContainer/ActiveQuestsTab/ScrollContainer/VBoxContainer")
+journal_tab = NodePath("Profile/MarginContainer/VBoxContainer/Contents/JournalTab")
 pause = true
 metadata/_custom_type_script = "uid://dw1aw6urlvg27"
 
@@ -245,12 +250,14 @@ mouse_filter = 2
 
 [node name="Contents" type="MarginContainer" parent="Profile/MarginContainer/VBoxContainer" unique_id=1998245230]
 layout_mode = 2
+size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="StatsTab" type="MarginContainer" parent="Profile/MarginContainer/VBoxContainer/Contents" unique_id=1679802119]
 visible = false
 layout_mode = 2
 mouse_filter = 2
+script = ExtResource("20_7rvsd")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Profile/MarginContainer/VBoxContainer/Contents/StatsTab" unique_id=224995020]
 layout_mode = 2
@@ -261,9 +268,13 @@ layout_mode = 2
 text = "STATS"
 horizontal_alignment = 1
 
-[node name="JournalTab" type="MarginContainer" parent="Profile/MarginContainer/VBoxContainer/Contents" unique_id=1532974484]
+[node name="JournalTab" type="MarginContainer" parent="Profile/MarginContainer/VBoxContainer/Contents" unique_id=1532974484 node_paths=PackedStringArray("active_quests_vbox", "completed_quests_vbox")]
 layout_mode = 2
 mouse_filter = 2
+script = ExtResource("20_77202")
+quest_tab_button_group = SubResource("ButtonGroup_7rvsd")
+active_quests_vbox = NodePath("VBoxContainer/MarginContainer/ActiveQuestsTab/ScrollContainer/VBoxContainer")
+completed_quests_vbox = NodePath("VBoxContainer/MarginContainer/CompletedQuestsTab/ScrollContainer2/VBoxContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Profile/MarginContainer/VBoxContainer/Contents/JournalTab" unique_id=1334132128]
 layout_mode = 2
@@ -274,5 +285,61 @@ layout_mode = 2
 text = "JOURNAL"
 horizontal_alignment = 1
 
-[node name="JournalQuestPanel" parent="Profile/MarginContainer/VBoxContainer/Contents/JournalTab/VBoxContainer" unique_id=1774396229 instance=ExtResource("20_77202")]
+[node name="HBoxContainer" type="HBoxContainer" parent="Profile/MarginContainer/VBoxContainer/Contents/JournalTab/VBoxContainer" unique_id=1522514064]
 layout_mode = 2
+mouse_filter = 2
+
+[node name="ActiveQuestsTabButton" type="Button" parent="Profile/MarginContainer/VBoxContainer/Contents/JournalTab/VBoxContainer/HBoxContainer" unique_id=1079179771 node_paths=PackedStringArray("tab")]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 1
+toggle_mode = true
+button_group = SubResource("ButtonGroup_7rvsd")
+text = "ACTIVE"
+script = ExtResource("19_07rek")
+tab = NodePath("../../MarginContainer/ActiveQuestsTab")
+metadata/_custom_type_script = "uid://8bevyibgwl6q"
+
+[node name="CompletedQuestsTabButton" type="Button" parent="Profile/MarginContainer/VBoxContainer/Contents/JournalTab/VBoxContainer/HBoxContainer" unique_id=685669897 node_paths=PackedStringArray("tab")]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 1
+toggle_mode = true
+button_group = SubResource("ButtonGroup_7rvsd")
+text = "COMPLETED"
+script = ExtResource("19_07rek")
+tab = NodePath("../../MarginContainer/CompletedQuestsTab")
+metadata/_custom_type_script = "uid://8bevyibgwl6q"
+
+[node name="MarginContainer" type="MarginContainer" parent="Profile/MarginContainer/VBoxContainer/Contents/JournalTab/VBoxContainer" unique_id=99372372]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="ActiveQuestsTab" type="MarginContainer" parent="Profile/MarginContainer/VBoxContainer/Contents/JournalTab/VBoxContainer/MarginContainer" unique_id=1592556815]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Profile/MarginContainer/VBoxContainer/Contents/JournalTab/VBoxContainer/MarginContainer/ActiveQuestsTab" unique_id=848529006]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Profile/MarginContainer/VBoxContainer/Contents/JournalTab/VBoxContainer/MarginContainer/ActiveQuestsTab/ScrollContainer" unique_id=1612132379]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+mouse_filter = 2
+
+[node name="CompletedQuestsTab" type="MarginContainer" parent="Profile/MarginContainer/VBoxContainer/Contents/JournalTab/VBoxContainer/MarginContainer" unique_id=864277594]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="Profile/MarginContainer/VBoxContainer/Contents/JournalTab/VBoxContainer/MarginContainer/CompletedQuestsTab" unique_id=298792873]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Profile/MarginContainer/VBoxContainer/Contents/JournalTab/VBoxContainer/MarginContainer/CompletedQuestsTab/ScrollContainer2" unique_id=65873728]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+mouse_filter = 2

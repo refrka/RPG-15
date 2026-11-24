@@ -21,6 +21,10 @@ enum LocationState {
 
 @export var feature_root: Node2D
 
+@export var camera_top_left_limit: Marker2D
+
+@export var camera_bottom_right_limit: Marker2D
+
 var location_state: LocationState
 
 var initialized:= false

@@ -11,6 +11,10 @@ class_name ProfileOverlay extends Overlay
 
 @export var tab_button_group: ButtonGroup
 
+@export var quest_panel_vbox: VBoxContainer
+
+@export var journal_tab: JournalTab
+
 
 
 
@@ -41,6 +45,8 @@ func open() -> void:
 
 		tool_rect.update()
 
+	journal_tab.load_quest_panels()
+
 
 
 
@@ -55,6 +61,10 @@ func close() -> void:
 
 
 
+
+func load_quest_panels() -> void:
+
+	pass
 
 
 
@@ -75,11 +85,11 @@ func _on_tab_button_pressed(button: Button) -> void:
 
 		if tab_button == button:
 
-			tab_button.tab.show()
+			tab_button.tab.open()
 
 		else:
 
-			tab_button.tab.hide()
+			tab_button.tab.close()
 
 
 

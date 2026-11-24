@@ -13,7 +13,6 @@ func fire(_data:={}) -> void:
 
 
 
-
 func get_notice_message() -> String:
 
 	return ""

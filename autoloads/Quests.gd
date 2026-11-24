@@ -1,6 +1,7 @@
 extends Node
 
 
+var turn_in_quest_option:= load("res://main/dialogue/option_resources/turn_in_quest_option.tres")
 
 var active_quests: Array[QuestData]
 
@@ -38,6 +39,16 @@ func get_root_options(source_entity: Entity) -> Array:
 	var root_options = []
 
 	for quest_data in active_quests:
+
+		if quest_data.state == Quest.QuestState.READY and not quest_data.quest.auto_complete:
+
+			if quest_data.quest.turn_in_entity_ref and quest_data.quest.turn_in_entity_ref.matches(source_entity):
+
+				var option = turn_in_quest_option.duplicate()
+
+				option.quest_data = quest_data
+
+				root_options.append(option)
 
 		var current_objectives = quest_data.get_current_objectives()
 
@@ -156,7 +167,7 @@ func set_quest_stage(quest: Quest, index: int) -> void:
 
 	var stage = quest.get_stage(index)
 
-	stage.objective_completed.connect(_on_stage_objective_completed.bind(quest_data), CONNECT_ONE_SHOT)
+	stage.objective_completed.connect(_on_stage_objective_completed.bind(quest_data))
 
 
 
@@ -192,6 +203,10 @@ func _on_stage_objective_completed(objective: QuestObjective, quest_data: QuestD
 
 func _on_quest_stage_completed(quest_data: QuestData) -> void:
 
+	var stage = quest_data.get_stage()
+
+	stage.objective_completed.disconnect(_on_stage_objective_completed)
+
 	var next_stage_index = quest_data.stage_index + 1
 
 	var next_stage = quest_data.get_stage(next_stage_index)
@@ -204,9 +219,13 @@ func _on_quest_stage_completed(quest_data: QuestData) -> void:
 
 	else:
 
-		quest_data.set_state(Quest.QuestState.COMPLETE)
+		if quest_data.quest.auto_complete:
 
-		Notices.new_notice("Quest completed: %s" % quest_data.quest.quest_title)
+			quest_data.set_state(Quest.QuestState.COMPLETE)
+
+		else:
+
+			quest_data.set_state(Quest.QuestState.READY)
 
 
 

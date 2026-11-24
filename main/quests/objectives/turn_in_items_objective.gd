@@ -7,7 +7,7 @@ class_name TurnInItemsObjective extends QuestObjective
 
 
 
-func initialize() -> void:
+func initialize(_quest_data: QuestData) -> void:
 
 	Events.subscribe(PlayerSubmittedItemEvent, _on_player_submitted_item)
 

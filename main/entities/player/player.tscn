@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://di7dnrrxv3kv4" path="res://main/sensor/pickup_sensor.gd" id="9_qvaa3"]
 [ext_resource type="Script" uid="uid://ccdd8pxqp8bym" path="res://main/components/interaction_component.gd" id="10_243e6"]
 [ext_resource type="Script" uid="uid://dqww7qb3cvxoo" path="res://main/sensor/sensor.gd" id="10_elonm"]
+[ext_resource type="Resource" uid="uid://dvy7rax5t4ios" path="res://main/items/equipment/tools/axe.tres" id="10_fjjas"]
 [ext_resource type="Script" uid="uid://rv1tyr5x36h4" path="res://main/states/body_interacting_state.gd" id="12_qe6dv"]
 [ext_resource type="Script" uid="uid://bgdddqoa78u1i" path="res://main/components/health_component.gd" id="16_s4fyv"]
 [ext_resource type="PackedScene" uid="uid://bh7ip01t2cvqp" path="res://ui/tool_icon_rect.tscn" id="23_n1onb"]
@@ -50,6 +51,7 @@ script = ExtResource("3_la1ju")
 stacks = Array[ExtResource("4_enjxq")]([SubResource("Resource_o4e80"), SubResource("Resource_ereea")])
 currency_stack = SubResource("Resource_wsknm")
 weapon_stack = SubResource("Resource_kdw2b")
+tools = Array[ExtResource("9_n1onb")]([ExtResource("10_fjjas")])
 metadata/_custom_type_script = "uid://d1l0dy163gnc5"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4e80"]

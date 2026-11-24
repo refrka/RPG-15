@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="DialogueQuestOption" format=3 uid="uid://deyr3ss8uy4fh"]
+
+[ext_resource type="Script" uid="uid://pl241836natb" path="res://main/conditions/condition.gd" id="1_pxhwi"]
+[ext_resource type="Script" uid="uid://dkta1jljyvgwr" path="res://main/commands/command.gd" id="2_lm8fp"]
+[ext_resource type="Script" uid="uid://c28llubm3opy7" path="res://main/dialogue/dialogue_quest_option.gd" id="2_t60tx"]
+[ext_resource type="Script" uid="uid://dgwbtjsm863fm" path="res://main/commands/turn_in_quest_command.gd" id="3_vdwrl"]
+[ext_resource type="Script" uid="uid://bxv7h66hnp8wv" path="res://main/commands/command_set.gd" id="4_ucwmk"]
+
+[sub_resource type="Resource" id="Resource_t60tx"]
+script = ExtResource("3_vdwrl")
+
+[sub_resource type="Resource" id="Resource_pxhwi"]
+script = ExtResource("4_ucwmk")
+commands = Array[ExtResource("2_lm8fp")]([SubResource("Resource_t60tx")])
+metadata/_custom_type_script = "uid://bxv7h66hnp8wv"
+
+[resource]
+script = ExtResource("2_t60tx")
+text = "Submit quest"
+on_select_command_set = SubResource("Resource_pxhwi")
+metadata/_custom_type_script = "uid://c28llubm3opy7"

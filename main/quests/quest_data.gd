@@ -52,6 +52,10 @@ func set_state(_state: Quest.QuestState) -> void:
 
 	state_changed.emit(state)
 
+	if state == Quest.QuestState.COMPLETE:
+
+		Notices.new_notice("Quest completed: %s" % quest.quest_title)
+
 	Events.fire_script(QuestStateChangedEvent, {"quest_data": self})
 
 

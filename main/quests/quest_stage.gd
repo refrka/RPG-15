@@ -24,6 +24,6 @@ func initialize(quest_data: QuestData) -> void:
 
 
 
-func _on_objective_completed(objective: QuestObjective) -> void:	
+func _on_objective_completed(objective: QuestObjective) -> void:
 
 	objective_completed.emit(objective)

@@ -23,6 +23,8 @@ game_state = 2
 allowed_actions = Array[StringName]([&"profile"])
 metadata/_custom_type_script = "uid://dy0n8ihmni5qm"
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_tw3kd"]
+
 [node name="Root" type="Node" unique_id=425788085 groups=["root"]]
 script = ExtResource("1_pyidc")
 input_configs = Array[ExtResource("2_vvh5c")]([SubResource("Resource_ihp3c"), SubResource("Resource_28aoi")])
@@ -72,6 +74,7 @@ visible = false
 
 [node name="ProfileOverlay" parent="ProfileCanvas" unique_id=1283527882 instance=ExtResource("4_28aoi")]
 visible = false
+tab_button_group = SubResource("ButtonGroup_tw3kd")
 
 [node name="CursorCanvas" type="CanvasLayer" parent="." unique_id=1737291134]
 

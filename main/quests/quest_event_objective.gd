@@ -10,10 +10,22 @@ func initialize(quest_data: QuestData) -> void:
 
 	super(quest_data)
 
+	if is_complete():
+
+		complete()
+
 	if event:
 
 		Events.subscribe(event.get_script(), _on_event)
 
+
+
+func is_complete() -> bool:
+
+	return false
+
+
+	
 
 
 func _on_event(_event: Event) -> void:

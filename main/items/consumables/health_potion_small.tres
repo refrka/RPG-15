@@ -8,13 +8,14 @@
 [sub_resource type="Resource" id="Resource_va07x"]
 script = ExtResource("2_i8adq")
 amount = 1
-duration = 4.0
+duration = 10.0
 tick_rate = 1.0
 
 [resource]
 script = ExtResource("1_bfaqu")
 effects_on_consume = Array[ExtResource("1_puu05")]([SubResource("Resource_va07x")])
 item_id = &"health_potion_small"
+display_name = "Sm Health Potion"
 max_stack = 10
 icon_texture = ExtResource("1_m6eym")
 sprite_offset = Vector2(0, -8)

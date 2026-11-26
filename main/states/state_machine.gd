@@ -39,7 +39,7 @@ func initialize(_entity: Entity) -> void:
 
 			body_states[state.get_script()] = state
 
-			state.initialize(_entity)
+			state.initialize(_entity, self)
 
 	if combat_root:
 
@@ -47,7 +47,7 @@ func initialize(_entity: Entity) -> void:
 
 			combat_states[state.get_script()] = state
 
-			state.initialize(_entity)
+			state.initialize(_entity, self)
 
 	current_body_state = initial_body_state
 

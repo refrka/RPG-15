@@ -100,9 +100,7 @@ func update_visuals() -> void:
 
 	if hovered:
 
-		if is_empty():
-
-			stylebox = hovered_empty_stylebox
+		stylebox = hovered_empty_stylebox
 
 	if selected:
 

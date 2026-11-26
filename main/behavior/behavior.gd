@@ -2,64 +2,67 @@ class_name Behavior extends Resource
 
 
 
+
 @export var phases: Array[BehaviorPhase]
+
+var actor: Entity
 
 var phase_index:= -1
 
-
-
-var entity: Entity
-
+var current_phase: BehaviorPhase
 
 
 
+func initialize() -> void:
 
-func initialize(_entity: Entity) -> void:
+	for phase in phases:
 
-	entity = _entity
+		phase.actor = actor
 
+		phase.phase_index_requested.connect(_on_phase_index_requested)
+
+
+
+func start() -> void:
+
+	start_phase(0)
+
+
+
+func end() -> void:
+
+	if current_phase:
+
+		current_phase.phase_index_requested.disconnect(_on_phase_index_requested)
 
 
 
 
 func start_phase(index: int) -> void:
 
+	if phases.size() - 1 < index:
+
+		return
+
+	if current_phase:
+
+		current_phase.end()
+
 	phase_index = index
 
-	var phase = get_phase(phase_index)
+	var phase = phases[index]
 
-	phase.command_data["actor"] = entity
+	if phase:
 
-	phase.ended.connect(_on_phase_ended.bind(phase), CONNECT_ONE_SHOT)
+		current_phase = phase
 
-	phase.execute_index(0)
-
-
-
-
-func end() -> void:
-
-	var phase = get_phase(phase_index)
-
-	phase.end()
-
-
-
-func get_phase(index: int) -> BehaviorPhase:
-
-	if phases.size() - 1 >= index:
-
-		return phases[index]
-
-	return null
+		phase.start()
 
 
 
 
-func _on_phase_ended(phase: BehaviorPhase) -> void:
 
-	var next_index = phase.next_index
 
-	if next_index == -1:
+func _on_phase_index_requested(index: int) -> void:
 
-		start_phase(phase_index)
+	start_phase(index)

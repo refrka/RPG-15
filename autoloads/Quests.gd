@@ -177,6 +177,8 @@ func set_quest_stage(quest: Quest, index: int) -> void:
 
 	stage.objective_completed.connect(_on_stage_objective_completed.bind(quest_data))
 
+	quest_data.initialize_stage()
+
 
 
 

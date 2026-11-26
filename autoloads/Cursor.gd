@@ -10,6 +10,8 @@ var cursor_slot: CursorSlot
 
 var multi_select_enabled:= false
 
+var item_tooltip: ItemTooltip
+
 
 
 
@@ -17,6 +19,8 @@ var multi_select_enabled:= false
 func _ready() -> void:
 
 	process_mode = Node.PROCESS_MODE_ALWAYS
+
+	item_tooltip = get_tree().get_first_node_in_group("item_tooltip")
 
 
 
@@ -57,6 +61,8 @@ func handle_slot_input(item_slot: ItemSlot, event: InputEvent) -> void:
 					elif cursor_slot.held_slot.can_accept_contents(item_slot) and item_slot.can_accept_contents(cursor_slot.held_slot):
 
 						cursor_slot.held_slot.swap(item_slot)
+
+					show_item_tooltip(cursor_slot.item_stack)
 
 					cursor_slot.drop_slot()
 
@@ -102,9 +108,42 @@ func deselect_slot(slot: ItemSlot) -> void:
 
 func set_slot_hover_state(slot: ItemSlot, state: bool) -> void:
 
+	hide_item_tooltip()
+
 	slot.set_hovered_state(state)
 
 	hovered_slot = null if state == false else slot
+
+	if hovered_slot and not hovered_slot.is_empty():
+
+		show_item_tooltip(hovered_slot.item_stack)
+
+
+
+
+
+
+
+
+
+
+
+func show_item_tooltip(item_stack: ItemStack) -> void:
+
+	item_tooltip.activate(item_stack.item)
+
+
+
+func hide_item_tooltip() -> void:
+
+	item_tooltip.deactivate()
+
+
+
+
+
+
+
 
 
 

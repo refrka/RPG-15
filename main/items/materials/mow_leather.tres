@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_o3g3f")
 item_id = &"mow_leather"
+display_name = "Mow Leather"
 icon_texture = ExtResource("1_y5i5g")
 sprite_offset = Vector2(0, -4)
 metadata/_custom_type_script = "uid://jlm5jqxs7txp"

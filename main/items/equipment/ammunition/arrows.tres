@@ -8,5 +8,6 @@
 script = ExtResource("3_vp7s7")
 projectile_scene = ExtResource("2_iys06")
 item_id = &"arrows"
+display_name = "Arrows"
 icon_texture = ExtResource("1_aiqsy")
 metadata/_custom_type_script = "uid://b0jp04q6ex7d"

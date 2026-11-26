@@ -1,9 +1,13 @@
 [gd_resource type="Resource" script_class="Consumable" format=3 uid="uid://b4eqrmx0mxjq6"]
 
 [ext_resource type="Script" uid="uid://cb8051efpe7su" path="res://main/effects/effect.gd" id="1_jk2u2"]
+[ext_resource type="Texture2D" uid="uid://o824xrfq2pwl" path="res://textures/items/seeds_icon_texture.png" id="2_matsx"]
 [ext_resource type="Script" uid="uid://cw6a1oafm3u0g" path="res://main/items/consumable.gd" id="2_rk536"]
 
 [resource]
 script = ExtResource("2_rk536")
 item_id = &"seeds"
+display_name = "Seeds"
+icon_texture = ExtResource("2_matsx")
+sprite_offset = Vector2(0, -4)
 metadata/_custom_type_script = "uid://cw6a1oafm3u0g"

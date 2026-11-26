@@ -43,6 +43,8 @@ func add_stack(stack: ItemStack) -> void:
 
 		currency_stack.merge_stack(stack)
 
+		Events.fire_script(PlayerAcquiredItemEvent, {"item": stack.item})
+
 		return
 
 	var stacks_with_item = get_stacks_with(stack.item)
@@ -57,6 +59,8 @@ func add_stack(stack: ItemStack) -> void:
 
 			stack.set_count(0)
 
+			Events.fire_script(PlayerAcquiredItemEvent, {"item": stack.item})
+
 	else:
 
 		for _stack in stacks_with_item:
@@ -64,6 +68,8 @@ func add_stack(stack: ItemStack) -> void:
 			if _stack.can_merge_stack(stack):
 
 				_stack.merge_stack(stack)
+
+				Events.fire_script(PlayerAcquiredItemEvent, {"item": stack.item})
 
 				if stack.is_empty():
 
@@ -86,6 +92,8 @@ func add_item(item: Item, amount:= 1) -> void:
 
 		remaining = stack.remove_amount(remaining)
 
+		Events.fire_script(PlayerAcquiredItemEvent, {"item": item})
+
 
 
 func add_tool(tool: Tool) -> void:
@@ -93,6 +101,8 @@ func add_tool(tool: Tool) -> void:
 	if not tools.has(tool):
 
 		tools.append(tool)
+
+		Events.fire_script(PlayerAcquiredItemEvent, {"item": tool})
 
 		Events.fire_script(PlayerAcquiredToolEvent, {"tool": tool}, true)
 

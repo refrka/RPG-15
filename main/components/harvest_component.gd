@@ -110,7 +110,7 @@ func _on_death() -> void:
 
 func _on_failed_interaction() -> void:
 
-	entity.body_anim_player.play("harvestable/failed_harvest")
+	animation_component.play_body_animation("harvestable/failed_harvest")
 
 
 

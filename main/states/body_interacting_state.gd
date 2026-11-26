@@ -4,9 +4,9 @@ class_name BodyInteractingState extends BodyBusyState
 var interaction_component: InteractionComponent
 
 
-func initialize(_entity: Entity) -> void:
+func initialize(_entity: Entity, _state_machine: StateMachine) -> void:
 
-	super(_entity)
+	super(_entity, _state_machine)
 
 	interaction_component = entity.get_component(InteractionComponent)
 
@@ -26,6 +26,8 @@ func enter() -> void:
 	animation_component.play_body_animation(anim_name)
 
 	if interaction_component.current_interactable_component and interaction_component.current_interactable_component.required_tool:
+
+		entity.tool_icon_rect.texture = interaction_component.current_interactable_component.required_tool.icon_texture
 
 		entity.tool_icon_rect.anim_player.play("use")
 

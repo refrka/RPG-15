@@ -2,11 +2,19 @@
 
 [ext_resource type="Script" uid="uid://cb8051efpe7su" path="res://main/effects/effect.gd" id="1_d0qlt"]
 [ext_resource type="Texture2D" uid="uid://3lmplcm5lg6q" path="res://textures/items/fish_icon_texture.png" id="2_aeqfe"]
+[ext_resource type="Script" uid="uid://d16157jshvhex" path="res://main/effects/restore_health_instant_effect.gd" id="2_o8s3m"]
 [ext_resource type="Script" uid="uid://cw6a1oafm3u0g" path="res://main/items/consumable.gd" id="2_uo762"]
+
+[sub_resource type="Resource" id="Resource_2fpl2"]
+script = ExtResource("2_o8s3m")
+amount = 1
+metadata/_custom_type_script = "uid://d16157jshvhex"
 
 [resource]
 script = ExtResource("2_uo762")
+effects_on_consume = Array[ExtResource("1_d0qlt")]([SubResource("Resource_2fpl2")])
 item_id = &"fish"
+display_name = "Fish"
 icon_texture = ExtResource("2_aeqfe")
 sprite_offset = Vector2(0, -2)
 metadata/_custom_type_script = "uid://cw6a1oafm3u0g"

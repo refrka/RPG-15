@@ -51,6 +51,8 @@ var decay:= -1.0
 
 
 
+var time_alive:= 0.0
+
 var timer:= 0.0
 
 
@@ -65,6 +67,8 @@ func expire() -> void:
 
 func tick(delta: float) -> void:
 
+	time_alive += delta
+
 	if modifier_type == ModifierType.DECAY:
 
 		value *= clampf(1.0 - decay * delta, 0.0, 1.0)
@@ -75,9 +79,7 @@ func tick(delta: float) -> void:
 
 	elif modifier_type == ModifierType.DURATION:
 
-		timer -= delta
-
-		if timer <= 0.0:
+		if time_alive >= duration:
 
 			expire()
 

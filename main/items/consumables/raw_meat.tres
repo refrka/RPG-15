@@ -2,11 +2,19 @@
 
 [ext_resource type="Script" uid="uid://cb8051efpe7su" path="res://main/effects/effect.gd" id="1_qo38c"]
 [ext_resource type="Texture2D" uid="uid://485x6sf3teg8" path="res://textures/items/raw_meat_icon_texture.png" id="2_48x2m"]
+[ext_resource type="Script" uid="uid://cfwqrd45ywtmk" path="res://main/effects/reduce_health_instant_effect.gd" id="2_hfqen"]
 [ext_resource type="Script" uid="uid://cw6a1oafm3u0g" path="res://main/items/consumable.gd" id="2_tqn5c"]
+
+[sub_resource type="Resource" id="Resource_mtiwc"]
+script = ExtResource("2_hfqen")
+amount = 2
+metadata/_custom_type_script = "uid://cfwqrd45ywtmk"
 
 [resource]
 script = ExtResource("2_tqn5c")
+effects_on_consume = Array[ExtResource("1_qo38c")]([SubResource("Resource_mtiwc")])
 item_id = &"raw_meant"
+display_name = "Raw Meat"
 icon_texture = ExtResource("2_48x2m")
 sprite_offset = Vector2(0, -2)
 metadata/_custom_type_script = "uid://cw6a1oafm3u0g"

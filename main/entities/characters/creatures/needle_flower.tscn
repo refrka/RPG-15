@@ -1,11 +1,49 @@
 [gd_scene format=3 uid="uid://bsdpolq2op80x"]
 
 [ext_resource type="PackedScene" uid="uid://bxhe8lv6h7cau" path="res://main/entities/character.tscn" id="1_iivdv"]
+[ext_resource type="Script" uid="uid://bilm5ege1cif1" path="res://main/entities/entity_stats.gd" id="2_6e181"]
+[ext_resource type="Script" uid="uid://crb5u1k1b1ilj" path="res://main/loot/loot_entry.gd" id="2_67qx5"]
 [ext_resource type="Texture2D" uid="uid://phas4seyfmde" path="res://textures/props/needle_flower_sprite_texture.png" id="2_b077t"]
+[ext_resource type="Script" uid="uid://jlm5jqxs7txp" path="res://main/items/item.gd" id="3_6e181"]
+[ext_resource type="Script" uid="uid://dmr4v28gqmw1h" path="res://main/loot/loot_table.gd" id="4_6ypib"]
 [ext_resource type="Script" uid="uid://bgdddqoa78u1i" path="res://main/components/health_component.gd" id="4_g6342"]
+[ext_resource type="Resource" uid="uid://cehviswe2qxhm" path="res://main/items/materials/petal.tres" id="5_6ypib"]
 [ext_resource type="Script" uid="uid://p6bwral64oot" path="res://main/components/turret_component.gd" id="5_uma50"]
 [ext_resource type="Script" uid="uid://vqmdx5cwp2ie" path="res://main/combat/attack_entry.gd" id="5_vlhms"]
+[ext_resource type="Resource" uid="uid://b4eqrmx0mxjq6" path="res://main/items/consumables/seeds.tres" id="6_matpp"]
 [ext_resource type="PackedScene" uid="uid://bwbd1trukdceq" path="res://main/combat/projectiles/needle.tscn" id="6_vlhms"]
+[ext_resource type="Script" uid="uid://bw4ppwk1krp00" path="res://main/states/body_flinch_state.gd" id="7_vlhms"]
+
+[sub_resource type="Resource" id="Resource_matpp"]
+script = ExtResource("2_6e181")
+base_health = 1
+metadata/_custom_type_script = "uid://bilm5ege1cif1"
+
+[sub_resource type="Resource" id="Resource_0lcj0"]
+script = ExtResource("2_67qx5")
+items = Dictionary[ExtResource("3_6e181"), int]({
+ExtResource("5_6ypib"): 1
+})
+weight = -1
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_jk2u2"]
+script = ExtResource("2_67qx5")
+items = Dictionary[ExtResource("3_6e181"), int]({
+ExtResource("6_matpp"): 1
+})
+weight = 50
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_rk536"]
+script = ExtResource("2_67qx5")
+weight = 25
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_v5bko"]
+script = ExtResource("4_6ypib")
+entries = Array[ExtResource("2_67qx5")]([SubResource("Resource_0lcj0"), SubResource("Resource_jk2u2"), SubResource("Resource_rk536")])
+metadata/_custom_type_script = "uid://dmr4v28gqmw1h"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iivdv"]
 size = Vector2(2, 13)
@@ -21,16 +59,40 @@ size = Vector2(5, 5)
 
 [sub_resource type="Resource" id="Resource_hv40w"]
 script = ExtResource("5_vlhms")
-knockback_force = 1000.0
+knockback_force = 100.0
 metadata/_custom_type_script = "uid://vqmdx5cwp2ie"
+
+[sub_resource type="Animation" id="Animation_matpp"]
+resource_name = "fire_projectile"
+length = 0.21628821
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/BodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.011807792, 0.1186216),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5tfpv"]
+_data = {
+&"fire_projectile": SubResource("Animation_matpp")
+}
 
 [node name="NeedleFlower" unique_id=920390172 instance=ExtResource("1_iivdv")]
 entity_id = &"needle_flower"
+stats = SubResource("Resource_matpp")
+death_loot_table = SubResource("Resource_v5bko")
 starting_face_dir = Vector2(-1, 0)
 
 [node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(1546177270) index="0" unique_id=2072653577]
-position = Vector2(0, -16)
+position = Vector2(1, -8)
 texture = ExtResource("2_b077t")
+hframes = 3
 
 [node name="BodyCollision" parent="." index="1" unique_id=934894713]
 position = Vector2(0, -6.5)
@@ -59,9 +121,14 @@ script = ExtResource("5_uma50")
 attack_entry = SubResource("Resource_hv40w")
 projectile_scene = ExtResource("6_vlhms")
 ray_root = NodePath("../../TurretRays")
+cooldown_duration = 0.5
 metadata/_custom_type_script = "uid://p6bwral64oot"
 
-[node name="CenterMarker" parent="." index="7" unique_id=1538757570]
+[node name="BodyFlinchState" type="Node" parent="StateMachine/BodyRoot" parent_id_path=PackedInt32Array(2018266311) index="1" unique_id=212311826]
+script = ExtResource("7_vlhms")
+metadata/_custom_type_script = "uid://bw4ppwk1krp00"
+
+[node name="CenterMarker" parent="." index="8" unique_id=1538757570]
 position = Vector2(0, -10.5)
 
 [node name="TurretRays" type="Node2D" parent="." index="9" unique_id=491874564]
@@ -79,4 +146,8 @@ target_position = Vector2(100, 0)
 collision_mask = 512
 collide_with_areas = true
 
+[node name="BodyAnimPlayer" parent="." index="11" unique_id=1242108839]
+libraries/needle_flower = SubResource("AnimationLibrary_5tfpv")
+
 [editable path="Hurtbox"]
+[editable path="VisionSensor"]

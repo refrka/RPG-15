@@ -11,6 +11,15 @@ var last_tick:= 0.0
 
 
 
+
+
+func expire() -> void:
+
+	expired.emit()
+
+
+
+
 func tick(delta: float) -> void:
 
 	super(delta)
@@ -25,4 +34,4 @@ func tick(delta: float) -> void:
 
 	if time_alive >= duration:
 
-		expired.emit()
+		expire()

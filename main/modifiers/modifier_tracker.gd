@@ -37,10 +37,6 @@ func get_float_multiply() -> float:
 			if modifier.operator == Modifier.Operator.MULTIPLY:
 
 				float_total *= modifier.value
-
-			elif modifier.operator == Modifier.Operator.OVERRIDE:
-
-				return modifier.value
 	
 	return float_total
 
@@ -57,13 +53,24 @@ func get_float_add() -> float:
 			if modifier.operator == Modifier.Operator.ADD:
 
 				float_total += modifier.value
-
-			elif modifier.operator == Modifier.Operator.OVERRIDE:
-
-				return modifier.value
 	
 	return float_total
 
+
+
+func get_float_override() -> float:
+
+	var float_override:= -1.0
+
+	for modifier in modifiers:
+
+		if modifier.value_type == Modifier.ValueType.FLOAT:
+			
+			if modifier.operator == Modifier.Operator.OVERRIDE:
+
+				float_override = modifier.value
+
+	return float_override
 
 
 

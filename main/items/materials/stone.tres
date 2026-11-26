@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_p3yok")
 item_id = &"stone"
+display_name = "Stone"
 icon_texture = ExtResource("1_rywj5")
 sprite_offset = Vector2(0, -4)
 metadata/_custom_type_script = "uid://jlm5jqxs7txp"

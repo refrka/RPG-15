@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://rna4tku2xtgd"]
+
+[ext_resource type="Script" uid="uid://dqww7qb3cvxoo" path="res://main/sensor/sensor.gd" id="1_7ssw1"]
+[ext_resource type="Script" uid="uid://dpb8wb2anr5o2" path="res://main/effect_areas/effect_area.gd" id="1_p13c1"]
+
+[node name="EffectArea" type="Node2D" unique_id=1299279660 node_paths=PackedStringArray("sensor")]
+script = ExtResource("1_p13c1")
+sensor = NodePath("Sensor")
+
+[node name="Sensor" type="Area2D" parent="." unique_id=60474967]
+script = ExtResource("1_7ssw1")
+metadata/_custom_type_script = "uid://dqww7qb3cvxoo"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sensor" unique_id=367345360]

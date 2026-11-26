@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://eqxiq60w63ko"
-path="res://.godot/imported/thief_sprite_texture.png-0993b5876e348f2babc9bdea6656d367.ctex"
+uid="uid://dmuoj58nqdxa"
+path="res://.godot/imported/speed_potion_icon_texture.png-a5c1fee13a6cdbf0392780859366920a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://main/entities/characters/npcs/thief_sprite_texture.png"
-dest_files=["res://.godot/imported/thief_sprite_texture.png-0993b5876e348f2babc9bdea6656d367.ctex"]
+source_file="res://textures/items/speed_potion_icon_texture.png"
+dest_files=["res://.godot/imported/speed_potion_icon_texture.png-a5c1fee13a6cdbf0392780859366920a.ctex"]
 
 [params]
 

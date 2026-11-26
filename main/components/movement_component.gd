@@ -133,17 +133,17 @@ func clear_target_position() -> void:
 
 func get_velocity(delta: float) -> Vector2:
 
+	var modifier_velocity = modifier_tracker.get_vector()
+
 	if move_locked:
 
-		return Vector2.ZERO
+		return Vector2.ZERO + modifier_velocity
 
 	move_dir = get_move_dir()
 
 	move_speed = get_move_speed()
 
 	move_velocity = move_dir * move_speed * delta
-
-	var modifier_velocity = modifier_tracker.get_vector()
 
 	move_velocity += modifier_velocity
 
@@ -153,6 +153,12 @@ func get_velocity(delta: float) -> Vector2:
 
 
 func get_move_speed() -> float:
+
+	var speed_override = modifier_tracker.get_float_override()
+
+	if speed_override != -1.0:
+
+		return speed_override
 
 	var speed_multipler = modifier_tracker.get_float_multiply()
 

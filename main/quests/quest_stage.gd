@@ -17,9 +17,9 @@ func initialize(quest_data: QuestData) -> void:
 
 	for objective in objectives:
 
-		objective.initialize(quest_data)
-
 		objective.completed.connect(_on_objective_completed.bind(objective))
+
+		objective.initialize(quest_data)
 
 
 

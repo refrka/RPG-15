@@ -41,6 +41,10 @@ func fire_script(event_script: Script, data:= {}, with_notice:= false) -> void:
 
 	event.fire(data)
 
+	if with_notice:
+
+		Notices.new_notice(event.get_notice_message())
+
 	if subscriptions.has(event_script):
 
 		var callbacks = subscriptions[event_script]
@@ -48,10 +52,6 @@ func fire_script(event_script: Script, data:= {}, with_notice:= false) -> void:
 		for callback in callbacks:
 
 			callback.call(event)
-
-	if with_notice:
-
-		Notices.new_notice(event.get_notice_message())
 
 		
 

@@ -24,6 +24,17 @@ func initialize(quest_data: QuestData) -> void:
 
 		dialogue_option.quest_objective = self
 
+	if is_complete():
+
+		complete()
+
+
+
+
+func is_complete() -> bool:
+
+	return false
+
 
 
 func complete() -> void:

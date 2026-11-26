@@ -21,6 +21,8 @@ enum LocationState {
 
 @export var feature_root: Node2D
 
+@export var temp_root: Node2D
+
 @export var camera_top_left_limit: Marker2D
 
 @export var camera_bottom_right_limit: Marker2D
@@ -111,6 +113,18 @@ func add_pickup(pickup: Pickup, origin: Vector2, move_out:= true) -> void:
 		var tween = get_tree().create_tween()
 
 		tween.tween_property(pickup, "global_position", origin + (dir * 16.0), 0.5)
+
+
+
+
+
+func add_temp(temp: Node2D, target_position: Vector2) -> void:
+
+	temp_root.add_child.call_deferred(temp)
+
+	temp.global_position = target_position
+
+
 
 
 

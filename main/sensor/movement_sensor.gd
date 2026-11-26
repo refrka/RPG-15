@@ -41,7 +41,7 @@ func _on_entity_entered(_entity: Entity) -> void:
 
 	if movement_component:
 
-		var modifier = Modifier.new_passive(move_speed_override, Modifier.Operator.OVERRIDE)
+		var modifier = Modifier.new_passive(move_speed_override, Modifier.Operator.MULTIPLY)
 
 		movement_component.modifier_tracker.add_modifier(modifier)
 

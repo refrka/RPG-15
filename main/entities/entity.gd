@@ -1,6 +1,8 @@
 class_name Entity extends PhysicsBody2D
 
 
+signal died
+
 signal deactivated
 
 signal face_dir_updated
@@ -228,7 +230,11 @@ func die() -> void:
 
 	hurtbox.deactivate()
 
+	body_collision.set.call_deferred("disabled", true)
+
 	components.values().map(func(c): c._on_death())
+
+	died.emit()
 
 	deactivate()
 
@@ -294,5 +300,7 @@ func _on_death_animation_finished() -> void:
 
 	else:
 
-		body_anim_player.play("expire")
+		var animation_component = get_component(AnimationComponent)
+
+		animation_component.play_body_animation("expire")
 

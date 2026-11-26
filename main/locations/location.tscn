@@ -5,12 +5,13 @@
 [ext_resource type="Script" uid="uid://bel2v4sctr7am" path="res://main/features/feature.gd" id="2_gk7iq"]
 [ext_resource type="Script" uid="uid://cgh4peg28c4u7" path="res://main/features/spawn_point.gd" id="3_kceww"]
 
-[node name="Location" type="Node2D" unique_id=670555715 node_paths=PackedStringArray("entity_root", "projectile_root", "pickup_root", "feature_root", "camera_top_left_limit", "camera_bottom_right_limit")]
+[node name="Location" type="Node2D" unique_id=670555715 node_paths=PackedStringArray("entity_root", "projectile_root", "pickup_root", "feature_root", "temp_root", "camera_top_left_limit", "camera_bottom_right_limit")]
 script = ExtResource("1_rethr")
 entity_root = NodePath("NavigationRegion2D/YSortRoot/Entities")
 projectile_root = NodePath("NavigationRegion2D/YSortRoot/Projectiles")
 pickup_root = NodePath("NavigationRegion2D/YSortRoot/Pickups")
 feature_root = NodePath("NavigationRegion2D/Features")
+temp_root = NodePath("NavigationRegion2D/YSortRoot/Temp")
 camera_top_left_limit = NodePath("CameraTopLeftLimit")
 camera_bottom_right_limit = NodePath("CameraBottomRightLimit")
 metadata/_custom_type_script = "uid://b0sw0v5y17w7s"
@@ -31,6 +32,9 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="Pickups" type="Node2D" parent="NavigationRegion2D/YSortRoot" unique_id=303855106]
+y_sort_enabled = true
+
+[node name="Temp" type="Node2D" parent="NavigationRegion2D/YSortRoot" unique_id=1191672698]
 y_sort_enabled = true
 
 [node name="Features" type="Node2D" parent="NavigationRegion2D" unique_id=586368805]

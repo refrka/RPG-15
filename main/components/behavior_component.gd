@@ -2,8 +2,24 @@ class_name BehaviorComponent extends Component
 
 
 
+enum Temperament {
 
-@export var default_behavior: Behavior
+	PASSIVE,
+
+	AGGRESSIVE,
+
+	DEFENSIVE
+
+}
+
+
+@export var aggressive:= false
+
+@export var passive_behavior: Behavior
+
+@export var defensive_behavior: Behavior
+
+@export var aggressive_behavior: Behavior
 
 
 
@@ -11,15 +27,24 @@ class_name BehaviorComponent extends Component
 
 var current_behavior: Behavior
 
+var player: Player
+
 
 
 func initialize(_entity: Entity) -> void:
 
 	super(_entity)
 
-	if default_behavior:
+	entity.vision_sensor.entity_position_updated.connect(_on_entity_position_updated)
 
-		default_behavior.initialize(entity)
+	if passive_behavior:
+
+		passive_behavior.actor = entity
+
+		passive_behavior.initialize()
+
+		current_behavior = passive_behavior
+
 
 
 
@@ -27,22 +52,26 @@ func activate() -> void:
 
 	super()
 
-	if default_behavior:
+	if current_behavior:
 
-		start_behavior(default_behavior)
-
-
+		current_behavior.start()
 
 
-func start_behavior(behavior: Behavior) -> void:
+
+func deactivate() -> void:
+
+	super()
+
+	if current_behavior:
+
+		current_behavior.end()
+
+
+
+
+func change_change(behavior: Behavior) -> void:
 
 	current_behavior = behavior
 
-	current_behavior.start_phase(0)
+	
 
-
-
-
-func _on_death() -> void:
-
-	current_behavior.end()

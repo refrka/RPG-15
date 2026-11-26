@@ -16,6 +16,7 @@ metadata/_custom_type_script = "uid://r2k8wvpjv24y"
 script = ExtResource("1_00rpu")
 effects_on_consume = Array[ExtResource("1_ouq86")]([SubResource("Resource_vmymc")])
 item_id = &"health_potion_large"
+display_name = "Lg Health Potion"
 icon_texture = ExtResource("1_hfhgq")
 sprite_offset = Vector2(0, -3)
 metadata/_custom_type_script = "uid://cw6a1oafm3u0g"

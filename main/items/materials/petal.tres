@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://cehviswe2qxhm"]
+
+[ext_resource type="Script" uid="uid://jlm5jqxs7txp" path="res://main/items/item.gd" id="1_23srx"]
+[ext_resource type="Texture2D" uid="uid://urd7ft1hmswr" path="res://textures/items/petal_icon_texture.png" id="1_v5bko"]
+
+[resource]
+script = ExtResource("1_23srx")
+item_id = &"petal"
+display_name = "Petal"
+icon_texture = ExtResource("1_v5bko")
+sprite_offset = Vector2(0, -2)
+metadata/_custom_type_script = "uid://jlm5jqxs7txp"

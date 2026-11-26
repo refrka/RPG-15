@@ -1,0 +1,18 @@
+To Do
+
+-	Bartering
+-	Crafting
+-	Thief/Bandit
+-	Wands
+-	Area effects
+-	Effect animations (burning)
+-	Damage types/resistances
+-	Effect icons/HUD
+-	Some audio
+-	Cutscenes
+-	Levels/progression
+-	More ammunition (arrow types)
+-	Planting/growing
+	> "plot" Feature
+	> Complete growth generates a harvestable
+	

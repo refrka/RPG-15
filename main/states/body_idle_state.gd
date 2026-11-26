@@ -5,11 +5,6 @@ class_name BodyIdleState extends BodyState
 
 
 
-func initialize(_entity: Entity) -> void:
-
-	super(_entity)
-
-
 
 
 func enter() -> void:
@@ -17,6 +12,12 @@ func enter() -> void:
 	super()
 
 	if movement_component:
+
+		if movement_component.move_dir != Vector2.ZERO:
+
+			state_machine.request_state(BodyMovingState)
+
+			return
 
 		movement_component.move_started.connect(_on_move_started)
 
@@ -32,7 +33,7 @@ func exit() -> void:
 
 	super()
 
-	if movement_component:
+	if movement_component and movement_component.move_started.is_connected(_on_move_started):
 
 		movement_component.move_started.disconnect(_on_move_started)
 

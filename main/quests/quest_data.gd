@@ -19,9 +19,9 @@ var completed_objectives: Array[QuestObjective]
 
 
 
-func initialize_stage(index: int) -> void:
+func initialize_stage() -> void:
 
-	var stage = quest.get_stage(index)
+	var stage = quest.get_stage(stage_index)
 
 	if stage:
 
@@ -40,8 +40,6 @@ func set_stage_index(index: int) -> void:
 		set_state(Quest.QuestState.ACTIVE)
 
 	stage_index = index
-
-	initialize_stage(index)
 
 
 

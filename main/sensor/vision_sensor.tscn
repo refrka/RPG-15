@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://ctlmlkxoxfuyh"]
+
+[ext_resource type="Script" uid="uid://cumdo7th2a4jw" path="res://main/sensor/vision_sensor.gd" id="1_wn3iu"]
+
+[node name="VisionSensor" type="Area2D" unique_id=1433049990 node_paths=PackedStringArray("ray")]
+collision_layer = 0
+script = ExtResource("1_wn3iu")
+ray = NodePath("RayCast2D")
+metadata/_custom_type_script = "uid://dqww7qb3cvxoo"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1570644251]
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=2578313]
+target_position = Vector2(0, 0)
+collision_mask = 1024

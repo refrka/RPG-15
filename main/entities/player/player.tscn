@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://dqww7qb3cvxoo" path="res://main/sensor/sensor.gd" id="10_elonm"]
 [ext_resource type="Script" uid="uid://rv1tyr5x36h4" path="res://main/states/body_interacting_state.gd" id="12_qe6dv"]
 [ext_resource type="Script" uid="uid://bgdddqoa78u1i" path="res://main/components/health_component.gd" id="16_s4fyv"]
+[ext_resource type="Script" uid="uid://bw4ppwk1krp00" path="res://main/states/body_flinch_state.gd" id="22_n1onb"]
 [ext_resource type="PackedScene" uid="uid://bh7ip01t2cvqp" path="res://ui/tool_icon_rect.tscn" id="23_n1onb"]
 
 [sub_resource type="Resource" id="Resource_o2a1x"]
@@ -262,6 +263,9 @@ script = ExtResource("9_enjxq")
 [node name="BodyInteractingState" type="Node" parent="StateMachine/BodyRoot" parent_id_path=PackedInt32Array(2018266311) index="2" unique_id=1127505818]
 script = ExtResource("12_qe6dv")
 metadata/_custom_type_script = "uid://rv1tyr5x36h4"
+
+[node name="BodyFlinchState" type="Node" parent="StateMachine/BodyRoot" parent_id_path=PackedInt32Array(2018266311) index="3" unique_id=1846586636]
+script = ExtResource("22_n1onb")
 
 [node name="CenterMarker" parent="." index="8" unique_id=1538757570]
 position = Vector2(0, -7)

@@ -7,6 +7,8 @@ class_name State extends Node
 
 var active:= false
 
+var state_machine: StateMachine
+
 var entity: Entity
 
 
@@ -14,9 +16,11 @@ var entity: Entity
 
 
 
-func initialize(_entity: Entity) -> void:
+func initialize(_entity: Entity, _state_machine: StateMachine) -> void:
 
 	entity = _entity
+
+	state_machine = _state_machine
 
 
 

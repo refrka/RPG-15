@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://xldnyi01j1e3" path="res://ui/cursor_slot.tscn" id="5_jnlp7"]
 [ext_resource type="PackedScene" uid="uid://ccbqbh5n24ied" path="res://ui/container_overlay.tscn" id="5_vyht1"]
 [ext_resource type="PackedScene" uid="uid://bci53ctylpbcv" path="res://ui/main_menu.tscn" id="9_huihk"]
+[ext_resource type="Script" uid="uid://dci4nht54qjle" path="res://ui/item_tooltip.gd" id="10_gd4vy"]
 
 [sub_resource type="Resource" id="Resource_ihp3c"]
 script = ExtResource("2_vvh5c")
@@ -27,7 +28,15 @@ metadata/_custom_type_script = "uid://dy0n8ihmni5qm"
 script = ExtResource("2_vvh5c")
 metadata/_custom_type_script = "uid://dy0n8ihmni5qm"
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_tw3kd"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_gd4vy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tw3kd"]
+bg_color = Color(0.1221207, 0.14522305, 0.15285042, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25674063, 0.29679266, 0.31015244, 1)
 
 [node name="Root" type="Node" unique_id=425788085 groups=["root"]]
 script = ExtResource("1_pyidc")
@@ -79,13 +88,45 @@ visible = false
 
 [node name="ProfileOverlay" parent="ProfileCanvas" unique_id=1283527882 instance=ExtResource("4_28aoi")]
 visible = false
-tab_button_group = SubResource("ButtonGroup_tw3kd")
+tab_button_group = SubResource("ButtonGroup_gd4vy")
 
 [node name="CursorCanvas" type="CanvasLayer" parent="." unique_id=1737291134]
 
 [node name="CursorSlot" parent="CursorCanvas" unique_id=609063128 instance=ExtResource("5_jnlp7")]
 custom_minimum_size = Vector2(18, 18)
 selected_stylebox = null
+
+[node name="ItemTooltip" type="MarginContainer" parent="CursorCanvas" unique_id=1232438630 node_paths=PackedStringArray("item_label") groups=["item_tooltip"]]
+process_mode = 3
+offset_right = 54.0
+offset_bottom = 21.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+script = ExtResource("10_gd4vy")
+item_label = NodePath("VBoxContainer/PanelContainer/MarginContainer/Label")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CursorCanvas/ItemTooltip" unique_id=887595879]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CursorCanvas/ItemTooltip/VBoxContainer" unique_id=1245974026]
+self_modulate = Color(1, 1, 1, 0.5137255)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tw3kd")
+
+[node name="MarginContainer" type="MarginContainer" parent="CursorCanvas/ItemTooltip/VBoxContainer/PanelContainer" unique_id=1296788636]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Label" type="Label" parent="CursorCanvas/ItemTooltip/VBoxContainer/PanelContainer/MarginContainer" unique_id=414943251]
+layout_mode = 2
+text = "Item Name"
 
 [node name="NoticeCanvas" type="CanvasLayer" parent="." unique_id=1177334563]
 

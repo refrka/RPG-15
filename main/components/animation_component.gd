@@ -35,6 +35,10 @@ func update_face_dir(dir: Vector2) -> void:
 
 func play_body_animation(anim_name: String) -> void:
 
+	if entity.body_anim_player.current_animation.ends_with("die") or entity.body_anim_player.current_animation.ends_with("expire"):
+
+		return
+
 	if entity.body_anim_player.has_animation(anim_name):
 
 		entity.body_anim_player.play(anim_name)
@@ -43,15 +47,15 @@ func play_body_animation(anim_name: String) -> void:
 
 
 
-func _on_damage_package_received(_damage_package: DamagePackage) -> void:
+# func _on_damage_package_received(_damage_package: DamagePackage) -> void:
 
-	if not entity.is_alive():
+# 	if not entity.is_alive():
 
-		return
+# 		return
 
-	var anim_name = "%s/flinch" % entity.entity_id if entity.body_anim_player.has_animation("%s/flinch" % entity.entity_id) else "flinch"
+# 	var anim_name = "%s/flinch" % entity.entity_id if entity.body_anim_player.has_animation("%s/flinch" % entity.entity_id) else "flinch"
 
-	entity.body_anim_player.play(anim_name)
+# 	entity.body_anim_player.play(anim_name)
 
 
 
@@ -81,7 +85,9 @@ func _on_body_anim_finished(anim_name: StringName) -> void:
 
 		death_animation_finished.emit()
 
-	if anim_name.ends_with("flinch"):
+	# 
+
+	if anim_name.ends_with("flinch") and movement_component:
 
 		if movement_component.move_dir != Vector2.ZERO:
 

@@ -77,4 +77,8 @@ func _on_damage_package_received(damage_package: DamagePackage) -> void:
 
 	reduce_health(damage_package.amount)
 
+	if is_alive():
+
+		entity.state_machine.request_state(BodyFlinchState)
+
 

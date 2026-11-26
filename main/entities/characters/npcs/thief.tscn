@@ -1,14 +1,96 @@
 [gd_scene format=3 uid="uid://cgvvhswm6fe30"]
 
 [ext_resource type="PackedScene" uid="uid://bxhe8lv6h7cau" path="res://main/entities/character.tscn" id="1_2cvbs"]
-[ext_resource type="Texture2D" uid="uid://eqxiq60w63ko" path="res://main/entities/characters/npcs/thief_sprite_texture.png" id="2_b22mq"]
+[ext_resource type="Texture2D" uid="uid://bgnkn3vwtl55a" path="res://textures/characters/thief_sprite_texture.png" id="2_2cvbs"]
+[ext_resource type="Script" uid="uid://bilm5ege1cif1" path="res://main/entities/entity_stats.gd" id="2_2n7r2"]
+[ext_resource type="Script" uid="uid://bgdddqoa78u1i" path="res://main/components/health_component.gd" id="3_b22mq"]
+[ext_resource type="Script" uid="uid://crb5u1k1b1ilj" path="res://main/loot/loot_entry.gd" id="3_xuv12"]
+[ext_resource type="Script" uid="uid://buwbh3f25d74m" path="res://main/components/movement_component.gd" id="4_ckikk"]
+[ext_resource type="Script" uid="uid://jlm5jqxs7txp" path="res://main/items/item.gd" id="4_s3y0n"]
+[ext_resource type="Script" uid="uid://bw4ppwk1krp00" path="res://main/states/body_flinch_state.gd" id="5_gib1h"]
+[ext_resource type="Resource" uid="uid://2vovknpo4hli" path="res://main/items/valuables/coin.tres" id="5_ofbcq"]
+[ext_resource type="Script" uid="uid://dmr4v28gqmw1h" path="res://main/loot/loot_table.gd" id="6_d34gv"]
+[ext_resource type="Resource" uid="uid://c1yq4vce3lqc2" path="res://main/items/consumables/speed_potion.tres" id="6_xuv12"]
+[ext_resource type="Script" uid="uid://baoovdts8slvq" path="res://main/states/body_moving_state.gd" id="6_y4ylr"]
+[ext_resource type="Script" uid="uid://bnfw81624qqdu" path="res://main/components/behavior_component.gd" id="11_s3y0n"]
+
+[sub_resource type="Resource" id="Resource_egt8o"]
+script = ExtResource("2_2n7r2")
+base_health = 1
+metadata/_custom_type_script = "uid://bilm5ege1cif1"
+
+[sub_resource type="Resource" id="Resource_pqscp"]
+script = ExtResource("3_xuv12")
+items = Dictionary[ExtResource("4_s3y0n"), int]({
+ExtResource("5_ofbcq"): 1
+})
+weight = -1
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_r00cq"]
+script = ExtResource("3_xuv12")
+items = Dictionary[ExtResource("4_s3y0n"), int]({
+ExtResource("5_ofbcq"): 1
+})
+weight = 50
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_64tk8"]
+script = ExtResource("3_xuv12")
+items = Dictionary[ExtResource("4_s3y0n"), int]({
+ExtResource("6_xuv12"): 1
+})
+weight = -1
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_p3g33"]
+script = ExtResource("6_d34gv")
+entries = Array[ExtResource("3_xuv12")]([SubResource("Resource_pqscp"), SubResource("Resource_r00cq"), SubResource("Resource_64tk8")])
+metadata/_custom_type_script = "uid://dmr4v28gqmw1h"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rwfsq"]
+size = Vector2(10, 4)
 
 [node name="Thief" unique_id=920390172 instance=ExtResource("1_2cvbs")]
+entity_id = &"thief"
+stats = SubResource("Resource_egt8o")
+death_loot_table = SubResource("Resource_p3g33")
 
 [node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(1546177270) index="0" unique_id=2072653577]
 position = Vector2(0, -5)
-texture = ExtResource("2_b22mq")
+texture = ExtResource("2_2cvbs")
 offset = Vector2(0, -3)
 
-[node name="CenterMarker" parent="." index="4" unique_id=1538757570]
+[node name="BodyCollision" parent="." index="1" unique_id=934894713]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_rwfsq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1587296689) index="1" unique_id=1103075324]
+position = Vector2(0, -8)
+polygon = PackedVector2Array(-4, -6, -4, -5, -5, -5, -5, 8, -2, 8, -2, 6, 2, 6, 2, 8, 5, 8, 5, 2, 6, 2, 6, -5, 5, -5, 5, -6)
+
+[node name="HealthComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="2" unique_id=694353905]
+script = ExtResource("3_b22mq")
+metadata/_custom_type_script = "uid://bgdddqoa78u1i"
+
+[node name="MovementComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="3" unique_id=1468605756]
+script = ExtResource("4_ckikk")
+metadata/_custom_type_script = "uid://buwbh3f25d74m"
+
+[node name="BehaviorComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="4" unique_id=1245532815]
+script = ExtResource("11_s3y0n")
+metadata/_custom_type_script = "uid://bnfw81624qqdu"
+
+[node name="BodyFlinchState" type="Node" parent="StateMachine/BodyRoot" parent_id_path=PackedInt32Array(2018266311) index="1" unique_id=973676764]
+script = ExtResource("5_gib1h")
+metadata/_custom_type_script = "uid://bw4ppwk1krp00"
+
+[node name="BodyMovingState" type="Node" parent="StateMachine/BodyRoot" parent_id_path=PackedInt32Array(2018266311) index="2" unique_id=1198023438]
+script = ExtResource("6_y4ylr")
+metadata/_custom_type_script = "uid://baoovdts8slvq"
+
+[node name="CenterMarker" parent="." index="7" unique_id=1538757570]
 position = Vector2(0, -5)
+
+[editable path="Hurtbox"]
+[editable path="VisionSensor"]

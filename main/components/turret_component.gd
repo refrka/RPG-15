@@ -14,6 +14,10 @@ var target_rays: Array
 
 
 
+var animation_component: AnimationComponent
+
+
+
 func initialize(_entity: Entity) -> void:
 
 	super(_entity)
@@ -25,6 +29,18 @@ func initialize(_entity: Entity) -> void:
 		ray.add_exception(entity.hurtbox)
 
 	entity.face_dir_updated.connect(_on_face_dir_updated)
+
+	animation_component = entity.get_component(AnimationComponent)
+
+	entity.body_anim_player.animation_finished.connect(_on_animation_finished)
+
+
+
+
+
+func start_projectile() -> void:
+
+	animation_component.play_body_animation("%s/fire_projectile" % entity.entity_id)
 
 
 
@@ -49,6 +65,14 @@ func fire_projectile() -> void:
 
 	timer = cooldown_duration
 
+	await get_tree().create_timer(0.2).timeout
+
+	animation_component.play_body_animation("RESET")
+
+
+
+
+
 
 
 func is_target_in_sight() -> bool:
@@ -56,6 +80,12 @@ func is_target_in_sight() -> bool:
 	for ray in target_rays:
 
 		if ray.is_colliding():
+
+			var collider = ray.get_collider()
+
+			if collider is Hurtbox and collider.entity.entity_id == entity.entity_id:
+
+				return false
 
 			return true
 
@@ -69,6 +99,14 @@ func _on_face_dir_updated(dir: Vector2) -> void:
 
 
 
+func _on_animation_finished(anim_name: StringName) -> void:
+
+	if anim_name.ends_with("fire_projectile"):
+
+		fire_projectile()
+
+
+
 
 
 func _process(delta: float) -> void:
@@ -79,7 +117,7 @@ func _process(delta: float) -> void:
 
 	if timer <= 0.0 and is_target_in_sight():
 
-		fire_projectile()
+		start_projectile()
 
 	else:
 

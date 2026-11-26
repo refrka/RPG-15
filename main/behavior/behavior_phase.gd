@@ -1,12 +1,15 @@
 class_name BehaviorPhase extends Resource
 
 
-signal ended
+signal phase_index_requested(index: int)
 
-
-@export var next_index:= -1
 
 @export var commands: Array[Command]
+
+@export var next_phase:= -1
+
+
+var actor: Entity
 
 var command_index:= -1
 
@@ -15,66 +18,60 @@ var command_data:= {}
 
 
 
+
 func start() -> void:
 
-	execute_index(0)
+	command_data["actor"] = actor
+
+	execute_command(0)
 
 
 
 func end() -> void:
 
-	var current_command = get_command(command_index)
+	if command_index != -1:
 
-	if current_command.result == Command.Result.PENDING:
+		var command = commands[command_index]
 
-		current_command.cancel()
+		if command.result == Command.Result.PENDING:
+
+			command.command_executed.disconnect(_on_command_executed)
+
+			command.cancel()
+
+	command_index = -1
 
 
 
+func execute_command(index: int) -> void:
 
-func execute_index(index: int) -> void:
+	if commands.size() - 1 < index:
 
-	command_index = index
+		command_index = -1
 
-	var command = get_command(index)
-
-	if not command:
+		phase_index_requested.emit(next_phase)
 
 		return
 
+	command_index = index
+
+	var command = commands[index]
+
 	match command.execute(command_data):
+
+		Command.Result.SUCCESS:
+
+			execute_command(command_index + 1)
 
 		Command.Result.PENDING:
 
 			command.command_executed.connect(_on_command_executed, CONNECT_ONE_SHOT)
 
-		Command.Result.SUCCESS:
 
-			_on_command_executed()
-		
-
-
-
-
-func get_command(index: int) -> Command:
-
-	if commands.size() - 1 >= index:
-
-		return commands[index]
-
-	return null
 
 
 
 
 func _on_command_executed() -> void:
 
-	var next_command_index = command_index + 1
-
-	if commands.size() - 1 < next_command_index:
-
-		ended.emit()
-
-	else:
-
-		execute_index(next_command_index)
+	execute_command(command_index + 1)

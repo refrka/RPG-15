@@ -2,11 +2,27 @@
 
 [ext_resource type="Script" uid="uid://cb8051efpe7su" path="res://main/effects/effect.gd" id="1_m7bo3"]
 [ext_resource type="Texture2D" uid="uid://ir54jk8jpg5r" path="res://textures/items/cooked_meat_icon_texture.png" id="2_87ofo"]
+[ext_resource type="Script" uid="uid://d16157jshvhex" path="res://main/effects/restore_health_instant_effect.gd" id="2_otjfh"]
 [ext_resource type="Script" uid="uid://cw6a1oafm3u0g" path="res://main/items/consumable.gd" id="2_qo2uc"]
+[ext_resource type="Script" uid="uid://r2k8wvpjv24y" path="res://main/effects/restore_health_duration_effect.gd" id="3_5c762"]
+
+[sub_resource type="Resource" id="Resource_qt76e"]
+script = ExtResource("2_otjfh")
+amount = 10
+metadata/_custom_type_script = "uid://d16157jshvhex"
+
+[sub_resource type="Resource" id="Resource_sq7yr"]
+script = ExtResource("3_5c762")
+amount = 1
+duration = 10.0
+tick_rate = 1.0
+metadata/_custom_type_script = "uid://r2k8wvpjv24y"
 
 [resource]
 script = ExtResource("2_qo2uc")
+effects_on_consume = Array[ExtResource("1_m7bo3")]([SubResource("Resource_qt76e"), SubResource("Resource_sq7yr")])
 item_id = &"cooked_meat"
+display_name = "Cooked Meat"
 icon_texture = ExtResource("2_87ofo")
 sprite_offset = Vector2(0, -2)
 metadata/_custom_type_script = "uid://cw6a1oafm3u0g"

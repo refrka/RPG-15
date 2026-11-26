@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cpbopo7e42leg"]
+
+[ext_resource type="PackedScene" uid="uid://bxhe8lv6h7cau" path="res://main/entities/character.tscn" id="1_rwfsq"]
+[ext_resource type="Texture2D" uid="uid://t243doa1jcp7" path="res://textures/characters/bandit_sprite_texture.png" id="2_ue2ce"]
+[ext_resource type="Script" uid="uid://bgdddqoa78u1i" path="res://main/components/health_component.gd" id="3_ue2ce"]
+[ext_resource type="Script" uid="uid://bw4ppwk1krp00" path="res://main/states/body_flinch_state.gd" id="4_f5t33"]
+[ext_resource type="Script" uid="uid://buwbh3f25d74m" path="res://main/components/movement_component.gd" id="4_w0qby"]
+[ext_resource type="Script" uid="uid://baoovdts8slvq" path="res://main/states/body_moving_state.gd" id="5_w0qby"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rwfsq"]
+size = Vector2(10, 5)
+
+[node name="Bandit" unique_id=920390172 instance=ExtResource("1_rwfsq")]
+entity_id = &"bandit"
+
+[node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(1546177270) index="0" unique_id=2072653577]
+texture = ExtResource("2_ue2ce")
+
+[node name="BodyCollision" parent="." index="1" unique_id=934894713]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_rwfsq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1587296689) index="1" unique_id=1576688374]
+position = Vector2(0, -8)
+polygon = PackedVector2Array(-4, -6, -4, -5, -5, -5, -5, 8, -2, 8, -2, 6, 2, 6, 2, 8, 5, 8, 5, 2, 6, 2, 6, -5, 5, -5, 5, -6)
+
+[node name="HealthComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="2" unique_id=1239195000]
+script = ExtResource("3_ue2ce")
+metadata/_custom_type_script = "uid://bgdddqoa78u1i"
+
+[node name="MovementComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="3" unique_id=1161334291]
+script = ExtResource("4_w0qby")
+metadata/_custom_type_script = "uid://buwbh3f25d74m"
+
+[node name="BodyFlinchState" type="Node" parent="StateMachine/BodyRoot" parent_id_path=PackedInt32Array(2018266311) index="1" unique_id=1844465209]
+script = ExtResource("4_f5t33")
+metadata/_custom_type_script = "uid://bw4ppwk1krp00"
+
+[node name="BodyMovingState" type="Node" parent="StateMachine/BodyRoot" parent_id_path=PackedInt32Array(2018266311) index="2" unique_id=1435705050]
+script = ExtResource("5_w0qby")
+metadata/_custom_type_script = "uid://baoovdts8slvq"
+
+[editable path="Hurtbox"]
+[editable path="VisionSensor"]

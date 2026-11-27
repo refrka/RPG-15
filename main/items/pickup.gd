@@ -1,5 +1,6 @@
 class_name Pickup extends CharacterBody2D
 
+signal pick_up_enabled_changed(state: bool)
 
 @export var sprite: Sprite2D
 
@@ -35,6 +36,8 @@ func float_to_entity(entity: Entity) -> void:
 
 		pick_up_enabled = true
 
+		pick_up_enabled_changed.emit(true)
+
 	pickup_target = entity
 
 
@@ -51,6 +54,8 @@ func pick_up() -> void:
 	else:
 
 		pick_up_enabled = false
+
+		pick_up_enabled_changed.emit(false)
 
 		pickup_target = null
 
@@ -77,6 +82,8 @@ func _on_animation_finished(anim_name: StringName) -> void:
 		await get_tree().create_timer(0.3).timeout
 
 		pick_up_enabled = true
+
+		pick_up_enabled_changed.emit(true)
 
 
 

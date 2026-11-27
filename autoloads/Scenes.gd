@@ -89,12 +89,3 @@ func transition_to(location_id: StringName, spawn_id:= "default_spawn") -> void:
 
 	current_location.activate()
 
-
-
-
-
-func collect_save_data(dict: Dictionary) -> Dictionary:
-
-	dict["location_id"] = current_location.location_id
-
-	return dict

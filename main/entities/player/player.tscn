@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://di7dnrrxv3kv4" path="res://main/sensor/pickup_sensor.gd" id="9_qvaa3"]
 [ext_resource type="Script" uid="uid://ccdd8pxqp8bym" path="res://main/components/interaction_component.gd" id="10_243e6"]
 [ext_resource type="Script" uid="uid://dqww7qb3cvxoo" path="res://main/sensor/sensor.gd" id="10_elonm"]
+[ext_resource type="Resource" uid="uid://dvy7rax5t4ios" path="res://main/items/equipment/tools/axe.tres" id="11_f7733"]
 [ext_resource type="Script" uid="uid://rv1tyr5x36h4" path="res://main/states/body_interacting_state.gd" id="12_qe6dv"]
 [ext_resource type="Script" uid="uid://bgdddqoa78u1i" path="res://main/components/health_component.gd" id="16_s4fyv"]
 [ext_resource type="Script" uid="uid://bw4ppwk1krp00" path="res://main/states/body_flinch_state.gd" id="22_n1onb"]
@@ -57,6 +58,7 @@ script = ExtResource("3_la1ju")
 stacks = Array[ExtResource("4_enjxq")]([SubResource("Resource_o4e80"), SubResource("Resource_ereea")])
 currency_stack = SubResource("Resource_wsknm")
 weapon_stack = SubResource("Resource_kdw2b")
+tools = Array[ExtResource("9_n1onb")]([ExtResource("11_f7733")])
 metadata/_custom_type_script = "uid://d1l0dy163gnc5"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4e80"]
@@ -267,19 +269,20 @@ metadata/_custom_type_script = "uid://rv1tyr5x36h4"
 [node name="BodyFlinchState" type="Node" parent="StateMachine/BodyRoot" parent_id_path=PackedInt32Array(2018266311) index="3" unique_id=1846586636]
 script = ExtResource("22_n1onb")
 
-[node name="CenterMarker" parent="." index="8" unique_id=1538757570]
+[node name="CenterMarker" parent="." index="9" unique_id=1538757570]
 position = Vector2(0, -7)
-
-[node name="DirRay" parent="." index="9" unique_id=1334925714]
-position = Vector2(0, -7)
-target_position = Vector2(20, 0)
 
 [node name="ToolIconRect" parent="." index="10" unique_id=1307352774 instance=ExtResource("23_n1onb")]
 offset_top = -29.0
 offset_bottom = -13.0
 metadata/_edit_lock_ = true
 
-[node name="BodyAnimPlayer" parent="." index="11" unique_id=1242108839]
+[node name="DirRay" parent="." index="11" unique_id=1334925714]
+position = Vector2(0, -7)
+target_position = Vector2(20, 0)
+
+[node name="BodyAnimPlayer" parent="." index="12" unique_id=1242108839]
 libraries/player = SubResource("AnimationLibrary_elonm")
 
 [editable path="Hurtbox"]
+[editable path="VisionSensor"]

@@ -2,13 +2,48 @@
 
 [ext_resource type="PackedScene" uid="uid://7krrh8p7u6uf" path="res://main/entities/harvestable.tscn" id="1_ibn08"]
 [ext_resource type="Texture2D" uid="uid://b0360n5kch1td" path="res://textures/props/log_sprite_texture.png" id="2_w2wt6"]
+[ext_resource type="Script" uid="uid://crb5u1k1b1ilj" path="res://main/loot/loot_entry.gd" id="3_i4caj"]
 [ext_resource type="Resource" uid="uid://dvy7rax5t4ios" path="res://main/items/equipment/tools/axe.tres" id="3_w2wt6"]
+[ext_resource type="Script" uid="uid://jlm5jqxs7txp" path="res://main/items/item.gd" id="4_ryl6t"]
+[ext_resource type="Resource" uid="uid://thla7eiiiyol" path="res://main/items/materials/wood.tres" id="5_3if6k"]
+[ext_resource type="Resource" uid="uid://ike4dv35yu4k" path="res://main/items/equipment/weapons/fire_wand.tres" id="6_3if6k"]
+[ext_resource type="Script" uid="uid://dmr4v28gqmw1h" path="res://main/loot/loot_table.gd" id="6_17eri"]
+[ext_resource type="Resource" uid="uid://bcayebw3dcfmm" path="res://main/items/materials/fire_essence.tres" id="6_ryl6t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0iyh"]
 size = Vector2(45, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w2wt6"]
 size = Vector2(45, 16)
+
+[sub_resource type="Resource" id="Resource_ddxqt"]
+script = ExtResource("3_i4caj")
+items = Dictionary[ExtResource("4_ryl6t"), int]({
+ExtResource("5_3if6k"): 1
+})
+weight = -1
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_5pnv6"]
+script = ExtResource("3_i4caj")
+items = Dictionary[ExtResource("4_ryl6t"), int]({
+ExtResource("6_3if6k"): 1
+})
+weight = -1
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_aqtay"]
+script = ExtResource("3_i4caj")
+items = Dictionary[ExtResource("4_ryl6t"), int]({
+ExtResource("6_ryl6t"): 1
+})
+weight = -1
+metadata/_custom_type_script = "uid://crb5u1k1b1ilj"
+
+[sub_resource type="Resource" id="Resource_fd3we"]
+script = ExtResource("6_17eri")
+entries = Array[ExtResource("3_i4caj")]([SubResource("Resource_ddxqt"), SubResource("Resource_5pnv6"), SubResource("Resource_aqtay")])
+metadata/_custom_type_script = "uid://dmr4v28gqmw1h"
 
 [sub_resource type="Animation" id="Animation_w2wt6"]
 resource_name = "successful_harvest"
@@ -35,11 +70,12 @@ position = Vector2(-0.5, -8)
 shape = SubResource("RectangleShape2D_w2wt6")
 
 [node name="HarvestComponent" parent="ComponentRoot" parent_id_path=PackedInt32Array(1493594875) index="1" unique_id=550237833]
-duration = 2.0
-die_on_harvest = true
+loot_table = SubResource("Resource_fd3we")
+duration = 1.5
+free_on_harvest = true
 required_tool = ExtResource("3_w2wt6")
 
-[node name="BodyAnimPlayer" parent="." index="6" unique_id=527948352]
+[node name="BodyAnimPlayer" parent="." index="7" unique_id=527948352]
 libraries/log = SubResource("AnimationLibrary_w2wt6")
 
 [editable path="Hurtbox"]

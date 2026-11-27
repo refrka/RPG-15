@@ -2,23 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ir8hcomoadvf" path="res://main/entities/prop.tscn" id="1_0au4o"]
 [ext_resource type="Texture2D" uid="uid://bn8rjihvtvwlb" path="res://textures/props/small_chest_sprite_texture.png" id="2_ck51w"]
-[ext_resource type="Script" uid="uid://d1l0dy163gnc5" path="res://main/items/inventory.gd" id="2_lguia"]
 [ext_resource type="Script" uid="uid://bjsigac1fgp3o" path="res://main/components/container_component.gd" id="3_7fl1e"]
-[ext_resource type="Script" uid="uid://cwi55co0pga55" path="res://main/items/item_stack.gd" id="3_q75d6"]
-[ext_resource type="Resource" uid="uid://c58tpeps5btc6" path="res://main/items/equipment/weapons/sword.tres" id="4_q75d6"]
-[ext_resource type="Script" uid="uid://ccsom65yrr3sr" path="res://main/items/tool.gd" id="5_v8hu0"]
-
-[sub_resource type="Resource" id="Resource_lguia"]
-script = ExtResource("3_q75d6")
-item = ExtResource("4_q75d6")
-count = 1
-metadata/_custom_type_script = "uid://cwi55co0pga55"
-
-[sub_resource type="Resource" id="Resource_mvgl5"]
-script = ExtResource("2_lguia")
-stacks = Array[ExtResource("3_q75d6")]([SubResource("Resource_lguia")])
-size = 3
-metadata/_custom_type_script = "uid://d1l0dy163gnc5"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ck51w"]
 size = Vector2(12, 5)
@@ -28,7 +12,7 @@ size = Vector2(12, 10)
 
 [node name="SmallChest" unique_id=1222908469 instance=ExtResource("1_0au4o")]
 collision_layer = 69
-inventory = SubResource("Resource_mvgl5")
+entity_id = &"small_chest"
 
 [node name="BodySprite" parent="CanvasGroup" parent_id_path=PackedInt32Array(549313783) index="0" unique_id=1612993214]
 position = Vector2(0, -8)

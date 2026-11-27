@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_bg6qm")
 item_id = &"coin"
+display_name = "coin"
 max_stack = 200
 icon_texture = ExtResource("1_ftn4p")
 sprite_offset = Vector2(0, -1)

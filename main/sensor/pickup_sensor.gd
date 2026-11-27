@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func _on_body_entered(body: PhysicsBody2D) -> void:
 
-	if body is Pickup and not body.player_dropped:
+	if body is Pickup and not body.player_dropped and body.pick_up_enabled:
 
 		body.float_to_entity(get_parent() as Entity)
 

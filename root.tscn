@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cpg0dmngoe6r4" path="res://main/locations/scenes/forest.scn" id="4_tw3kd"]
 [ext_resource type="PackedScene" uid="uid://xldnyi01j1e3" path="res://ui/cursor_slot.tscn" id="5_jnlp7"]
 [ext_resource type="PackedScene" uid="uid://ccbqbh5n24ied" path="res://ui/container_overlay.tscn" id="5_vyht1"]
+[ext_resource type="PackedScene" uid="uid://dvyjni6qcljnc" path="res://ui/crafting_overlay.tscn" id="8_qw60f"]
 [ext_resource type="PackedScene" uid="uid://bci53ctylpbcv" path="res://ui/main_menu.tscn" id="9_huihk"]
 [ext_resource type="Script" uid="uid://dci4nht54qjle" path="res://ui/item_tooltip.gd" id="10_gd4vy"]
 
@@ -28,7 +29,7 @@ metadata/_custom_type_script = "uid://dy0n8ihmni5qm"
 script = ExtResource("2_vvh5c")
 metadata/_custom_type_script = "uid://dy0n8ihmni5qm"
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_gd4vy"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_qw60f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tw3kd"]
 bg_color = Color(0.1221207, 0.14522305, 0.15285042, 1)
@@ -84,11 +85,13 @@ visible = false
 [node name="ContainerOverlay" parent="OverlayCanvas" unique_id=1552684798 instance=ExtResource("5_vyht1")]
 visible = false
 
+[node name="CraftingOverlay" parent="OverlayCanvas" unique_id=1425683688 instance=ExtResource("8_qw60f")]
+
 [node name="ProfileCanvas" type="CanvasLayer" parent="." unique_id=127699270]
 
 [node name="ProfileOverlay" parent="ProfileCanvas" unique_id=1283527882 instance=ExtResource("4_28aoi")]
 visible = false
-tab_button_group = SubResource("ButtonGroup_gd4vy")
+tab_button_group = SubResource("ButtonGroup_qw60f")
 
 [node name="CursorCanvas" type="CanvasLayer" parent="." unique_id=1737291134]
 

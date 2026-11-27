@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bcayebw3dcfmm"]
+
+[ext_resource type="Script" uid="uid://jlm5jqxs7txp" path="res://main/items/item.gd" id="1_ajyo1"]
+[ext_resource type="Texture2D" uid="uid://d1y3hs6tvs60j" path="res://textures/items/fire_essence_icon_texture.png" id="1_mirjo"]
+
+[resource]
+script = ExtResource("1_ajyo1")
+item_id = &"fire_essence"
+display_name = "Fire Essence"
+gold_value = 5.0
+icon_texture = ExtResource("1_mirjo")
+sprite_offset = Vector2(0, -8)
+metadata/_custom_type_script = "uid://jlm5jqxs7txp"

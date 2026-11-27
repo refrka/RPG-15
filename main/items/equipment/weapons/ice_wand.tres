@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://cgp1uovhfd6lg"]
+
+[ext_resource type="Script" uid="uid://dkppyi86u3mti" path="res://main/items/weapon.gd" id="1_kbcbu"]
+[ext_resource type="Script" uid="uid://vqmdx5cwp2ie" path="res://main/combat/attack_entry.gd" id="1_lvfba"]
+[ext_resource type="Texture2D" uid="uid://61f3ed4rrtk2" path="res://textures/items/ice_wand_icon_texture.png" id="2_3qxai"]
+
+[sub_resource type="Resource" id="Resource_fru85"]
+script = ExtResource("1_lvfba")
+metadata/_custom_type_script = "uid://vqmdx5cwp2ie"
+
+[resource]
+script = ExtResource("1_kbcbu")
+weapon_type = 1
+attack_entry = SubResource("Resource_fru85")
+item_id = &"ice_wand"
+display_name = "Ice Wand"
+gold_value = 20.0
+icon_texture = ExtResource("2_3qxai")
+sprite_offset = Vector2(0, -8)
+metadata/_custom_type_script = "uid://dkppyi86u3mti"

@@ -4,6 +4,8 @@ class_name ItemSlot extends MarginContainer
 signal stack_updated
 
 
+@export var display_only:= false
+
 @export var default_stylebox: StyleBox
 
 @export var hovered_empty_stylebox: StyleBox
@@ -37,7 +39,9 @@ func _ready() -> void:
 
 	mouse_exited.connect(_on_mouse_exited)
 
-	gui_input.connect(_on_gui_input)
+	if not display_only:
+
+		gui_input.connect(_on_gui_input)
 
 	if item_stack != null:
 

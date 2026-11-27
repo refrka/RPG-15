@@ -8,4 +8,6 @@ var data = {
 
 	"spawn_id": "",
 
+	"known_recipes": [ ],
+
 }

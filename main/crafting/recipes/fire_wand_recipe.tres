@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" format=3 uid="uid://ceef1s8svxn22"]
+
+[ext_resource type="Script" uid="uid://jlm5jqxs7txp" path="res://main/items/item.gd" id="1_babm0"]
+[ext_resource type="Script" uid="uid://dq2dm4k7rkuc7" path="res://main/crafting/crafting_recipe.gd" id="2_3sxcd"]
+[ext_resource type="Resource" uid="uid://ike4dv35yu4k" path="res://main/items/equipment/weapons/fire_wand.tres" id="2_en1wn"]
+[ext_resource type="Resource" uid="uid://thla7eiiiyol" path="res://main/items/materials/wood.tres" id="3_o2416"]
+[ext_resource type="Resource" uid="uid://dr6x7uoerbnpj" path="res://main/items/valuables/ruby.tres" id="4_o6x16"]
+
+[resource]
+script = ExtResource("2_3sxcd")
+recipe_id = &"fire_wand"
+required_items = Dictionary[ExtResource("1_babm0"), int]({
+ExtResource("3_o2416"): 1,
+ExtResource("4_o6x16"): 1
+})
+product = ExtResource("2_en1wn")
+metadata/_custom_type_script = "uid://dq2dm4k7rkuc7"

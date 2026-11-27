@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://ike4dv35yu4k"]
+
+[ext_resource type="Script" uid="uid://dkppyi86u3mti" path="res://main/items/weapon.gd" id="1_gtsn4"]
+[ext_resource type="Script" uid="uid://vqmdx5cwp2ie" path="res://main/combat/attack_entry.gd" id="1_sltqa"]
+[ext_resource type="Texture2D" uid="uid://dwkf45ypk7btf" path="res://textures/items/fire_wand_icon_texture.png" id="2_pb83l"]
+
+[sub_resource type="Resource" id="Resource_sltqa"]
+script = ExtResource("1_sltqa")
+metadata/_custom_type_script = "uid://vqmdx5cwp2ie"
+
+[resource]
+script = ExtResource("1_gtsn4")
+weapon_type = 1
+attack_entry = SubResource("Resource_sltqa")
+item_id = &"fire_wand"
+display_name = "Fire Wand"
+gold_value = 20.0
+max_stack = 1
+icon_texture = ExtResource("2_pb83l")
+sprite_offset = Vector2(0, -8)
+metadata/_custom_type_script = "uid://dkppyi86u3mti"

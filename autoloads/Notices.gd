@@ -44,7 +44,7 @@ func next_notice() -> void:
 
 		notice.size = Vector2.ZERO
 
-		timer = 0.25
+		timer = 0.1
 
 
 

@@ -40,11 +40,9 @@ func _ready() -> void:
 
 func add_overlay(overlay: Overlay) -> void:
 
-	if active_overlays.has(overlay):
+	if not active_overlays.has(overlay):
 
-		return
-
-	active_overlays.append(overlay)
+		active_overlays.append(overlay)
 
 	if overlay.pause:
 

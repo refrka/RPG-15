@@ -18,7 +18,6 @@ signal weapon_updated
 
 
 
-
 func resize(_size:= -1) -> void:
 
 	if stacks.size() == _size:

@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://dvyjni6qcljnc"]
+
+[ext_resource type="Script" uid="uid://dh3soiu6mh7fk" path="res://ui/crafting_overlay.gd" id="1_hhv6a"]
+[ext_resource type="PackedScene" uid="uid://22f865ftlxjt" path="res://ui/ingredient_row.tscn" id="2_dpvih"]
+[ext_resource type="PackedScene" uid="uid://dfl48hjw5fn52" path="res://ui/item_slot.tscn" id="2_hhv6a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28aoi"]
+bg_color = Color(0.1221207, 0.14522305, 0.15285042, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25674063, 0.29679266, 0.31015244, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_dpvih"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+color = Color(0.21987644, 0.26908064, 0.28641823, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iuegx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eji0w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cjjnb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dpvih"]
+
+[node name="CraftingOverlay" type="MarginContainer" unique_id=1425683688 groups=["overlay"]]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 32
+script = ExtResource("1_hhv6a")
+metadata/_custom_type_script = "uid://dw1aw6urlvg27"
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=661016707]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_28aoi")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=703589797]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1813762647]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=460851119]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=29040332]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=170094425]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.65
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer2" unique_id=1338416596]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer" unique_id=783399549]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Ingredients"
+
+[node name="IngredientRow" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer" unique_id=776963891 instance=ExtResource("2_dpvih")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=305264616]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 0.35
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer" unique_id=779252917]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1306774769]
+layout_mode = 2
+text = "Product"
+
+[node name="ItemSlot" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=163527939 instance=ExtResource("2_hhv6a")]
+layout_mode = 2
+size_flags_horizontal = 4
+display_only = true
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1220694853]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_dpvih")
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=402238134]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2" unique_id=1387252063]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="CheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer" unique_id=1698648215]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/icon_max_width = 8
+theme_override_font_sizes/font_size = 6
+theme_override_styles/normal = SubResource("StyleBoxEmpty_iuegx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_eji0w")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_cjjnb")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_dpvih")
+text = "Show unknown"
+autowrap_trim_flags = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer" unique_id=250701870]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RecipeList" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/ScrollContainer" unique_id=1941579144]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

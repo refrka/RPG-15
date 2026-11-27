@@ -70,11 +70,13 @@ func _on_animation_finished(anim_name: StringName) -> void:
 
 	if anim_name == "drop":
 
-		pick_up_enabled = true
-
 		shadow.show()
 
 		anim_player.play("float")
+
+		await get_tree().create_timer(0.3).timeout
+
+		pick_up_enabled = true
 
 
 

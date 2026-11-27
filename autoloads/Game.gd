@@ -101,20 +101,6 @@ func start(launch_mode: LaunchMode) -> void:
 
 			UI.add_overlay(main_menu)
 
-			if Saves.last_save_dict.is_empty():
-
-				main_menu.new_save_container.show()
-
-				main_menu.load_save_container.hide()
-
-			else:
-
-				main_menu.new_save_container.hide()
-
-				main_menu.load_save_container.show()
-
-				main_menu.update_load_save_container()
-
 			set_game_state(GameState.MAIN_MENU)
 
 
@@ -127,7 +113,7 @@ func load_save() -> void:
 
 	UI.remove_overlay(main_menu)
 
-	Scenes.load_location_scene(Saves.last_save_dict["location_id"])
+	load_save_data()
 
 	Scenes.current_location.activate()
 
@@ -201,12 +187,26 @@ func set_game_state(_game_state: GameState) -> void:
 
 
 
+func load_save_data() -> void:
+
+	var dict = Saves.last_save_dict.duplicate()
+
+	Game.player.saved_spawn_id = dict["spawn_id"]
+
+	Scenes.load_location_scene(dict["location_id"])
+
+
+
 
 
 func collect_save_data() -> Dictionary:
 
 	var dict = Saves.last_save_dict.duplicate()
 
-	dict = Scenes.collect_save_data(dict)
+	dict["location_id"] = Scenes.current_location.location_id
+
+	dict["spawn_id"] = Game.player.spawn_id
+
+	dict["known_recipes"] = Game.player.known_recipes
 
 	return dict

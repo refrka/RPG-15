@@ -128,7 +128,7 @@ func add_temp(temp: Node2D, target_position: Vector2) -> void:
 
 
 
-func spawn_player(spawn_id: StringName) -> void:
+func spawn_player(spawn_id: StringName, save_spawn_id:= false) -> void:
 
 	var spawn_point = get_feature(spawn_id)
 
@@ -141,6 +141,10 @@ func spawn_player(spawn_id: StringName) -> void:
 		Game.player.reparent(entity_root)
 
 		AttachCameraToPlayerCommand.run()
+
+		if save_spawn_id:
+
+			Game.player.saved_spawn_id = spawn_id
 
 
 

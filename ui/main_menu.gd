@@ -39,6 +39,26 @@ func update_load_save_container() -> void:
 
 
 
+func open() -> void:
+
+	super()
+
+	if Saves.last_save_dict.is_empty():
+
+		new_save_container.show()
+
+		load_save_container.hide()
+
+	else:
+
+		new_save_container.hide()
+
+		load_save_container.show()
+
+		update_load_save_container()
+
+
+
 
 func _on_start_button_pressed() -> void:
 

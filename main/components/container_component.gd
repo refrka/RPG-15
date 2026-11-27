@@ -50,7 +50,9 @@ func start() -> void:
 
 			var loot = loot_table.get_loot(randf())
 
-			entity.inventory.add_stack(loot)
+			for stack in loot:
+
+				entity.inventory.add_stack(stack)
 
 		if on_opened_command_set:
 

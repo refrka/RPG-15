@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://22f865ftlxjt"]
+
+[ext_resource type="Texture2D" uid="uid://cc0g8abxtp3pw" path="res://textures/items/ruby_icon_texture.png" id="1_okyvx"]
+[ext_resource type="Script" uid="uid://bk0xwr7npam1q" path="res://ui/ingredient_row.gd" id="1_whe40"]
+
+[node name="IngredientRow" type="HBoxContainer" unique_id=776963891 node_paths=PackedStringArray("texture_rect", "label")]
+size_flags_horizontal = 4
+script = ExtResource("1_whe40")
+texture_rect = NodePath("TextureRect")
+label = NodePath("Label")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1994727371]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+texture = ExtResource("1_okyvx")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=1497980558]
+layout_mode = 2
+theme_override_font_sizes/font_size = 6
+text = "x9"

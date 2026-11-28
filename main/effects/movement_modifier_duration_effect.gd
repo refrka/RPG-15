@@ -18,8 +18,6 @@ func apply(_target_entity: Entity) -> void:
 
 	super(_target_entity)
 
-	print("applying modifier")
-
 	var movement_component = target_entity.get_component(MovementComponent)
 
 	var operator_override = Modifier.Operator.OVERRIDE

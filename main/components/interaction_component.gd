@@ -48,6 +48,8 @@ func try_interaction() -> void:
 
 	if not is_instance_valid(interactable_component):
 
+		current_interactable = interactable
+
 		Dialogue.try_dialogue(interactable)
 
 		return
@@ -73,6 +75,14 @@ func try_interaction() -> void:
 
 
 func try_end_interaction() -> void:
+
+	if Dialogue.current_source == current_interactable:
+
+		Dialogue.close_dialogue()
+
+		end_interaction(false)
+
+		return
 
 	if current_interactable and not current_interactable_component.can_end():
 
@@ -140,7 +150,9 @@ func start_interaction(interactable: Entity, interactable_component: Interactabl
 
 func end_interaction(retry:= true) -> void:
 
-	current_interactable_component.end()
+	if current_interactable_component:
+
+		current_interactable_component.end()
 
 	close_interaction(retry)
 
@@ -156,21 +168,23 @@ func close_interaction(retry:= true) -> void:
 
 		entity.state_machine.request_state(BodyIdleState)
 
-	if current_interactable_component.completed.is_connected(_on_current_interaction_completed):
+	if current_interactable_component:
 
-		current_interactable_component.completed.disconnect(_on_current_interaction_completed)
+		if current_interactable_component.completed.is_connected(_on_current_interaction_completed):
 
-	if current_interactable_component.closed.is_connected(_on_current_interaction_closed):
+			current_interactable_component.completed.disconnect(_on_current_interaction_completed)
 
-		current_interactable_component.closed.disconnect(_on_current_interaction_closed)
+		if current_interactable_component.closed.is_connected(_on_current_interaction_closed):
 
-	if current_interactable_component.cancelled.is_connected(_on_current_interaction_cancelled):
+			current_interactable_component.closed.disconnect(_on_current_interaction_closed)
 
-		current_interactable_component.cancelled.disconnect(_on_current_interaction_cancelled)
+		if current_interactable_component.cancelled.is_connected(_on_current_interaction_cancelled):
 
-	if current_interactable_component.ended.is_connected(_on_current_interaction_ended):
+			current_interactable_component.cancelled.disconnect(_on_current_interaction_cancelled)
 
-		current_interactable_component.ended.disconnect(_on_current_interaction_ended)
+		if current_interactable_component.ended.is_connected(_on_current_interaction_ended):
+
+			current_interactable_component.ended.disconnect(_on_current_interaction_ended)
 
 	if retry:
 

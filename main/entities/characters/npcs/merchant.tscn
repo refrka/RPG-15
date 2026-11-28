@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://dmr4v28gqmw1h" path="res://main/loot/loot_table.gd" id="8_8750o"]
 [ext_resource type="Resource" uid="uid://bv547bjtfya6w" path="res://main/items/consumables/health_potion_small.tres" id="8_va07x"]
 [ext_resource type="Script" uid="uid://buwbh3f25d74m" path="res://main/components/movement_component.gd" id="11_a5j4f"]
+[ext_resource type="Script" uid="uid://c2hshcflw4mfb" path="res://main/components/barter_component.gd" id="17_jfe7e"]
 
 [sub_resource type="Resource" id="Resource_msveb"]
 script = ExtResource("2_stbip")
@@ -81,10 +82,14 @@ metadata/_custom_type_script = "uid://bgdddqoa78u1i"
 script = ExtResource("11_a5j4f")
 metadata/_custom_type_script = "uid://buwbh3f25d74m"
 
-[node name="CenterMarker" parent="." index="5" unique_id=1538757570]
+[node name="BarterComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1771809177) index="4" unique_id=2024546698]
+script = ExtResource("17_jfe7e")
+
+[node name="CenterMarker" parent="." index="7" unique_id=1538757570]
 position = Vector2(0, -6)
 
-[node name="DirRay" parent="." index="6" unique_id=1334925714]
+[node name="DirRay" parent="." index="8" unique_id=1334925714]
 position = Vector2(0, -6)
 
 [editable path="Hurtbox"]
+[editable path="VisionSensor"]

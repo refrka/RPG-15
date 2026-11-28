@@ -144,16 +144,3 @@ func _on_option_selected(option: DialogueOption) -> void:
 	option_selected.emit(option)
 
 
-
-
-# func _unhandled_input(event: InputEvent) -> void:
-
-# 	if not is_visible_in_tree():
-
-# 		return
-
-# 	if event.is_action_pressed("interact") and Inputs.is_action_allowed("interact"):
-
-# 		UI.remove_overlay(self)
-
-# 		get_viewport().set_input_as_handled()

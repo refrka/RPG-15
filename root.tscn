@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://xldnyi01j1e3" path="res://ui/cursor_slot.tscn" id="5_jnlp7"]
 [ext_resource type="PackedScene" uid="uid://ccbqbh5n24ied" path="res://ui/container_overlay.tscn" id="5_vyht1"]
 [ext_resource type="PackedScene" uid="uid://dvyjni6qcljnc" path="res://ui/crafting_overlay.tscn" id="8_qw60f"]
-[ext_resource type="Script" uid="uid://dw1aw6urlvg27" path="res://ui/overlay.gd" id="9_eji0w"]
+[ext_resource type="PackedScene" uid="uid://c2dl2ccevxhwj" path="res://ui/barter_overlay.tscn" id="9_eji0w"]
 [ext_resource type="PackedScene" uid="uid://bci53ctylpbcv" path="res://ui/main_menu.tscn" id="9_huihk"]
 [ext_resource type="Script" uid="uid://dci4nht54qjle" path="res://ui/item_tooltip.gd" id="10_gd4vy"]
 
@@ -23,22 +23,14 @@ metadata/_custom_type_script = "uid://dy0n8ihmni5qm"
 [sub_resource type="Resource" id="Resource_28aoi"]
 script = ExtResource("2_vvh5c")
 game_state = 2
-allowed_actions = Array[StringName]([&"profile", &"interact"])
+allowed_actions = Array[StringName]([&"profile", &"interact", &"back"])
 metadata/_custom_type_script = "uid://dy0n8ihmni5qm"
 
 [sub_resource type="Resource" id="Resource_28rpg"]
 script = ExtResource("2_vvh5c")
 metadata/_custom_type_script = "uid://dy0n8ihmni5qm"
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28aoi"]
-bg_color = Color(0.1221207, 0.14522305, 0.15285042, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.25674063, 0.29679266, 0.31015244, 1)
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_qwhpj"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_eji0w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tw3kd"]
 bg_color = Color(0.1221207, 0.14522305, 0.15285042, 1)
@@ -51,7 +43,6 @@ border_color = Color(0.25674063, 0.29679266, 0.31015244, 1)
 [node name="Root" type="Node" unique_id=425788085 groups=["root"]]
 script = ExtResource("1_pyidc")
 input_configs = Array[ExtResource("2_vvh5c")]([SubResource("Resource_ihp3c"), SubResource("Resource_28aoi"), SubResource("Resource_28rpg")])
-launch_mode = 1
 location_scenes = Dictionary[StringName, PackedScene]({
 &"debug_location": ExtResource("2_pyidc"),
 &"forest": ExtResource("4_tw3kd")
@@ -96,28 +87,13 @@ visible = false
 
 [node name="CraftingOverlay" parent="OverlayCanvas" unique_id=1425683688 instance=ExtResource("8_qw60f")]
 
-[node name="BarterOverlay" type="MarginContainer" parent="OverlayCanvas" unique_id=294297936]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_bottom = 32
-script = ExtResource("9_eji0w")
-metadata/_custom_type_script = "uid://dw1aw6urlvg27"
-
-[node name="PanelContainer" type="PanelContainer" parent="OverlayCanvas/BarterOverlay" unique_id=1589429381]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_28aoi")
+[node name="BarterOverlay" parent="OverlayCanvas" unique_id=423673812 instance=ExtResource("9_eji0w")]
 
 [node name="ProfileCanvas" type="CanvasLayer" parent="." unique_id=127699270]
 
 [node name="ProfileOverlay" parent="ProfileCanvas" unique_id=1283527882 instance=ExtResource("4_28aoi")]
 visible = false
-tab_button_group = SubResource("ButtonGroup_qwhpj")
+tab_button_group = SubResource("ButtonGroup_eji0w")
 
 [node name="CursorCanvas" type="CanvasLayer" parent="." unique_id=1737291134]
 
@@ -171,6 +147,7 @@ mouse_filter = 2
 [node name="MainMenuCanvas" type="CanvasLayer" parent="." unique_id=385023001]
 
 [node name="MainMenu" parent="MainMenuCanvas" unique_id=560946578 instance=ExtResource("9_huihk")]
+visible = false
 
 [node name="FGCanvas" type="CanvasLayer" parent="." unique_id=911550628]
 

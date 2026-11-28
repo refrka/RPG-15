@@ -67,7 +67,6 @@ input_bg_vbox = NodePath("PanelContainer/MarginContainer/HBoxContainer/InputBGVB
 option_vbox = NodePath("PanelContainer/MarginContainer/HBoxContainer/InputBGVBox/MarginContainer2/OptionVBox")
 close_button = NodePath("PanelContainer/MarginContainer/HBoxContainer/InputBGVBox/MarginContainer2/CloseButton")
 anim_player = NodePath("PanelContainer/MarginContainer/HBoxContainer/InputBGVBox/MarginContainer3/NextLineLabel/AnimationPlayer")
-pause = true
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=610389764]
 custom_minimum_size = Vector2(400, 0)

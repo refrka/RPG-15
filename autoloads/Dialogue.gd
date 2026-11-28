@@ -6,6 +6,9 @@ signal dialogue_opened
 signal dialogue_closed
 
 
+@onready var barter_option = preload("res://main/dialogue/option_resources/barter_option.tres")
+
+
 var dialogue_overlay: DialogueOverlay
 
 
@@ -185,6 +188,12 @@ func get_root_options(entity: Entity = null) -> Array[DialogueOption]:
 
 		root_options.append(option)
 
+	var barter_component = entity.get_component(BarterComponent)
+
+	if barter_component:
+
+		root_options.append(barter_option)
+
 	return root_options
 
 
@@ -233,10 +242,6 @@ func _on_dialogue_option_selected(option: DialogueOption) -> void:
 
 		option.on_select_command_set.execute_all(data)
 
-	if not option.node:
-
-		close_dialogue()
-
-	else:
+	if option.node:
 
 		set_dialogue_node(option.node)

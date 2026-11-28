@@ -15,10 +15,6 @@ func initialize(quest_data: QuestData) -> void:
 
 func is_complete() -> bool:
 
-	print("checking if this is complete: ", description)
-
-	print("complete: ", Game.player.inventory.has_item(item))
-
 	return Game.player.inventory.has_item(item)
 
 

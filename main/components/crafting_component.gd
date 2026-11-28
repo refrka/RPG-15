@@ -14,6 +14,8 @@ func start() -> void:
 
 	UI.add_overlay(overlay)
 
+	overlay.closed.connect(_on_crafting_overlay_closed, CONNECT_ONE_SHOT)
+
 
 
 
@@ -23,3 +25,10 @@ func end() -> void:
 	var overlay = UI.get_overlay(CraftingOverlay)
 
 	UI.remove_overlay(overlay)
+
+
+
+
+func _on_crafting_overlay_closed() -> void:
+
+	complete()
